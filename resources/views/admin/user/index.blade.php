@@ -28,19 +28,20 @@
                         <div class="card-header">
                             <h3 class="card-title">User Table</h3>
                         </div>
-                        @if (session('success'))
+                        @if(session('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif
 
-                        @if (session('error'))
+                        @if(session('error'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {{ session('error') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif
+
                         <div class="card-body">
                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">

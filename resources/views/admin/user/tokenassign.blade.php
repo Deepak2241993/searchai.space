@@ -7,6 +7,12 @@
         <div class="card-header bg-primary text-white">
             <h5>Assign Token For User</h5>
         </div>
+        @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
         <div class="card-body">
             <form action="{{ route('admin.assign-tokens') }}" method="POST">
                 @csrf
