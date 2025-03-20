@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Token;
 use App\Models\User;
+use App\Models\Service;
+use App\Models\CustomerAddress;
 use Illuminate\Http\Request;
 
 class OrderRecordsController extends Controller
@@ -60,5 +62,43 @@ if ($order) {
 }
 
 
+//  For Token Assing
+public function AssignTokensView(Request $request, $user_id) {
+    $user = User::findOrFail($user_id);
+    $address = CustomerAddress::where('user_id',$user_id)->first();
+    $services  = Service::where('status',1)->get();
+        return view('admin.user.tokenassign', compact('user','services','address'));
+    }
+    public function TokenAssignToUser(Request $request)
+    {
+        $user_id = $request->user_id; // Assuming user_id is passed
+        $serviceNames = $request->service_names;
+        $tokenQuantities = $request->tokens_purchased;
+    
+        if (empty($serviceNames) || empty($tokenQuantities)) {
+            return back()->with('error', 'Invalid data submitted.');
+        }
+    
+        // foreach ($serviceNames as $key => $serviceName) {
+           
+    
+        // }
+        $tokenQuantities= implode(',', $tokenQuantities);
+        $serviceName = implode(',', $serviceNames);
+        $orderData = [
+            'razorpay_order_id' => 'Token_assign_By_Admin',
+            'user_id' => $user_id,
+            'amount' => 0.00,
+            'currency' => 'INR',
+            'status' => 'paid',
+            'service_names' => $serviceName,
+            'tokens_purchased' => $tokenQuantities,
+            'tokens' => $tokenQuantities,
+        ];
+        
+        Order::create($orderData);
+        return back()->with('success', 'Tokens assigned successfully.');
+    }
+    
     
 }

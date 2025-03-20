@@ -158,6 +158,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // User 
         Route::get('/user-list', [AuthController::class, 'userList'])->name('user-list');
+        Route::get('/assign-tokens/{user_id}', [OrderRecordsController::class, 'AssignTokensView'])->name('assign-tokens-view');
+        Route::post('/assign-tokens', [OrderRecordsController::class, 'TokenAssignToUser'])->name('assign-tokens');
         Route::get('/user-edit/{id}', [AuthController::class, 'userEdit'])->name('user.edit');
         Route::put('/user-update/{id}', [AuthController::class, 'userUpdate'])->name('user.update');
         Route::delete('/user-delete/{id}', [AuthController::class, 'userDelete'])->name('user.delete');

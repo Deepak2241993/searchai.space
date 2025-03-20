@@ -63,6 +63,7 @@
                                             <td style="width: 25%;">
                                                 <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-sm btn-info">Edit</a>
                                                 <a href="javascript:void(0);" class="btn btn-sm btn-danger" onclick="deleteUser({{ $user->id }})">Delete</a>
+                                                <a href="{{ route('admin.assign-tokens-view', ['user_id' => $user->id]) }}" class="btn btn-sm btn-dark">Assign Tokens</a>
                                             </td>
                                         </tr>                                    
                                     @empty
