@@ -110,7 +110,7 @@ public function AssignTokensView(Request $request, $user_id) {
         }
         $tokens = [];
         $order_id = $createdOrder->id;
-        $expiresAt = Carbon::now()->addDays(600);
+        $expiresAt = Carbon::now()->addDays(30);
         foreach ($tokenQuantities as $key => $value) {
             if ((int)$value > 0) {
                 for ($i = 0; $i < $value; $i++) {

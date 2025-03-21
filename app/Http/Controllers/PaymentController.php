@@ -160,7 +160,7 @@ class PaymentController extends Controller
                     $numberOfTokens = $order->tokens_purchased;
                     // dd($numberOfTokens); 
                     $user = User::find($order->user_id);
-                    $expiresAt = Carbon::now()->addDays(600);
+                    $expiresAt = Carbon::now()->addDays(30);
 
                     $tokens = [];
                     $services = explode(',', $order->service_names);
