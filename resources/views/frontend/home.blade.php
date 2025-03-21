@@ -115,64 +115,328 @@
 }
 
 </style>
+{{-- Css by SSS --}}
+<style>
+    .button-container {
+        background: #ffffff;
+        padding: 30px;
+        border: 2px solid #74ebd5;
+        border-radius: 15px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
 
+    .button-container h3 {
+        margin-bottom: 20px;
+        font-size: 22px;
+        color: #333;
+        font-family: "Poppins", Sans-serif;
+    }
+
+    .button-container button {
+        background-color: #ED760D;
+        color: #000000;
+        border-color: #ffffff;
+        -webkit-transition-duration: 0.1s;
+        transition-duration: 0.1s;
+        font-family: "Poppins", Sans-serif;
+        font-weight: 600;
+        padding: 12px 25px;
+        margin: 0 10px;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .button-container button:hover {
+        background-color: #000000;
+        color: #FFFFFF;
+        border-color: #000000;
+    }
+
+    .cart-button {
+        border-radius: 30px;
+        font-weight: bold;
+        color: #fff;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+    .cart-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .cart-button .badge {
+        font-size: 0.8rem;
+        padding: 5px 8px;
+        font-weight: bold;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .cart-button i {
+        margin-right: 8px;
+        font-size: 1.2rem;
+    }
+    .service_box{
+        width:150px;margin:5px
+    }
+    
+    .ServiceButton {
+        padding: 30px;
+        text-align: center;
+    }
+
+    .ServiceButton .btn-submit {
+        background-color: #ED760D;
+        color: #ffffff;
+        border-color: #ED760D;
+        -webkit-transition-duration: 0.1s;
+        transition-duration: 0.1s;
+        font-family: "Poppins", Sans-serif;
+        font-weight: 600;
+        padding: 12px 25px;
+        margin: 0 10px;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    /* Carousel Responsive Styles */
+    .carousel-caption {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        text-align: left;
+        padding: 0 5%;
+    }
+
+    .carousel-content {
+        max-width: 50%;
+    }
+
+    .banner-title {
+        font-family: Impact, sans-serif;
+        font-size: 64px;
+        font-weight: 300;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .banner-description {
+        font-size: 24px;
+        color: #fff;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Tablet */
+    @media (max-width: 992px) {
+        .carousel-caption {
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .carousel-content {
+            max-width: 80%;
+            text-align: center;
+        }
+        
+        .banner-title {
+            font-size: 36px;
+        }
+        
+        .banner-description {
+            font-size: 18px;
+        }
+        
+        .ServiceButton {
+            padding: 15px;
+        }
+        
+        .ServiceButton .btn-submit {
+            margin: 5px;
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        .carousel-item {
+            height: 400px;
+        }
+        
+        .carousel-item img {
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        .carousel-caption {
+            padding: 0;
+            justify-content: flex-start;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .carousel-content {
+            max-width: 100%;
+            padding: 20px;
+            margin-top: 60px;
+        }
+        
+        .banner-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .banner-description {
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .ServiceButton {
+            position: static;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .ServiceButton .btn-submit {
+            padding: 8px 15px;
+            font-size: 14px;
+            margin: 5px;
+        }
+    }
+
+    /* Small Mobile */
+    @media (max-width: 576px) {
+        .carousel-item {
+            height: 350px;
+        }
+        
+        .banner-title {
+            font-size: 24px;
+        }
+        
+        .banner-description {
+            font-size: 14px;
+        }
+        
+        .ServiceButton .btn-submit {
+            padding: 6px 12px;
+            font-size: 12px;
+            width: 100%;
+            max-width: 300px;
+            margin: 5px auto;
+        }
+        
+        .mobile-service-buttons .ServiceButton {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    .mobile-service-buttons {
+        display: none;
+        padding: 15px;
+        background-color: #f8f9fa;
+    }
+
+    @media (max-width: 992px) {
+        .mobile-service-buttons {
+            display: block !important;
+        }
+        
+        .carousel-caption .ServiceButton {
+            display: none;
+        }
+    }
+</style>
 <main id="content">
 
     <div id="carouselExampleCaptions" class="carousel slide">
-    <div class="carousel-indicators">
-        @foreach ($bannerData as $key => $banner)
-            <button type="button" data-bs-target="#carouselExampleCaptions" 
-                data-bs-slide-to="{{ $key }}" 
-                class="{{ $key == 0 ? 'active' : '' }}" 
-                aria-current="{{ $key == 0 ? 'true' : 'false' }}" 
-                aria-label="Slide {{ $key + 1 }}">
-            </button>
-        @endforeach
+        <div class="carousel-indicators">
+            @foreach ($bannerData as $key => $banner)
+                <button type="button" data-bs-target="#carouselExampleCaptions" 
+                    data-bs-slide-to="{{ $key }}" 
+                    class="{{ $key == 0 ? 'active' : '' }}" 
+                    aria-current="{{ $key == 0 ? 'true' : 'false' }}" 
+                    aria-label="Slide {{ $key + 1 }}">
+                </button>
+            @endforeach
+        </div>
+
+        <div class="carousel-inner">
+            @foreach ($bannerData as $key => $banner)
+            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                <img src="{{ url('/').$banner->image }}" class="d-block w-100" alt="{{ $banner->title }}">
+                <div class="carousel-caption">
+                    <div class="carousel-content">
+                        <h4 class="banner-title">{!! $banner->title !!}</h4>
+                        
+                        <div class="banner-description">
+                            {!! $banner->description !!}
+                        </div>
+                        
+                        <!-- For Service Button (Desktop Only) -->
+                        <div class="ServiceButton">
+                            @foreach ($serviceData as $item)
+                                <a href="{{ route('services.show', $item->service_slug) }}">
+                                    <button class="btn-submit">
+                                        {{'Buy'}} {{ $item->name == 'KYC+CCRV' ? 'Aadhar KYC + Criminal Background Verification' : $item->name }}
+                                    </button>
+                                </a>
+                            @endforeach
+                        </div>
+                        <!-- For Service Button -->
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 
-    <div class="carousel-inner">
-        @foreach ($bannerData as $key => $banner)
-        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-            <img src="{{ url('/').$banner->image }}" class="d-block w-100" alt="{{ $banner->title }}">
-            <div class="carousel-caption" style="
-                top: 50%; 
-                transform: translateY(-80%); 
-                right: 5%; 
-                left: auto; 
-                text-align: left; 
-                max-width: 50%;">
-                
-                <h4 style="
-                    font-family: Impact, sans-serif; 
-                    font-size: 64px; 
-                    font-weight: 300; 
-                    color: #fff; 
-                    line-height: 1.2; 
-                    margin-bottom: 20px;">
-                    {!! $banner->title !!}
-                </h4>
-                
-                <span style="
-                    font-size: 24px; 
-                    color: #fff; 
-                    margin-bottom: 30px;">
-                    {!! $banner->description !!}
-                </span>
-                <!-- For Service Button-->
+    <!-- Mobile/Tablet Service Buttons -->
+    <div class="mobile-service-buttons">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
                     <div class="ServiceButton">
-                         @foreach ($serviceData as $item)
-                            <a href="{{ route('services.show', $item->service_slug) }}">
+                        @foreach ($serviceData as $item)
+                            <a href="{{ route('services.show', $item->service_slug) }}" class="w-100">
                                 <button class="btn-submit">
-    {{'Buy'}} {{ $item->name == 'KYC+CCRV' ? 'Aadhar KYC + Criminal Background Verification' : $item->name }}
-</button>
-
+                                    {{'Buy'}} {{ $item->name == 'KYC+CCRV' ? 'Aadhar KYC + Criminal Background Verification' : $item->name }}
+                                </button>
                             </a>
                         @endforeach
                     </div>
-                <!-- For Service Button-->
+                </div>
             </div>
         </div>
-        @endforeach
     </div>
 
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
