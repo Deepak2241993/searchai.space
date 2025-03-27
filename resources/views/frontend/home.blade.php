@@ -87,7 +87,7 @@
     border-radius: 4px;
     cursor: pointer;
 }
-}
+
 /*For Slider */
 /* Default (Desktop) */
 .banner-title {
@@ -225,7 +225,7 @@
 
     .banner-title {
         font-family: Impact, sans-serif;
-        font-size: 64px;
+        font-size: 40px;
         font-weight: 300;
         color: #fff;
         line-height: 1.2;
@@ -366,8 +366,12 @@
             display: none;
         }
     }
+    .gap-4 {
+    gap: 6.5rem!important;
+}
+
 </style>
-<main id="content">
+<main id="content" class="container">
 
     <div id="carouselExampleCaptions" class="carousel slide">
         <div class="carousel-indicators">
@@ -451,8 +455,84 @@
 
     
     
+<section class="container-fluid px-0">
+    <div class="container" style="margin-right: 20px;">
+      <div class="d-flex justify-content-center align-items-center gap-4">
+        <!-- Text Section -->
+        <div class="text-center">
+          <p><b>Getting started is<br>quick and easy</b></p>
+        </div>
+  
+        <!-- Icons and Arrows Section -->
+        <div class="d-flex align-items-center gap-4">
+          <img src="{{ url('/front-assets/images/add-user.png') }}" alt="Add User" width="80" height="80">
+          <i class="bi bi-arrow-right fs-3"></i>
+  
+          <img src="{{ url('/front-assets/images/fingerprint.png') }}" alt="Fingerprint" width="80" height="80">
+          <i class="bi bi-arrow-right fs-3"></i>
+  
+          <img src="{{ url('/front-assets/images/download.png') }}" alt="Download" width="80" height="80">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
     
-    
+<section class="container py-5">
+    <!-- Heading with Icon -->
+    <div class="d-flex align-items-center mb-4">
+      <img src="{{ url('/front-assets/images/legal-document.png') }}" alt="icon" style="width: 40px; height: 40px;">
+      <h4 class="ms-3">Document You Might Need</h4>
+    </div>
+
+    <!-- Card Layout -->
+    <div class="row g-4">
+      <!-- Card 1 -->
+      <div class="col-md-6">
+        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm">
+          <img src="{{ url('/front-assets/images/aadhar.jpg') }}" alt="Aadhaar Card" style="width: 60px; height: 60px;" />
+          <div class="ms-3">
+            <h6 class="mb-1 fw-bold">Aadhaar Card</h6>
+            <p class="mb-0 text-secondary">Aadhaar Card</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-md-6">
+        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm">
+          <img src="{{ url('/front-assets/images/pancard.png') }}" alt="PAN Card" style="width: 60px; height: 60px;" />
+          <div class="ms-3">
+            <h6 class="mb-1 fw-bold">PAN Card</h6>
+            <p class="mb-0 text-secondary">PAN Card</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-md-6">
+        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm">
+          <img src="{{ url('/front-assets/images/dl.webp') }}" alt="Driving License" style="width: 60px; height: 60px;" />
+          <div class="ms-3">
+            <h6 class="mb-1 fw-bold">Driving License</h6>
+            <p class="mb-0 text-secondary">Driving License</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-md-6">
+        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm">
+          <img src="{{ url('/front-assets/images/rc.webp') }}" alt="Vehicle Registration" style="width: 60px; height: 60px;" />
+          <div class="ms-3">
+            <h6 class="mb-1 fw-bold">Registration of Vehicles</h6>
+            <p class="mb-0 text-secondary">Registration of Vehicles</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
     {{-- <section id="slider">
         <div class="owl-carousel owl-theme">
@@ -475,109 +555,193 @@
     <section id="why-us">
         <div class="container">
             <h2 class="text-center mb3">Why SearchAI for Professional Background Verification?</h2>
-            <div class="pb3 ml-auto mr-auto m-auto" style="max-width:580px">
-                <amp-accordion id="why-helpers-near-me" expand-single-section animate disable-session-states>
-                    <section class="card p0 mb1">
-                        <header class="card-header md-list">
-                            <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/responsive.svg"
-                                    width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Convenient, Easy &amp; Organized</p>
-                                <span>
-                                    <amp-img layout="fixed"
-                                        src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
-                                        width="24" height="24" alt=""></amp-img>
-                                </span>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="pb3 ml-auto mr-auto m-auto">
+                    <amp-accordion id="why-helpers-near-me" expand-single-section animate disable-session-states>
+                        <section class="card p0 mb1">
+                            <header class="card-header md-list">
+                                <div class="md-list-item">
+                                    <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/responsive.svg"
+                                        width="40" height="40" alt=""></amp-img>
+                                    <p class="px2">Convenient, Easy &amp; Organized</p>
+                                    <span>
+                                        <amp-img layout="fixed"
+                                            src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
+                                            width="24" height="24" alt=""></amp-img>
+                                    </span>
+                                </div>
+                            </header>
+                            <div class="card-body">It is an Easier, Simpler & Better way of verifying Workers. 5 minutes and just a click of a few buttons, that’s all it takes to verify Workers at SearchAI.</div>
+                        </section>
+                        <section class="card p0 mb1">
+                            <header class="card-header md-list">
+                                <div class="md-list-item">
+                                    <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/shield2.svg"
+                                        width="40" height="40" alt=""></amp-img>
+                                    <p class="px2">Professionally Verified Workers only</p>
+                                    <span>
+                                        <amp-img layout="fixed"
+                                            src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
+                                            width="24" height="24" alt=""></amp-img>
+                                    </span>
+                                </div>
+                            </header>
+                            <div class="card-body">SearchAI follows a 2/3 Step Verification Process for every Worker registered with the platform. Everyone’s IDs & Court/Criminal Records are checked in detail.
+    
                             </div>
-                        </header>
-                        <div class="card-body">It is an Easier, Simpler & Better way of verifying Workers. 5 minutes and just a click of a few buttons, that’s all it takes to verify Workers at SearchAI.</div>
-                    </section>
-                    <section class="card p0 mb1">
-                        <header class="card-header md-list">
-                            <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/shield2.svg"
-                                    width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Professionally Verified Workers only</p>
-                                <span>
-                                    <amp-img layout="fixed"
-                                        src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
-                                        width="24" height="24" alt=""></amp-img>
-                                </span>
-                            </div>
-                        </header>
-                        <div class="card-body">SearchAI follows a 2/3 Step Verification Process for every Worker registered with the platform. Everyone’s IDs & Court/Criminal Records are checked in detail.
-
-                        </div>
-                    </section>
-                    <section class="card p0 mb1">
-                        <header class="card-header md-list">
-                            <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/fast_1.svg"
-                                    width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Quick Turnaround Time</p>
-                                <span>
-                                    <amp-img layout="fixed"
-                                        src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
-                                        width="24" height="24" alt=""></amp-img>
-                                </span>
-                            </div>
-                        </header>
-                        <div class="card-body">
-                            Get the Background Verification report in about 10-15 minutes.</div>
-                    </section>
-                    <section class="card p0 mb1">
-                        <header class="card-header md-list">
-                            <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/empty-inbox_2.svg"
-                                    width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Hassle-free</p>
-                                <span>
-                                    <amp-img layout="fixed"
-                                        src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
-                                        width="24" height="24" alt=""></amp-img>
-                                </span>
-                            </div>
-                        </header>
-                        <div class="card-body">Get the detailed Background Verification report directly in your email inbox. You are not required to go anywhere for the checks or submit a document anywhere. The whole process is hasslefree and online - end to end.</div>
-                    </section>
-                    <section class="card p0 mb1">
-                        <header class="card-header md-list">
-                            <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/salary.svg"
-                                    width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Cost effective</p>
-                                <span>
-                                    <amp-img layout="fixed"
-                                        src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
-                                        width="24" height="24" alt=""></amp-img>
-                                </span>
-                            </div>
-                        </header>
-                        <div class="card-body">Get the professional background verification of your workers done in as low as ₹300 only.</div>
-                    </section>
-
-                    <section class="card p0 mb1">
-                        <header class="card-header md-list">
-                            <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/credit-card.svg"
-                                    width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Safe &amp; Secure Payment</p>
-                                <span>
-                                    <amp-img layout="fixed"
-                                        src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
-                                        width="24" height="24" alt=""></amp-img>
-                                </span>
-                            </div>
-                        </header>
-                        <div class="card-body">Every transaction processed at SearchAI goes through the recognised payment gateways like Paytm, PayU & others. Your details are entirely secured & protected against any unauthorised transactions.</div>
-                    </section>
-
-                </amp-accordion>
+                        </section>
+                        <section class="card p0 mb1">
+                            <header class="card-header md-list">
+                                <div class="md-list-item">
+                                    <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/fast_1.svg"
+                                        width="40" height="40" alt=""></amp-img>
+                                    <p class="px2">Quick Turnaround Time</p>
+                                    <span>
+                                        <amp-img layout="fixed"
+                                            src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
+                                            width="24" height="24" alt=""></amp-img>
+                                    </span>
+                                </div>
+                            </header>
+                            <div class="card-body">
+                                Get the Background Verification report in about 10-15 minutes.</div>
+                        </section>  
+                    </amp-accordion>
+                    </div>
+                </div>
+                <div class="col md-6">
+                    <div class="pb3 ml-auto mr-auto m-auto">
+                        <amp-accordion id="why-helpers-near-me" expand-single-section animate disable-session-states>
+                            
+                            <section class="card p0 mb1">
+                                <header class="card-header md-list">
+                                    <div class="md-list-item">
+                                        <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/empty-inbox_2.svg"
+                                            width="40" height="40" alt=""></amp-img>
+                                        <p class="px2">Hassle-free</p>
+                                        <span>
+                                            <amp-img layout="fixed"
+                                                src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
+                                                width="24" height="24" alt=""></amp-img>
+                                        </span>
+                                    </div>
+                                </header>
+                                <div class="card-body">Get the detailed Background Verification report directly in your email inbox. You are not required to go anywhere for the checks or submit a document anywhere. The whole process is hasslefree and online - end to end.</div>
+                            </section>
+                            <section class="card p0 mb1">
+                                <header class="card-header md-list">
+                                    <div class="md-list-item">
+                                        <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/salary.svg"
+                                            width="40" height="40" alt=""></amp-img>
+                                        <p class="px2">Cost effective</p>
+                                        <span>
+                                            <amp-img layout="fixed"
+                                                src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
+                                                width="24" height="24" alt=""></amp-img>
+                                        </span>
+                                    </div>
+                                </header>
+                                <div class="card-body">Get the professional background verification of your workers done in as low as ₹300 only.</div>
+                            </section>
+        
+                            <section class="card p0 mb1">
+                                <header class="card-header md-list">
+                                    <div class="md-list-item">
+                                        <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/credit-card.svg"
+                                            width="40" height="40" alt=""></amp-img>
+                                        <p class="px2">Safe &amp; Secure Payment</p>
+                                        <span>
+                                            <amp-img layout="fixed"
+                                                src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
+                                                width="24" height="24" alt=""></amp-img>
+                                        </span>
+                                    </div>
+                                </header>
+                                <div class="card-body">Every transaction processed at SearchAI goes through the recognised payment gateways like Paytm, PayU & others. Your details are entirely secured & protected against any unauthorised transactions.</div>
+                            </section>
+        
+                        </amp-accordion>
+                    </div>
+                </div>
             </div>
+            
         </div>
     </section>
 
-
+{{--  Section For Plane  --}}
+<section class="py-5">
+    <div class="container text-center">
+      <h2 class="fw-bold">Yearly Plans & Pricing</h2>
+      <p class="text-muted">Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices.</p>
+      
+      <div class="row mt-5">
+        <!-- Hatchling Plan -->
+        <div class="col-sm-12 col-md-4 mb-4">
+          <div class="card border-0 shadow" style="border-radius: 12px;">
+            <div class="card-header text-white" style="background-color: #5b3dc9; border-radius: 12px 12px 0 0;">
+              <h5>HATCHLING PLAN</h5>
+              <h2>$29</h2>
+              <p>PER MONTH</p>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled">
+                <li>✔ Unlimited Support</li>
+                <li>✔ 5GB Server Space</li>
+                <li>✔ 2 Users per Project</li>
+                <li>✖ Email Integration</li>
+                <li>✖ Unlimited Download</li>
+              </ul>
+              <a href="#" class="btn btn-warning text-white">CHOOSE PLAN</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Baby Plan -->
+        <div class="col-sm-12 col-md-4 mb-4">
+          <div class="card border-0 shadow" style="border-radius: 12px;">
+            <div class="card-header text-white" style="background-color: #6cbe45; border-radius: 12px 12px 0 0;">
+              <h5>BABY PLAN</h5>
+              <h2>$69</h2>
+              <p>PER MONTH</p>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled">
+                <li>✔ Unlimited Support</li>
+                <li>✔ 10GB Server Space</li>
+                <li>✔ 5 Users per Project</li>
+                <li>✔ Email Integration</li>
+                <li>✖ Unlimited Download</li>
+              </ul>
+              <a href="#" class="btn btn-warning text-white">CHOOSE PLAN</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Premium Plan -->
+        <div class="col-sm-12 col-md-4 mb-4">
+          <div class="card border-0 shadow" style="border-radius: 12px;">
+            <div class="card-header text-white" style="background-color: #e57235; border-radius: 12px 12px 0 0;">
+              <h5>PREMIUM PLAN</h5>
+              <h2>$99</h2>
+              <p>PER MONTH</p>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled">
+                <li>✔ Unlimited Support</li>
+                <li>✔ 25GB Server Space</li>
+                <li>✔ 10 Users per Project</li>
+                <li>✔ Email Integration</li>
+                <li>✔ Unlimited Download</li>
+              </ul>
+              <a href="#" class="btn btn-warning text-white">CHOOSE PLAN</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
     <div class="divider"></div>
 
 

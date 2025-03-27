@@ -32,8 +32,8 @@ class BannerController extends Controller
 {
     // Validate the input data
     $validatedData = $request->validate([
-        'title'       => 'required|string|max:255',
-        'description' => 'required|string',
+        // 'title'       => 'required|string|max:255',
+        // 'description' => 'required|string',
         'image'       => [
             'nullable',
             'image',
@@ -106,8 +106,8 @@ class BannerController extends Controller
 {
     // Validate the input data
     $validatedData = $request->validate([
-        'title'       => 'required|string|max:255',
-        'description' => 'required|string',
+        // 'title'       => 'required|string|max:255',
+        // 'description' => 'required|string',
         'image'       => [
             'nullable',
             'image',

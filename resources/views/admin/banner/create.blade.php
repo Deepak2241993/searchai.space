@@ -61,7 +61,7 @@
                             @csrf
                             <div class="row">
                                 <!-- Title Field -->
-                                <div class="mb-3 col-lg-6">
+                                {{-- <div class="mb-3 col-lg-6">
                                     <label for="title" class="form-label">Title</label>
                                     <input 
                                         type="text" 
@@ -71,10 +71,10 @@
                                         value="{{ isset($bannerData) ? $bannerData->title : '' }}" 
                                         placeholder="Enter title" 
                                         required>
-                                </div>
+                                </div> --}}
 
                                 <!-- Description Field -->
-                                <div class="mb-3 col-lg-12">
+                                {{-- <div class="mb-3 col-lg-12">
                                     <label for="summernote" class="form-label">Description</label>
                                     <textarea 
                                         class="form-control" 
@@ -83,7 +83,7 @@
                                         rows="5" 
                                         placeholder="Enter description" 
                                         required>{{ isset($bannerData) ? $bannerData->description : '' }}</textarea>
-                                </div>
+                                </div> --}}
 
                                 <!-- Image Upload Field -->
                                 <div class="mb-3 col-lg-6">

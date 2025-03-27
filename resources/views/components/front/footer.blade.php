@@ -3,7 +3,7 @@
 	  <div class="container">
 		<nav style="width:100%" class="ampstart-footer-nav">
 			<div class="sm-col-12 md-col-4 md-col lg-col lg-col-4">
-				<h3 style="border-left:3px solid #fff;padding-left:10px">Contact Info</h3>
+				<h3>Contact Info</h3>
 				<ul class="list-reset footer-links mb2">
 					<li><a rel="noopener" href="#" target="_blank" class="inline-block footer-link text-decoration-none">Navigant Digital Pvt. ltd.</a></li>
 					<li><a rel="noopener" href="#" target="_blank" class="inline-block footer-link text-decoration-none" style="line-height:24px">A 24/5, Mohan Cooperative Industrial Area, Badarpur, Secound Floor, New Delhi 110044</a></li>
@@ -14,7 +14,7 @@
 				
 			</div>
 			<div class="sm-col-12 md-col-3 md-col lg-col lg-col-3">
-				<h3 style="border-left:3px solid #fff;padding-left:10px">Important Links</h3>
+				<h3>Important Links</h3>
 				<ul class="list-reset footer-links mb2"> 
 					<li><a href="{{route('aboutus')}}" class="inline-block footer-link text-decoration-none">About Us</a></li>
 					<li><a href="#" class="inline-block footer-link text-decoration-none">Verify your Helper, Professionally</a></li>
@@ -26,7 +26,7 @@
 				</ul>
 			</div>
 			<div class="sm-col-12 md-col-3 md-col lg-col lg-col-3">
-				<h3 style="border-left:3px solid #fff;padding-left:10px">Our Policies</h3>
+				<h3>Our Policies</h3>
 				<ul class="list-reset footer-links mb2">
 					<li><a href="#" class="inline-block footer-link text-decoration-none">Terms of Use</a></li>
 					<li><a href="#" class="inline-block footer-link text-decoration-none">Privacy Policy</a></li>
@@ -37,7 +37,7 @@
 				</ul>
 			</div>
 			<div class="sm-col-12 md-col-2 md-col lg-col lg-col-2 text-center">
-				<amp-img layout="fixed" width="190" height="50" src="{{url('/front-assets/footer_logo-removebg-preview.png')}}" alt="Helpers near me"></amp-img>
+				<a href="{{url('/')}}"><amp-img layout="fixed" width="190" height="50" src="{{url('/front-assets/footer_logo-removebg-preview.png')}}" alt="Helpers near me"></amp-img></a>
 			</div>
 		</nav>
 	  </div>	
