@@ -1,4 +1,26 @@
-<footer id="footer">
+
+<footer id="footer" class="container">
+	<section class="py-5" style="background-color: #004b59;">
+		<div class="container text-center text-white">
+		  <h2 class="fw-bold">Subscribe Our Newsletter!</h2>
+		  <p class="mb-4">
+			Lorem Ipsum is simply dummy text printing and type setting industry. Lorem Ipsum been industry standard
+			dummy text ever since when unknown printer took a galley.
+		  </p>
+		  
+		  <!-- Subscription Form -->
+		  <form class="d-flex justify-content-center" style="max-width: 500px; margin: auto;">
+			<div class="input-group">
+			  <span class="input-group-text bg-white border-0">
+				<img src="https://cdn-icons-png.flaticon.com/512/3178/3178158.png" alt="email icon" width="20">
+			  </span>
+			  <input type="email" class="form-control border-0" placeholder="Enter your Email..." required>
+			  <button type="submit" class="btn btn-primary">SUBSCRIBE</button>
+			</div>
+		  </form>
+		</div>
+	  </section>
+	<div class="divider"></div>
 	<div class="ampstart-footer flex flex-column items-center px3">
 	  <div class="container">
 		<nav style="width:100%" class="ampstart-footer-nav">
@@ -36,8 +58,8 @@
 					<li><a href="#" class="inline-block footer-link text-decoration-none">Safety & Security Guidelines</a></li>
 				</ul>
 			</div>
-			<div class="sm-col-12 md-col-2 md-col lg-col lg-col-2 text-center">
-				<a href="{{url('/')}}"><amp-img layout="fixed" width="190" height="50" src="{{url('/front-assets/footer_logo-removebg-preview.png')}}" alt="Helpers near me"></amp-img></a>
+			<div class="sm-col-12 md-col-3 md-col lg-col lg-col-2 text-center">
+				<a href="{{url('/')}}"><amp-img layout="fixed" width="125" height="30" src="{{url('/front-assets/footer_logo-removebg-preview.png')}}" alt="Helpers near me"></amp-img></a>
 			</div>
 		</nav>
 	  </div>	

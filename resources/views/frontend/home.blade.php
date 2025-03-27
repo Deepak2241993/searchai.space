@@ -742,8 +742,8 @@
     </div>
   </section>
   
-    <div class="divider"></div>
-
+    
+      <div class="divider"></div>
 
     <section id="about-us">
         <h2 class="text-center m3">SearchAI - India’s Most Trusted Background Verification Partner</h2>
@@ -758,9 +758,9 @@
             </div>
         </div>
     </section>
-
     <div class="divider"></div>
-    <section style="background:#fff;color:#000;padding:30px 0">
+
+    {{-- <section style="background:#fff;color:#000;padding:30px 0">
         <div class="container">
             <div class="m-auto" style="max-width:860px">
                 <h2 class="text-center mb-3">Frequently Asked Questions</h2>
@@ -787,7 +787,7 @@
                 <br />
             </div>
         </div>
-    </section>
+    </section> --}}
     <div class="divider"></div>
     
 

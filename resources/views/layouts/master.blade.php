@@ -46,81 +46,8 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	@yield('style')
 
-	<style amp-boilerplate="">
-		body {
-			-webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-			-moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-			-ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-			animation: -amp-start 8s steps(1, end) 0s 1 normal both
-		}
-
-		@-webkit-keyframes -amp-start {
-			from {
-				visibility: hidden
-			}
-
-			to {
-				visibility: visible
-			}
-		}
-
-		@-moz-keyframes -amp-start {
-			from {
-				visibility: hidden
-			}
-
-			to {
-				visibility: visible
-			}
-		}
-
-		@-ms-keyframes -amp-start {
-			from {
-				visibility: hidden
-			}
-
-			to {
-				visibility: visible
-			}
-		}
-
-		@-o-keyframes -amp-start {
-			from {
-				visibility: hidden
-			}
-
-			to {
-				visibility: visible
-			}
-		}
-
-		@keyframes -amp-start {
-			from {
-				visibility: hidden
-			}
-
-			to {
-				visibility: visible
-			}
-		}
-	</style>
-	<noscript>
-		<style amp-boilerplate="">
-			body {
-				-webkit-animation: none;
-				-moz-animation: none;
-				-ms-animation: none;
-				animation: none
-			}
-		</style>
-	</noscript>
-
-
-	<script async custom-element="amp-analytics" src="{{url('/')}}/cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-	<script async custom-element="amp-sidebar" src="{{url('/')}}/cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
 	<script async custom-element="amp-accordion" src="{{url('/')}}/cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
-	<script async custom-element="amp-carousel" src="{{url('/')}}/cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
-	<script async custom-element="amp-install-serviceworker" src="{{url('/')}}/cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
+
 	<!-- Owl Carousel CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
@@ -2759,7 +2686,7 @@
 	<link rel="stylesheet" href="../use.fontawesome.com/releases/v5.2.0/css/all.css" />
 	<!-- Schema Structure -->
 </head>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
 
 	<amp-analytics type="googleanalytics" config="https://amp.analytics-debugger.com/ga4.json" data-credentials="include">
