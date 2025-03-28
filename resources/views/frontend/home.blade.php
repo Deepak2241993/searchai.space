@@ -385,6 +385,89 @@
     font-weight: 600;
     color: #333;
 }
+
+/* Fix for carousel controls */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 10%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    position: absolute;
+}
+
+.carousel-control-prev {
+    left: 0;
+}
+
+.carousel-control-next {
+    right: 0;
+}
+
+/* Make sure the controls don't extend beyond the carousel */
+#carouselExampleCaptions {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Process flow section styles */
+.process-flow-section {
+    margin: 30px 0;
+  }
+  
+  .process-flow-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+  
+  .process-flow-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .process-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+  
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .process-flow-container {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .process-flow-title {
+      font-size: 1.25rem;
+      margin-bottom: 15px;
+    }
+    
+    .process-icon {
+      width: 60px;
+      height: 60px;
+    }
+    
+    /* Change arrow direction for mobile */
+    .mobile-arrow {
+      transform: rotate(90deg);
+    }
+    
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+  }
+
+
 </style>
 <main id="content">
 
@@ -427,17 +510,17 @@
                 </div>
             </div>
             @endforeach
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
-
-       
+        
+        <!-- Carousel controls properly placed inside the carousel container -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 
     <!-- Mobile/Tablet Service Buttons -->
@@ -459,39 +542,60 @@
         </div>
     </div>
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-
 
     
-<section class="container-fluid px-0">
-    <div style="margin-right: 20px; margin-top: 20px;">
+<section class="container-fluid px-0 process-flow-section">
+  <div class="container">
+    <!-- Desktop View -->
+    <div class="d-none d-md-block">
       <div class="d-flex justify-content-center align-items-center gap-4">
         <!-- Text Section -->
         <div class="text-center">
-          <p><b>Getting started is<br>quick and easy</b></p>
+          <p class="process-flow-title"><b>Getting started is<br>quick and easy</b></p>
         </div>
-  
+        
         <!-- Icons and Arrows Section -->
         <div class="d-flex align-items-center gap-4">
-          <img src="{{ url('/front-assets/images/add-user.png') }}" alt="Add User" width="80" height="80">
+          <img src="{{ url('/front-assets/images/add-user.png') }}" alt="Add User" class="process-icon">
           <i class="bi bi-arrow-right fs-3"></i>
-  
-          <img src="{{ url('/front-assets/images/fingerprint.png') }}" alt="Fingerprint" width="80" height="80">
+          
+          <img src="{{ url('/front-assets/images/fingerprint.png') }}" alt="Fingerprint" class="process-icon">
           <i class="bi bi-arrow-right fs-3"></i>
-  
-          <img src="{{ url('/front-assets/images/download.png') }}" alt="Download" width="80" height="80">
+          
+          <img src="{{ url('/front-assets/images/download.png') }}" alt="Download" class="process-icon">
         </div>
       </div>
     </div>
-  </section>
+    
+    <!-- Mobile View -->
+    <div class="d-block d-md-none">
+      <div class="text-center mb-3">
+        <p class="process-flow-title"><b>Getting started is quick and easy</b></p>
+      </div>
+      
+      <div class="process-flow-container">
+        <div class="process-step">
+          <img src="{{ url('/front-assets/images/add-user.png') }}" alt="Add User" class="process-icon">
+          <span class="mt-2">Register</span>
+        </div>
+        
+        <i class="bi bi-arrow-down fs-3 my-2 mobile-arrow"></i>
+        
+        <div class="process-step">
+          <img src="{{ url('/front-assets/images/fingerprint.png') }}" alt="Fingerprint" class="process-icon">
+          <span class="mt-2">Verify</span>
+        </div>
+        
+        <i class="bi bi-arrow-down fs-3 my-2 mobile-arrow"></i>
+        
+        <div class="process-step">
+          <img src="{{ url('/front-assets/images/download.png') }}" alt="Download" class="process-icon">
+          <span class="mt-2">Download</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
   
   <div class="divider mt-4 mb-4"></div>
     
