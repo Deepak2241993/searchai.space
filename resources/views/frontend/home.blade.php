@@ -506,7 +506,7 @@
     <div class="row g-4">
       <!-- Card 1 -->
       <div class="col-md-6">
-        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm">
+        <div class="d-flex align-items-center p-3 rounded-3 shadow-sm" style="border-style: groove;">
           <img src="{{ url('/front-assets/images/aadhar.jpg') }}" alt="Aadhaar Card" style="width: 60px; height: 60px;" />
           <div class="ms-3">
             <h6 class="mb-1 fw-bold">Aadhaar Card</h6>
@@ -517,7 +517,7 @@
 
       <!-- Card 2 -->
       <div class="col-md-6">
-        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm">
+        <div class="d-flex align-items-center p-3 rounded-3 shadow-sm" style="border-style: groove;">
           <img src="{{ url('/front-assets/images/pancard.png') }}" alt="PAN Card" style="width: 60px; height: 60px;" />
           <div class="ms-3">
             <h6 class="mb-1 fw-bold">PAN Card</h6>
@@ -528,7 +528,7 @@
 
       <!-- Card 3 -->
       <div class="col-md-6">
-        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm">
+        <div class="d-flex align-items-center p-3 rounded-3 shadow-sm" style="border-style: groove;">
           <img src="{{ url('/front-assets/images/dl.webp') }}" alt="Driving License" style="width: 60px; height: 60px;" />
           <div class="ms-3">
             <h6 class="mb-1 fw-bold">Driving License</h6>
@@ -539,7 +539,7 @@
 
       <!-- Card 4 -->
       <div class="col-md-6">
-        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm">
+        <div class="d-flex align-items-center p-3 rounded-3 shadow-sm" style="border-style: groove;">
           <img src="{{ url('/front-assets/images/rc.webp') }}" alt="Vehicle Registration" style="width: 60px; height: 60px;" />
           <div class="ms-3">
             <h6 class="mb-1 fw-bold">Registration of Vehicles</h6>
