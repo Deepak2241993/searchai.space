@@ -50,10 +50,14 @@
     font-size: 22px;
     font-weight: 700;
 }
+.deepak{
+    margin-left: 30px;
+    margin-right: 30px;
+}
 </style>
 
 
-<header class="navbar navbar-expand-lg navbar-light container" style="background-color:#ffff">
+<header class="navbar deepak navbar-expand-lg navbar-light" style="background-color:#ffff">
     <div class="container-fluid">
         <a class="navbar-brand text-white" href="{{ route('home')}}">
             <amp-img src="{{url('/front-assets')}}/images/footer_logo.png" width="200" height="40" layout="fixed" alt="Helpers near me"></amp-img>

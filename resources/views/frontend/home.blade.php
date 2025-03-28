@@ -371,7 +371,7 @@
 }
 
 </style>
-<main id="content" class="container">
+<main id="content" class="deepak">
 
     <div id="carouselExampleCaptions" class="carousel slide">
         <div class="carousel-indicators">
@@ -412,16 +412,17 @@
                 </div>
             </div>
             @endforeach
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+       
     </div>
 
     <!-- Mobile/Tablet Service Buttons -->
@@ -456,7 +457,7 @@
     
     
 <section class="container-fluid px-0">
-    <div class="container" style="margin-right: 20px;">
+    <div style="margin-right: 20px; margin-top: 20px;">
       <div class="d-flex justify-content-center align-items-center gap-4">
         <!-- Text Section -->
         <div class="text-center">
@@ -479,10 +480,10 @@
   
   
     
-<section class="container py-5">
+<section class="py-5 deepak">
     <!-- Heading with Icon -->
     <div class="d-flex align-items-center mb-4">
-      <img src="{{ url('/front-assets/images/legal-document.png') }}" alt="icon" style="width: 40px; height: 40px;">
+      <img src="{{ url('/front-assets/images/legal-document.png') }}" alt="icon" style="width: 60px; height: 60px;">
       <h4 class="ms-3">Document You Might Need</h4>
     </div>
 
@@ -547,11 +548,7 @@
             @endforeach
         </div>
     </section> --}}
-   
-
-
-   
-    <div class="divider"></div>
+ 
     <section id="why-us">
         <div class="container">
             <h2 class="text-center mb3">Why SearchAI for Professional Background Verification?</h2>

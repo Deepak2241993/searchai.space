@@ -1,34 +1,36 @@
 
-<footer id="footer" class="container">
-	<section class="py-5" style="background-color: #004b59;">
-		<div class="container text-center text-white">
-		  <h2 class="fw-bold">Subscribe Our Newsletter!</h2>
-		  <p class="mb-4">
-			Lorem Ipsum is simply dummy text printing and type setting industry. Lorem Ipsum been industry standard
-			dummy text ever since when unknown printer took a galley.
-		  </p>
-		  
-		  <!-- Subscription Form -->
-		  <form class="d-flex justify-content-center" style="max-width: 500px; margin: auto;">
-			<div class="input-group">
-			  <span class="input-group-text bg-white border-0">
-				<img src="https://cdn-icons-png.flaticon.com/512/3178/3178158.png" alt="email icon" width="20">
-			  </span>
-			  <input type="email" class="form-control border-0" placeholder="Enter your Email..." required>
-			  <button type="submit" class="btn btn-primary">SUBSCRIBE</button>
-			</div>
-		  </form>
-		</div>
-	  </section>
-	<div class="divider"></div>
+<footer id="footer">
+
 	<div class="ampstart-footer flex flex-column items-center px3">
-	  <div class="container">
-		<nav style="width:100%" class="ampstart-footer-nav">
+
+		<section class="py-5 deepak" style="background-color: #004b59;">
+			<div class="container text-center text-white">
+			  <h2 class="fw-bold">Subscribe Our Newsletter!</h2>
+			  <p class="mb-4">
+				Lorem Ipsum is simply dummy text printing and type setting industry. Lorem Ipsum been industry standard
+				dummy text ever since when unknown printer took a galley.
+			  </p>
+			  
+			  <!-- Subscription Form -->
+			  <form class="d-flex justify-content-center" style="max-width: 500px; margin: auto;">
+				<div class="input-group">
+				  <span class="input-group-text bg-white border-0">
+					<img src="https://cdn-icons-png.flaticon.com/512/3178/3178158.png" alt="email icon" width="20">
+				  </span>
+				  <input type="email" class="form-control border-0" placeholder="Enter your Email..." required>
+				  <button type="submit" class="btn btn-primary">SUBSCRIBE</button>
+				</div>
+			  </form>
+			</div>
+		  </section>
+
+		  <div class="divider"></div>
+		<nav style="width:100%" class="p-4">
 			<div class="sm-col-12 md-col-4 md-col lg-col lg-col-4">
 				<h3>Contact Info</h3>
 				<ul class="list-reset footer-links mb2">
 					<li><a rel="noopener" href="#" target="_blank" class="inline-block footer-link text-decoration-none">Navigant Digital Pvt. ltd.</a></li>
-					<li><a rel="noopener" href="#" target="_blank" class="inline-block footer-link text-decoration-none" style="line-height:24px">A 24/5, Mohan Cooperative Industrial Area, Badarpur, Secound Floor, New Delhi 110044</a></li>
+					<li><a rel="noopener" href="#" target="_blank" class="inline-block footer-link text-decoration-none" style="line-height:24px">A 24/5, Mohan Cooperative Industrial Area, Badarpur,<br> Secound Floor, New Delhi 110044</a></li>
 					<li class="xs-hide sm-hide"><a class="text-decoration-none footer-link inline-block" href="tel:+#"><i class="fa fa-phone"></i> +91-93550 93937</a></li>
 					<li class="xs-hide sm-hide"><a class="text-decoration-none footer-link inline-block" href="https://wa.me/#" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp us</a></li>
 					<li class="xs-hide sm-hide"><a class="text-decoration-none footer-link inline-block" href="mailto:care@searchai.com"><i class="fa fa-envelope-o"></i> care@searchai.com</a></li>
@@ -40,9 +42,6 @@
 				<ul class="list-reset footer-links mb2"> 
 					<li><a href="{{route('aboutus')}}" class="inline-block footer-link text-decoration-none">About Us</a></li>
 					<li><a href="#" class="inline-block footer-link text-decoration-none">Verify your Helper, Professionally</a></li>
-					{{-- <li><a href="#" class="inline-block footer-link text-decoration-none">Affiliations</a></li>
-					<li><a href="#" class="inline-block footer-link text-decoration-none">Reviews</a></li>
-					<li><a href="#" class="inline-block footer-link text-decoration-none">Refer a Worker</a></li> --}}
 					<li><a target="_blank" href="#" class="inline-block footer-link text-decoration-none">Blog</a></li>
 					
 				</ul>
@@ -59,10 +58,9 @@
 				</ul>
 			</div>
 			<div class="sm-col-12 md-col-3 md-col lg-col lg-col-2 text-center">
-				<a href="{{url('/')}}"><amp-img layout="fixed" width="125" height="30" src="{{url('/front-assets/footer_logo-removebg-preview.png')}}" alt="Helpers near me"></amp-img></a>
+				<a href="{{url('/')}}"><amp-img layout="fixed" width="165" height="45" src="{{url('/front-assets/footer_logo-removebg-preview.png')}}" alt="Helpers near me"></amp-img></a>
 			</div>
-		</nav>
-	  </div>	
+		</nav>	
 	</div>
 	<div style="background:#2e2d2d;color:#fff;padding:1px 0px 1px" class="copyright">
 		{{-- <nav class="ampstart-footer-nav">
