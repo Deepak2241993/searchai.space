@@ -3,28 +3,6 @@
 
 	<div class="ampstart-footer flex flex-column items-center px3">
 
-		<section class="py-5 deepak" style="background-color: #004b59;">
-			<div class="container text-center text-white">
-			  <h2 class="fw-bold">Subscribe Our Newsletter!</h2>
-			  <p class="mb-4">
-				Lorem Ipsum is simply dummy text printing and type setting industry. Lorem Ipsum been industry standard
-				dummy text ever since when unknown printer took a galley.
-			  </p>
-			  
-			  <!-- Subscription Form -->
-			  <form class="d-flex justify-content-center" style="max-width: 500px; margin: auto;">
-				<div class="input-group">
-				  <span class="input-group-text bg-white border-0">
-					<img src="https://cdn-icons-png.flaticon.com/512/3178/3178158.png" alt="email icon" width="20">
-				  </span>
-				  <input type="email" class="form-control border-0" placeholder="Enter your Email..." required>
-				  <button type="submit" class="btn btn-primary">SUBSCRIBE</button>
-				</div>
-			  </form>
-			</div>
-		  </section>
-
-		  <div class="divider"></div>
 		<nav style="width:100%" class="p-4">
 			<div class="sm-col-12 md-col-4 md-col lg-col lg-col-4">
 				<h3>Contact Info</h3>

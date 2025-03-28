@@ -371,7 +371,7 @@
 }
 
 </style>
-<main id="content" class="deepak">
+<main id="content">
 
     <div id="carouselExampleCaptions" class="carousel slide">
         <div class="carousel-indicators">
@@ -454,7 +454,7 @@
     </button>
 </div>
 
-    
+
     
 <section class="container-fluid px-0">
     <div style="margin-right: 20px; margin-top: 20px;">
@@ -478,7 +478,7 @@
     </div>
   </section>
   
-  
+  <div class="divider mt-4 mb-4"></div>
     
 <section class="py-5 deepak">
     <!-- Heading with Icon -->
@@ -548,7 +548,7 @@
             @endforeach
         </div>
     </section> --}}
- 
+    <div class="divider"></div>
     <section id="why-us">
         <div class="container">
             <h2 class="text-center mb3">Why SearchAI for Professional Background Verification?</h2>
@@ -665,7 +665,7 @@
             
         </div>
     </section>
-
+    <div class="divider"></div>
 {{--  Section For Plane  --}}
 <section class="py-5">
     <div class="container text-center">
@@ -738,9 +738,29 @@
       </div>
     </div>
   </section>
-  
+
+  <section class="py-5 deepak" style="background-color: #004b59;">
+      <div class="container text-center text-white">
+        <h2 class="fw-bold">Subscribe Our Newsletter!</h2>
+        <p class="mb-4">
+          Lorem Ipsum is simply dummy text printing and type setting industry. Lorem Ipsum been industry standard
+          dummy text ever since when unknown printer took a galley.
+        </p>
+        
+        <!-- Subscription Form -->
+        <form class="d-flex justify-content-center" style="max-width: 500px; margin: auto;">
+          <div class="input-group">
+            <span class="input-group-text bg-white border-0">
+              <img src="https://cdn-icons-png.flaticon.com/512/3178/3178158.png" alt="email icon" width="20">
+            </span>
+            <input type="email" class="form-control border-0" placeholder="Enter your Email..." required>
+            <button type="submit" class="btn btn-primary">SUBSCRIBE</button>
+          </div>
+        </form>
+      </div>
+    </section>
     
-      <div class="divider"></div>
+   
 
     <section id="about-us">
         <h2 class="text-center m3">SearchAI - India’s Most Trusted Background Verification Partner</h2>
