@@ -369,7 +369,22 @@
     .gap-4 {
     gap: 6.5rem!important;
 }
+.document_need p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
 
+}
+.document_need h6 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+.document_need h4 {
+    font-size: 25px;
+    font-weight: 600;
+    color: #333;
+}
 </style>
 <main id="content">
 
@@ -480,7 +495,7 @@
   
   <div class="divider mt-4 mb-4"></div>
     
-<section class="py-5 deepak">
+<section class="py-5 deepak document_need">
     <!-- Heading with Icon -->
     <div class="d-flex align-items-center mb-4">
       <img src="{{ url('/front-assets/images/legal-document.png') }}" alt="icon" style="width: 60px; height: 60px;">
