@@ -92,7 +92,7 @@ class TokenController extends Controller
 
         $data = Token::with('aadhaarData')
             ->where('user_id', $userId)
-           ->where('service_type', 'Aadhar KYC')
+           ->where('service_id', 'Aadhar KYC')
             ->paginate(10);
         return view('token.index', compact('data'));
     }
@@ -684,32 +684,35 @@ public function DLview(Request $request)
 
 public function DLVerification(Request $request)
 {
+     // dd($request->all());
     try {
         $validated = $request->validate([
-            'driving_license_number' => 'required|string|size:16',
+            'driving_license_number' => 'required|string',
             'date_of_birth' => 'required|date',
-            'token_share_code' => 'required|string',
+            'token' => 'required|string',
             'service_type' => 'required|string',
         ]);
-
-        $token = Token::where('token', $validated['token_share_code'])->first();
+        
+        $token = Token::where('token', $validated['token'])->first();
         if (!$token) {
             return response()->json([
                 'success' => false, 
                 'message' => 'Invalid token share code. Please try again.'
             ], 400);
         }
-
+        
         $data = [
             "driving_license_number" => $validated['driving_license_number'],
             "date_of_birth" => $validated['date_of_birth'],
             "source" => 1,
             "consent" => 'Y',
         ];
+    //    dd($data);
+    $api_url = env('API_base_url') . "dl-api/fetch";
 
         $curl = curl_init();
         curl_setopt_array($curl, [
-            CURLOPT_URL => rtrim(env('API_base_url') . "dl-api/fetch"),
+            CURLOPT_URL => $api_url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => json_encode($data),
@@ -731,7 +734,9 @@ public function DLVerification(Request $request)
         curl_close($curl);
 
         if ($httpCode === 200 && $response) {
-            return response()->json(json_decode($response, true));
+dd($response);
+            // return response()->json(json_decode($response, true));
+            dd(json(json_decode($response, true)));
         }
 
         return response()->json(['success' => false, 'message' => 'API request failed.'], $httpCode);

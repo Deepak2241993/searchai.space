@@ -73,71 +73,72 @@ public function AssignTokensView(Request $request, $user_id) {
     $services  = Service::where('status',1)->get();
         return view('admin.user.tokenassign', compact('user','services','address'));
     }
+
     public function TokenAssignToUser(Request $request)
-{
-    try {
-        $user_id = $request->user_id;
-        $serviceNames = $request->service_names;
-        $tokenQuantities = $request->tokens_purchased;
+    {
+        try {
+            $user_id = $request->user_id;
+            $serviceid = $request->id;
+            $tokenQuantities = $request->tokens_purchased;
 
-        // Validate input data
-        if (!$user_id || empty($serviceNames) || empty($tokenQuantities)) {
-            return back()->with('error', 'Invalid data submitted. Please check and try again.');
-        }
+            // Validate input data
+            if (!$user_id || empty($serviceid) || empty($tokenQuantities)) {
+                return back()->with('error', 'Invalid data submitted. Please check and try again.');
+            }
 
-        if (count($serviceNames) !== count($tokenQuantities)) {
-            return back()->with('error', 'Mismatched data. Please ensure all fields are correctly filled.');
-        }
+            if (count($serviceid) !== count($tokenQuantities)) {
+                return back()->with('error', 'Mismatched data. Please ensure all fields are correctly filled.');
+            }
 
-        // Prepare order data
-        $tokenQty = implode(',', $tokenQuantities);
-        $serviceName = implode(',', $serviceNames);
+            // Prepare order data
+            $tokenQty = implode(',', $tokenQuantities);
+            $serviceName = implode(',', $serviceid);
 
-        $orderData = [
-            'razorpay_order_id' => 'Token_assign_By_Admin',
-            'user_id' => $user_id,
-            'amount' => 0.00,
-            'currency' => 'INR',
-            'status' => 'paid',
-            'service_names' => $serviceName,
-            'tokens_purchased' => $tokenQty,
-            'tokens' => $tokenQty,
-        ];
+            $orderData = [
+                'razorpay_order_id' => 'Token_assign_By_Admin',
+                'user_id' => $user_id,
+                'amount' => 0.00,
+                'currency' => 'INR',
+                'status' => 'paid',
+                'service_id' => $serviceName,
+                'tokens_purchased' => $tokenQty,
+                'tokens' => $tokenQty,
+            ];
 
-        $createdOrder = Order::create($orderData);
-        if (!$createdOrder || !$createdOrder->id) {
-            return back()->with('error', 'Order creation failed.');
-        }
-        $tokens = [];
-        $order_id = $createdOrder->id;
-        $expiresAt = Carbon::now()->addDays(30);
-        foreach ($tokenQuantities as $key => $value) {
-            if ((int)$value > 0) {
-                for ($i = 0; $i < $value; $i++) {
-                    $tokenData = new Token();
-                   
-                    $tokenData->user_id = $user_id;
-                    $tokenData->order_id = $order_id;
-                    $tokenData->service_type = $serviceNames[$key];
-                    $tokenData->token = Str::random(32);
-                    $tokenData->status = 'active';
-                    $tokenData->api_status = 'active';
-                    $tokenData->expires_at = $expiresAt;
-                    $tokenData->save();
-                    $tokens[] = $tokenData;
+            $createdOrder = Order::create($orderData);
+            if (!$createdOrder || !$createdOrder->id) {
+                return back()->with('error', 'Order creation failed.');
+            }
+            $tokens = [];
+            $order_id = $createdOrder->id;
+            $expiresAt = Carbon::now()->addDays(30);
+            foreach ($tokenQuantities as $key => $value) {
+                if ((int)$value > 0) {
+                    for ($i = 0; $i < $value; $i++) {
+                        $tokenData = new Token();
+                    
+                        $tokenData->user_id = $user_id;
+                        $tokenData->order_id = $order_id;
+                        $tokenData->service_id = $serviceNames[$key];
+                        $tokenData->token = Str::random(32);
+                        $tokenData->status = 'active';
+                        $tokenData->api_status = 'active';
+                        $tokenData->expires_at = $expiresAt;
+                        $tokenData->save();
+                        $tokens[] = $tokenData;
+                    }
                 }
             }
+            // Send email after successful processing
+            $user = User::find($user_id);
+            Mail::to($user->email)->send(new TokenAssign($user, $tokens, $createdOrder));
+
+            return redirect()->route('admin.user-list')->with('success', 'Tokens assigned and email sent successfully.');
+
+        } catch (\Exception $e) {
+            return back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
-        // Send email after successful processing
-        $user = User::find($user_id);
-        Mail::to($user->email)->send(new TokenAssign($user, $tokens, $createdOrder));
-
-        return redirect()->route('admin.user-list')->with('success', 'Tokens assigned and email sent successfully.');
-
-    } catch (\Exception $e) {
-        return back()->with('error', 'An error occurred: ' . $e->getMessage());
     }
-}
 
     
     

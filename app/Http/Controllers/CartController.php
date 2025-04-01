@@ -154,7 +154,7 @@ class CartController extends Controller
 
         // Retrieve the cart data from the request
         $cartData = json_decode($request->input('cart'), true);
-        // dd($cartData);
+
 
         // Ensure cart data is available and not empty
         if (empty($cartData)) {

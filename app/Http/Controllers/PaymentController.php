@@ -39,11 +39,6 @@ class PaymentController extends Controller
             return response()->json(['error' => 'User not found'], 404);
         }
 
-        // $user->update([
-        //     'name' => $validated['name'],
-        //     'email' => $validated['email'],
-        // ]);
-
         $user->customerAddress()->updateOrCreate(
             ['user_id' => $user->id],
             [

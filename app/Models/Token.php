@@ -10,7 +10,7 @@ class Token extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'service_type',
+        'service_id',
         'token',
         'expires_at',
         'status',
