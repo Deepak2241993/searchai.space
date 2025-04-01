@@ -33,7 +33,7 @@ class CartController extends Controller
             if ($item['serviceName'] === $validated['serviceName']) {
                 $service = Service::where('name', $item['serviceName'])->first();
                 $taxRate = $service->tax ?? 0;
-
+                $item['service_id'] = $service->id;
                 // Update tokens and subtotal
                 $item['tokens'] += $validated['tokens'];
                 $item['subtotal'] = $item['tokens'] * $validated['pricePerItem'];
@@ -62,6 +62,7 @@ class CartController extends Controller
                 'subtotal' => $subtotal,
                 'taxRate' => $taxRate,
                 'taxAmount' => $taxPay,
+                'service_id' => $service->id,
                 'total_price' => $subtotal + $taxPay,
             ];
         }

@@ -18,6 +18,7 @@ class PaymentController extends Controller
 {
     public function createOrder(Request $request)
     {
+
         $validated = $request->validate([
             'amount' => 'required|numeric|min:1',
             'name' => 'required|string|max:255',
@@ -25,13 +26,13 @@ class PaymentController extends Controller
             'phone' => 'required|string|max:20',
             'address' => 'required|string|max:255',
             'buyTokens' => 'required|string|max:255',
-            'service_names' => 'required|array', 
+            'service_id' => 'required|array', 
             'service_names.*' => 'required|string|max:255',
             'tokens' => 'required|array',
             'tokens.*' => 'required|numeric|min:1',
         ]);
 
-        // dd($request->all());
+        dd($request->all());
 
         $user = User::find(auth()->id());
 
@@ -75,7 +76,7 @@ class PaymentController extends Controller
                 'currency' => 'INR',
                 'status' => 'pending',
                 'tokens_purchased' => $tokensToBuy,
-                'service_names' => $service_namesString, // Save as comma-separated string
+                'service_id' => $service_namesString, // Save as comma-separated string
                 'tokens' => $tokensString, // Save as comma-separated string
             ]);
 
@@ -83,7 +84,7 @@ class PaymentController extends Controller
                 'order_id' => $razorpayOrder['id'],
                 'amount' => $amountInPaise,
                 'tokens_purchased' => $tokensToBuy,
-                'service_names' => $service_namesString, // Log the string version
+                'service_id' => $service_namesString, // Log the string version
                 'currency' => 'INR',
             ]);
 

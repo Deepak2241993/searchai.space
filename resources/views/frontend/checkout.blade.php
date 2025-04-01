@@ -380,7 +380,7 @@
                                                 <li class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-3">
                                                     <div>
                                                         <h5 class="font-weight-bold">{{ $item['serviceName'] == 'KYC+CCRV' ? 'Aadhar KYC + Criminal Background Verification' : $item['serviceName'] }}</h5>
-                                                        <input type="hidden" name="serviceName[]" value="{{ $item['serviceName'] }}">
+                                                        <input type="hidden" name="service_id[]" value="{{ $item['service_id'] }}">
                                                         <input type="hidden" name="tokens[]" value="{{ $item['tokens'] }}">
                                                         <span class="text-muted">&#8377;{{ number_format($item['pricePerItem'], 2) }} x {{ $item['tokens'] }} tokens</span>
                                                     </div>
@@ -459,13 +459,13 @@
         const company_name = document.getElementById('company_name').value;
         const gst_number = document.getElementById('gst_number').value;
         // Get all service names
-        const service_names = Array.from(document.querySelectorAll('input[name="serviceName[]"]')).map(input => input.value);
+        const service_id = Array.from(document.querySelectorAll('input[name="service_id[]"]')).map(input => input.value);
 
         // Get all token counts
         const tokens = Array.from(document.querySelectorAll('input[name="tokens[]"]')).map(input => input.value);
         const buyTokens = tokens.reduce((acc, curr) => acc + curr, 0); 
         
-        if (!amount || !name || !email || !phone || !address || service_names.length === 0 || tokens.length === 0) {
+        if (!amount || !name || !email || !phone || !address || tokens.length === 0 || service_id.length === 0) {
             alert('Please fill all the required fields.');
             submitButton.disabled = false;
             spinner.classList.add('d-none');
@@ -498,7 +498,7 @@
                     phone,
                     address,
                     buyTokens,
-                    service_names,
+                    service_id,
                     tokens,
                     company_name,
                     gst_number

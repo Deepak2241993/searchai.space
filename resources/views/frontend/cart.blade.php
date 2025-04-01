@@ -219,6 +219,7 @@ td button:hover {
                             <td>
                                 <input class="form-control" type="number" value="{{ $item['tokens'] }}" min="1" style="width: 80px;"
                                     onchange="updateTotalPrice(this, {{ $item['pricePerItem'] }}, '{{ $item['id'] }}', {{ $item['taxRate'] }})">
+                                    <input class="form-control" type="hidden" value="{{ $item['service_id'] }}">
                             </td>
                             <td>
                                 <div class="product-info tax-amount">
@@ -304,17 +305,28 @@ function updateCartData() {
     document.querySelectorAll('tr[id^="cart-item-"]').forEach(row => {
         const itemId = row.id.replace('cart-item-', '');
         const quantityInput = row.querySelector('input[type="number"]');
+        const serviceIdInput = row.querySelector('input[type="hidden"]'); // Get hidden service_id input
         const pricePerItem = parseFloat(row.dataset.pricePerItem) || 0;
         const quantity = parseInt(quantityInput.value) || 1;
-        const serviceName = row.querySelector('.product-info h2').innerText;
+        const serviceNameElement = row.querySelector('.product-info h2');
+
+        // Ensure service name is correctly retrieved
+        const serviceName = serviceNameElement ? serviceNameElement.innerText.trim() : '';
 
         // Ensure tax and total price are extracted correctly
-        const taxAmount = parseFloat(row.querySelector('.tax-amount h2').innerText.replace('₹', '')) || 0;
-        const totalPrice = parseFloat(row.querySelector('.total-price h2').innerText.replace('₹', '')) || 0;
+        const taxAmountElement = row.querySelector('.tax-amount h2');
+        const totalPriceElement = row.querySelector('.total-price h2');
+
+        const taxAmount = taxAmountElement ? parseFloat(taxAmountElement.innerText.replace('₹', '').trim()) || 0 : 0;
+        const totalPrice = totalPriceElement ? parseFloat(totalPriceElement.innerText.replace('₹', '').trim()) || 0 : 0;
+
+        // Ensure service_id value is retrieved
+        const service_id = serviceIdInput ? serviceIdInput.value : '';
 
         cart.push({
             id: itemId,
             serviceName: serviceName,
+            service_id: service_id,
             tokens: quantity,
             pricePerItem: pricePerItem,
             taxAmount: taxAmount,
@@ -328,6 +340,7 @@ function updateCartData() {
         cartDataInput.value = JSON.stringify(cart);
     }
 }
+
 
 
 
