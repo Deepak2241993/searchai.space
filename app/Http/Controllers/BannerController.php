@@ -127,10 +127,10 @@ class BannerController extends Controller
     ]);
 
     // Update banner fields
-    $banner->title = $validatedData['title'];
-    $banner->description = $validatedData['description'];
-    $banner->status = $validatedData['status'];
-    $banner->order = $validatedData['order'];
+    $banner->title = $request->title;
+    $banner->description = $request->description;
+    $banner->status = $request->status;
+    $banner->order = $request->order;
 
     // Handle the image upload
     if ($request->hasFile('image')) {
