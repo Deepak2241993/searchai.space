@@ -663,6 +663,84 @@ public function CcrvReportGeneration(Request $request){
 }
 
 
+//  For DL Verification
 
 
+public function DLview(Request $request)
+{
+    $userId = auth()->id();
+    if (!$userId) {
+        return redirect()->route('login')->with('error', 'Please log in to access tokens.');
+    }
+    $data = Token::where('user_id', $userId)
+    ->where('service_type', 'DL')
+    ->paginate(10);
+
+    return view('dl.index', compact('data'));
+}
+
+
+
+
+public function DLVerification(Request $request)
+{
+    try {
+        $validated = $request->validate([
+            'driving_license_number' => 'required|string|size:16',
+            'date_of_birth' => 'required|date',
+            'token_share_code' => 'required|string',
+            'service_type' => 'required|string',
+        ]);
+
+        $token = Token::where('token', $validated['token_share_code'])->first();
+        if (!$token) {
+            return response()->json([
+                'success' => false, 
+                'message' => 'Invalid token share code. Please try again.'
+            ], 400);
+        }
+
+        $data = [
+            "driving_license_number" => $validated['driving_license_number'],
+            "date_of_birth" => $validated['date_of_birth'],
+            "source" => 1,
+            "consent" => 'Y',
+        ];
+
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_URL => rtrim(env('API_base_url') . "dl-api/fetch"),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_HTTPHEADER => [
+                "Accept: application/json",
+                "Content-Type: application/json",
+                "X-API-Key: " . env('GridLineAPIKey'),
+                "X-Auth-Type: API-Key"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        if (curl_errno($curl)) {
+            curl_close($curl);
+            return response()->json(['success' => false, 'message' => 'cURL Error: ' . curl_error($curl)]);
+        }
+        curl_close($curl);
+
+        if ($httpCode === 200 && $response) {
+            return response()->json(json_decode($response, true));
+        }
+
+        return response()->json(['success' => false, 'message' => 'API request failed.'], $httpCode);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'An error occurred: ' . $e->getMessage()
+        ], 500);
+    }
+}
 }

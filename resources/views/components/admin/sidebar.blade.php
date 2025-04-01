@@ -86,6 +86,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('dl-verification-view') }}" class="nav-link {{ Request::segment(1) === 'dl-verification-view' ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-check-square-o" aria-hidden="true"></i>
+                        <p>Driver's License Verification</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('orders') }}" class="nav-link {{ Request::segment(1) === 'my-orders' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-shopping-cart" aria-hidden="true"></i>
                         <p>Orders</p>
