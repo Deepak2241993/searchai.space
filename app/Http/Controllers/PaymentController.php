@@ -32,7 +32,6 @@ class PaymentController extends Controller
             'tokens.*' => 'required|numeric|min:1',
         ]);
 
-        dd($request->all());
 
         $user = User::find(auth()->id());
 
@@ -61,12 +60,11 @@ class PaymentController extends Controller
                 'receipt' => 'order_rcptid_' . uniqid(),
                 'payment_capture' => 1,
             ];
-
             $razorpayOrder = $api->order->create($orderData);
-            $tokensToBuy = $validated['buyTokens'];
 
+            $tokensToBuy = $validated['buyTokens'];
             // Convert arrays to comma-separated strings
-            $service_namesString = implode(',', $validated['service_names']);
+            $service_namesString = implode(',', $validated['service_id']);
             $tokensString = implode(',', $validated['tokens']);
 
             $order = Order::create([
@@ -168,7 +166,7 @@ class PaymentController extends Controller
                         for ($i = 0; $i < $numberOfTokensForService; $i++) {
                             $newToken = new Token();
                             $newToken->user_id = $user->id;
-                            $newToken->service_type = $service; 
+                            $newToken->service_id = $service; 
                             $newToken->token = Str::random(32); 
                             $newToken->expires_at = $expiresAt;
                             $newToken->status = 'active';

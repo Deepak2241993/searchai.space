@@ -401,7 +401,7 @@ public function downloadPdf($id)
             return redirect()->route('login')->with('error', 'Please log in to access tokens.');
         }
         $data = Token::where('user_id', $userId)
-            ->where('service_type', 'KYC+CCRV')
+            ->where('service_id', 'KYC+CCRV')
             ->paginate(10);
 
         return view('kyc_ccrv.index', compact('data'));
@@ -673,7 +673,7 @@ public function DLview(Request $request)
         return redirect()->route('login')->with('error', 'Please log in to access tokens.');
     }
     $data = Token::where('user_id', $userId)
-    ->where('service_type', 'DL')
+    ->where('service_id', 'DL')
     ->paginate(10);
 
     return view('dl.index', compact('data'));
