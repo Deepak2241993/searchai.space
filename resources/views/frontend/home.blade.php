@@ -344,7 +344,7 @@
         
         .ServiceButton .btn-submit {
             padding: 6px 12px;
-            font-size: 12px;
+            font-size: 15px;
             width: 100%;
             max-width: 300px;
             margin: 5px auto;

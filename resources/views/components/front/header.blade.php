@@ -100,6 +100,11 @@
         margin-left: 0px;
         margin-right: 0px;
     }
+
+    /* Set font size for .form-control for Tablet and Mobile */
+    .form-control {
+        font-size: 1.8rem;
+    }
 }
 
 /* For Small Mobile (max-width: 576px) */
@@ -108,10 +113,12 @@
         margin-left: 0px;
         margin-right: 0px;
     }
+
+    /* Set font size for .form-control for Small Mobile */
+    .form-control {
+        font-size: 1.8rem;
+    }
 }
-
-    
-
 
 </style>
 
