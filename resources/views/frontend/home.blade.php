@@ -619,14 +619,14 @@
           <span class="mt-2">Register Yourself</span>
         </div>
         
-        <i class="bi bi-arrow-down fs-3 my-2 mobile-arrow"></i>
+        <!-- <i class="bi bi-arrow-down fs-3 my-2 mobile-arrow"></i> -->
         
         <div class="process-step">
           <img src="{{ url('/front-assets/images/fingerprint.png') }}" alt="Fingerprint" class="process-icon">
           <span class="mt-2">Verify Yourself</span>
         </div>
         
-        <i class="bi bi-arrow-down fs-3 my-2 mobile-arrow"></i>
+        <!-- <i class="bi bi-arrow-down fs-3 my-2 mobile-arrow"></i> -->
         
         <div class="process-step">
           <img src="{{ url('/front-assets/images/download.png') }}" alt="Download" class="process-icon">
@@ -986,6 +986,26 @@
         </form>
       </div>
     </section>
+
+    <!-- mobile view -->
+
+  <section class="py-5 deepak shashwatmobile" style="background-color: #004b59;">
+  <div class="container text-center text-white">
+    <h2 class="fw-bold">Stay updated with our latest news!</h2>
+    <p class="mb-4">Subscribe to our newsletter for exclusive updates, insights, and offers. Enter your email below and never miss an update from us!</p>
+    
+    <!-- Subscription Form -->
+    <form class="d-flex flex-column align-items-center" style="max-width: 500px; margin: auto;">
+      <div class="input-group w-100">
+        <span class="input-group-text bg-white border-0">
+          <img src="https://cdn-icons-png.flaticon.com/512/3178/3178158.png" alt="email icon" width="20">
+        </span>
+        <input type="email" class="form-control border-0" placeholder="Enter your Email..." required>
+      </div>
+      <button type="submit" class="btn btn-primary mt-2 w-100">SUBSCRIBE</button>
+    </form>
+  </div>
+</section>
     
    
 
