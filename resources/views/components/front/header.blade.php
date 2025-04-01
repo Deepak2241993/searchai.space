@@ -54,6 +54,72 @@
     margin-left: 30px;
     margin-right: 30px;
 }
+
+
+
+
+/* @media (min-width: 992px) {
+        .deepak {
+            display: block;
+        }
+        .shashwatmobile {
+            display: none;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .deepak {
+            display: none;
+        }
+        .shashwatmobile {
+            display: block;
+        }
+    } */
+
+/* For Desktop (min-width: 992px) */
+@media (min-width: 992px) {
+    .deepak {
+        display: block;
+    }
+    .shashwatmobile {
+        display: none;
+    }
+}
+
+/* For Tablet and Mobile (max-width: 991px) */
+@media (max-width: 991px) {
+    .deepak {
+        display: none;
+    }
+    .shashwatmobile {
+        display: block;
+    }
+
+    /* Apply margin-left and margin-right for Tablet and Mobile */
+    .deepak, .shashwatmobile {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    /* Set font size for .form-control for Tablet and Mobile */
+    .form-control {
+        font-size: 1.8rem;
+    }
+}
+
+/* For Small Mobile (max-width: 576px) */
+@media (max-width: 576px) {
+    .deepak, .shashwatmobile {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    /* Set font size for .form-control for Small Mobile */
+    .form-control {
+        font-size: 1.8rem;
+    }
+}
+
 </style>
 
 
