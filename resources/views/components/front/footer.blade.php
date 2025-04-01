@@ -1,5 +1,6 @@
 
-<footer id="footer">
+<footer id="footer" style="background-color:#004555">
+	<div class="container">
 
 	<div class="ampstart-footer flex flex-column items-center px3">
 
@@ -40,6 +41,7 @@
 			</div>
 		</nav>	
 	</div>
+	</div>
 	<div style="background:#2e2d2d;color:#fff;padding:1px 0px 1px" class="copyright">
 		{{-- <nav class="ampstart-footer-nav">
 		  <ul class="social-list">
@@ -57,6 +59,7 @@
         </li>
 		  </ul>
 		</nav> --}}
-		<h5 class="text-center">Copyright &copy; {{date('Y')}} Navigant Digital Pvt ltd. |  All rights reserved | <a href="https://www.thetemz.com/" target="_blank">Develop by TEMZ</a></h5>
+		<h5 class="text-center">Copyright &copy; {{date('Y')}} Navigant Digital Pvt ltd. |  All rights reserved | <a href="https://www.thetemz.com/" target="_blank">Developed by TEMZ</a></h5>
 	</div>
+	
 </footer>

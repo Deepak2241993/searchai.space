@@ -44,7 +44,7 @@
         display: contents;
     }
     .nav-link {
-    color: #ED760D !important;
+    color: #000000 !important;
 }
 #navbarNav ul li a {
     font-size: 22px;

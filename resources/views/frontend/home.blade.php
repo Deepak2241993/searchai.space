@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('body')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
     .button-container {
         background: #ffffff;
@@ -186,6 +187,7 @@
     .ServiceButton {
         padding: 30px;
         text-align: center;
+        display: contents;
     }
 
     .ServiceButton .btn-submit {
@@ -202,6 +204,7 @@
         border-width: 1px;
         border-radius: 4px;
         cursor: pointer;
+        
     }
 
     /* Carousel Responsive Styles */
@@ -225,7 +228,7 @@
 
     .banner-title {
         font-family: Impact, sans-serif;
-        font-size: 40px;
+        font-size: 51px;
         font-weight: 300;
         color: #fff;
         line-height: 1.2;
@@ -234,10 +237,12 @@
     }
 
     .banner-description {
-        font-size: 24px;
+        font-size: 19px;
         color: #fff;
         margin-bottom: 30px;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        /* sm */
+        line-height:.8em;
     }
 
     /* Tablet */
@@ -277,7 +282,7 @@
         
         .carousel-item img {
             height: 100%;
-            object-fit: cover;
+            /* object-fit: cover; */
             object-position: center;
         }
         
@@ -545,27 +550,62 @@
 
     
 <section class="container-fluid px-0 process-flow-section">
-  <div class="container">
-    <!-- Desktop View -->
+  <!-- <div class="container">
+    
     <div class="d-none d-md-block">
       <div class="d-flex justify-content-center align-items-center gap-4">
-        <!-- Text Section -->
+        
         <div class="text-center">
           <p class="process-flow-title"><b>Getting started is<br>quick and easy</b></p>
         </div>
         
-        <!-- Icons and Arrows Section -->
         <div class="d-flex align-items-center gap-4">
           <img src="{{ url('/front-assets/images/add-user.png') }}" alt="Add User" class="process-icon">
+          <span class="mt-2">Register Yourself</span>
           <i class="bi bi-arrow-right fs-3"></i>
           
           <img src="{{ url('/front-assets/images/fingerprint.png') }}" alt="Fingerprint" class="process-icon">
+          <span class="mt-2">Verify Yourself</span>
           <i class="bi bi-arrow-right fs-3"></i>
           
           <img src="{{ url('/front-assets/images/download.png') }}" alt="Download" class="process-icon">
+          <span class="mt-2">Fetch your Documents</span>
         </div>
       </div>
+    </div> -->
+
+    <div class="container">
+    <!-- Desktop View -->
+    <div class="d-none d-md-block">
+        <div class="d-flex justify-content-center align-items-center gap-5">
+            <!-- Text Section -->
+            <div class="text-center">
+                <p class="process-flow-title"><b>Getting started is<br>quick and easy</b></p>
+            </div>
+
+            <!-- Icons and Arrows Section -->
+            <div class="d-flex align-items-center gap-4">
+                <div class="d-flex flex-column align-items-center">
+                    <img src="{{ url('/front-assets/images/add-user.png') }}" alt="Add User" class="process-icon">
+                    <span class="mt-2">Register Yourself</span>
+                </div>
+                <i class="bi bi-arrow-right fs-3"></i>
+
+                <div class="d-flex flex-column align-items-center">
+                    <img src="{{ url('/front-assets/images/fingerprint.png') }}" alt="Fingerprint" class="process-icon">
+                    <span class="mt-2">Verify Yourself</span>
+                </div>
+                <i class="bi bi-arrow-right fs-3"></i>
+
+                <div class="d-flex flex-column align-items-center">
+                    <img src="{{ url('/front-assets/images/download.png') }}" alt="Download" class="process-icon">
+                    <span class="mt-2">Fetch your Documents</span>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
     
     <!-- Mobile View -->
     <div class="d-block d-md-none">
@@ -576,21 +616,21 @@
       <div class="process-flow-container">
         <div class="process-step">
           <img src="{{ url('/front-assets/images/add-user.png') }}" alt="Add User" class="process-icon">
-          <span class="mt-2">Register</span>
+          <span class="mt-2">Register Yourself</span>
         </div>
         
         <i class="bi bi-arrow-down fs-3 my-2 mobile-arrow"></i>
         
         <div class="process-step">
           <img src="{{ url('/front-assets/images/fingerprint.png') }}" alt="Fingerprint" class="process-icon">
-          <span class="mt-2">Verify</span>
+          <span class="mt-2">Verify Yourself</span>
         </div>
         
         <i class="bi bi-arrow-down fs-3 my-2 mobile-arrow"></i>
         
         <div class="process-step">
           <img src="{{ url('/front-assets/images/download.png') }}" alt="Download" class="process-icon">
-          <span class="mt-2">Download</span>
+          <span class="mt-2">Fetch your Documents</span>
         </div>
       </div>
     </div>
@@ -599,7 +639,8 @@
   
   <div class="divider mt-4 mb-4"></div>
     
-<section class="py-5 deepak document_need">
+<!-- <section class="py-5 deepak document_need"> -->
+<section class="container">
     <!-- Heading with Icon -->
     <div class="d-flex align-items-center mb-4">
       <img src="{{ url('/front-assets/images/legal-document.png') }}" alt="icon" style="width: 60px; height: 60px;">
@@ -613,7 +654,7 @@
         <div class="d-flex align-items-center p-3 rounded-3 shadow-sm" style="border-style: groove;">
           <img src="{{ url('/front-assets/images/aadhar.jpg') }}" alt="Aadhaar Card" style="width: 60px; height: 60px;" />
           <div class="ms-3">
-            <h6 class="mb-1 fw-bold">Aadhaar Card</h6>
+            <h6 class="mb-1 fw-bold" style="font-size: 17px">Aadhaar Card</h6>
             <p class="mb-0 text-secondary">Aadhaar Card</p>
           </div>
         </div>
@@ -624,7 +665,7 @@
         <div class="d-flex align-items-center p-3 rounded-3 shadow-sm" style="border-style: groove;">
           <img src="{{ url('/front-assets/images/pancard.png') }}" alt="PAN Card" style="width: 60px; height: 60px;" />
           <div class="ms-3">
-            <h6 class="mb-1 fw-bold">PAN Card</h6>
+            <h6 class="mb-1 fw-bold" style="font-size: 17px">PAN Card</h6>
             <p class="mb-0 text-secondary">PAN Card</p>
           </div>
         </div>
@@ -635,7 +676,7 @@
         <div class="d-flex align-items-center p-3 rounded-3 shadow-sm" style="border-style: groove;">
           <img src="{{ url('/front-assets/images/dl.webp') }}" alt="Driving License" style="width: 60px; height: 60px;" />
           <div class="ms-3">
-            <h6 class="mb-1 fw-bold">Driving License</h6>
+            <h6 class="mb-1 fw-bold" style="font-size: 17px">Driving License</h6>
             <p class="mb-0 text-secondary">Driving License</p>
           </div>
         </div>
@@ -646,7 +687,7 @@
         <div class="d-flex align-items-center p-3 rounded-3 shadow-sm" style="border-style: groove;">
           <img src="{{ url('/front-assets/images/rc.webp') }}" alt="Vehicle Registration" style="width: 60px; height: 60px;" />
           <div class="ms-3">
-            <h6 class="mb-1 fw-bold">Registration of Vehicles</h6>
+            <h6 class="mb-1 fw-bold" style="font-size: 17px">Registration of Vehicles</h6>
             <p class="mb-0 text-secondary">Registration of Vehicles</p>
           </div>
         </div>
@@ -673,7 +714,7 @@
             <h2 class="text-center mb3">Why SearchAI for Professional Background Verification?</h2>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="pb3 ml-auto mr-auto m-auto">
+                    <div class="pb0 ml-auto mr-auto m-auto">
                     <amp-accordion id="why-helpers-near-me" expand-single-section animate disable-session-states>
                         <section class="card p0 mb1">
                             <header class="card-header md-list">
@@ -727,7 +768,7 @@
                     </div>
                 </div>
                 <div class="col md-6">
-                    <div class="pb3 ml-auto mr-auto m-auto">
+                    <div class="pb0 ml-auto mr-auto m-auto">
                         <amp-accordion id="why-helpers-near-me" expand-single-section animate disable-session-states>
                             
                             <section class="card p0 mb1">
@@ -786,13 +827,12 @@
     </section>
     <div class="divider"></div>
 {{--  Section For Plane  --}}
-<section class="py-5">
+<!-- <section class="py-5">
     <div class="container text-center">
       <h2 class="fw-bold">Yearly Plans & Pricing</h2>
       <p class="text-muted">Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices.</p>
       
       <div class="row mt-5">
-        <!-- Hatchling Plan -->
         <div class="col-sm-12 col-md-4 mb-4">
           <div class="card border-0 shadow" style="border-radius: 12px;">
             <div class="card-header text-white" style="background-color: #5b3dc9; border-radius: 12px 12px 0 0;">
@@ -813,7 +853,6 @@
           </div>
         </div>
   
-        <!-- Baby Plan -->
         <div class="col-sm-12 col-md-4 mb-4">
           <div class="card border-0 shadow" style="border-radius: 12px;">
             <div class="card-header text-white" style="background-color: #6cbe45; border-radius: 12px 12px 0 0;">
@@ -834,7 +873,6 @@
           </div>
         </div>
   
-        <!-- Premium Plan -->
         <div class="col-sm-12 col-md-4 mb-4">
           <div class="card border-0 shadow" style="border-radius: 12px;">
             <div class="card-header text-white" style="background-color: #e57235; border-radius: 12px 12px 0 0;">
@@ -856,14 +894,84 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
+
+  <section class="py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold">Yearly Plans & Pricing</h2>
+    <p class="text-muted">Choose the perfect plan with secure storage, unlimited support, email integration, and seamless downloads.</p>
+    
+    <div class="row mt-5">
+      <!-- Hatchling Plan -->
+      <div class="col-sm-12 col-md-4 mb-4">
+        <div class="card border-0 shadow" style="border-radius: 12px;">
+          <div class="card-header text-white" style="background-color: #5b3dc9; border-radius: 12px 12px 0 0; padding: 20px;">
+            <h5 class="mb-2">HATCHLING PLAN</h5>
+            <h2 class="mb-0 fw-bold">$29</h2>
+            <p class="mb-0">PER MONTH</p>
+          </div>
+          <div class="card-body py-4">
+            <ul class="list-unstyled text-start mx-auto" style="max-width: 200px;">
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Unlimited Support</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 5GB Server Space</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 2 Users per Project</li>
+              <li class="mb-3"><i class="fas fa-times text-danger me-2"></i> Email Integration</li>
+              <li class="mb-3"><i class="fas fa-times text-danger me-2"></i> Unlimited Download</li>
+            </ul>
+            <a href="#" class="btn btn-warning text-white fw-bold mt-3 px-4">CHOOSE PLAN</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Baby Plan -->
+      <div class="col-sm-12 col-md-4 mb-4">
+        <div class="card border-0 shadow" style="border-radius: 12px;">
+          <div class="card-header text-white" style="background-color: #6cbe45; border-radius: 12px 12px 0 0; padding: 20px;">
+            <h5 class="mb-2">BABY PLAN</h5>
+            <h2 class="mb-0 fw-bold">$69</h2>
+            <p class="mb-0">PER MONTH</p>
+          </div>
+          <div class="card-body py-4">
+            <ul class="list-unstyled text-start mx-auto" style="max-width: 200px;">
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Unlimited Support</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 10GB Server Space</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 5 Users per Project</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Email Integration</li>
+              <li class="mb-3"><i class="fas fa-times text-danger me-2"></i> Unlimited Download</li>
+            </ul>
+            <a href="#" class="btn btn-warning text-white fw-bold mt-3 px-4">CHOOSE PLAN</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Premium Plan -->
+      <div class="col-sm-12 col-md-4 mb-4">
+        <div class="card border-0 shadow" style="border-radius: 12px;">
+          <div class="card-header text-white" style="background-color: #e57235; border-radius: 12px 12px 0 0; padding: 20px;">
+            <h5 class="mb-2">PREMIUM PLAN</h5>
+            <h2 class="mb-0 fw-bold">$99</h2>
+            <p class="mb-0">PER MONTH</p>
+          </div>
+          <div class="card-body py-4">
+            <ul class="list-unstyled text-start mx-auto" style="max-width: 200px;">
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Unlimited Support</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 25GB Server Space</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 10 Users per Project</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Email Integration</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Unlimited Download</li>
+            </ul>
+            <a href="#" class="btn btn-warning text-white fw-bold mt-3 px-4">CHOOSE PLAN</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <section class="py-5 deepak" style="background-color: #004b59;">
       <div class="container text-center text-white">
-        <h2 class="fw-bold">Subscribe Our Newsletter!</h2>
-        <p class="mb-4">
-          Lorem Ipsum is simply dummy text printing and type setting industry. Lorem Ipsum been industry standard
-          dummy text ever since when unknown printer took a galley.
+        <h2 class="fw-bold">Stay updated with our latest news!</h2>
+        <p class="mb-4">Subscribe to our newsletter for exclusive updates, insights, and offers. Enter your email below and never miss an update from us!
         </p>
         
         <!-- Subscription Form -->
@@ -888,9 +996,12 @@
                 About Us section description - At SearchAI, we make background verification simple, fast, and reliable. Whether you're a large enterprise, small business, start-up, or individual, our AI-driven screening solutions ensure trust and safety in every interaction. With advanced Artificial Intelligence (AI) and Machine Learning (ML), we deliver accurate, efficient, and fully compliant verification services. Choose SearchAI for seamless, secure, and hassle-free background checks - because building trust should be effortless.
             </p>
             <div class="text-center block m3">
-                <a style="border-radius:4px" class="ampstart-btn btn btn-sm btn-outline-primary" href="{{route('aboutus')}}">
+                <!-- <a style="border-radius:4px" class="ampstart-btn btn btn-sm btn-outline-primary" href="{{route('aboutus')}}">
                     Read more&nbsp;<i class="fa fa-arrow-circle-right"></i>
-                </a>
+                </a> -->
+
+                <a href="{{route('aboutus')}}" class="btn btn-warning text-white fw-bold mt-3 px-4">READ MORE&nbsp;<i class="fa fa-arrow-circle-right"></i></a>
+
             </div>
         </div>
     </section>

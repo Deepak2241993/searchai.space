@@ -1406,7 +1406,7 @@
 
 		.btn.btn-outline-primary {
 			background: 0 0;
-			border-color: #ccc;
+			border-color: #000;
 			color: #000
 		}
 
@@ -2262,8 +2262,8 @@
 		}
 
 		.btn.btn-warning:hover {
-			background: #fff;
-			color: #ff8f00
+			background: #004B59;
+			color: #ff8f00;
 		}
 
 		.adv h2 {
