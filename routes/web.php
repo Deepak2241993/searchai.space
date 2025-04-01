@@ -138,6 +138,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/background-kyc-otp', [TokenController::class, 'KycOtpSubmit'])->name('kyc-otp');
     Route::post('/ccrv-report-generation', [TokenController::class, 'CcrvReportGeneration'])->name('ccrv-report-generation');
 
+    // Driver's License Verification
+    Route::get('/dl-verification-view', [TokenController::class, 'DLview'])->name('dl-verification-view');
+    Route::post('/dl-verification', [TokenController::class, 'DLVerification'])->name('dl-verification');
+
     // Checkout Routes
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::post('/payment/create-order', [PaymentController::class, 'createOrder'])->name('payment.createOrder');
