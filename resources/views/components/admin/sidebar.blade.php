@@ -91,7 +91,7 @@
                         </li>
                         @else
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a href="#" class="nav-link {{ Request::segment(2) === 'token-views' ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-check-square-o" aria-hidden="true"></i>
                                 <p>Service Not Found</p>
                             </a>
