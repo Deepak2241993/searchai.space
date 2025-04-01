@@ -70,7 +70,7 @@
                                         name="title" 
                                         value="{{ isset($bannerData) ? $bannerData->title : '' }}" 
                                         placeholder="Enter title" 
-                                        required>
+                                        >
                                 </div>
 
                                 <!-- Description Field -->
@@ -82,7 +82,7 @@
                                         name="description" 
                                         rows="5" 
                                         placeholder="Enter description" 
-                                        required>{{ isset($bannerData) ? $bannerData->description : '' }}</textarea>
+                                        >{{ isset($bannerData) ? $bannerData->description : '' }}</textarea>
                                 </div>
 
                                 <!-- Image Upload Field -->
