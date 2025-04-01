@@ -265,6 +265,7 @@ td button:hover {
                         <button type="submit" class="checkout-button">Proceed
                             to Checkout</button>
                     </form>
+                    <a href="{{url('/')}}" class="btn btn-primary checkout-button">Buy More</a>
                 </div>
             @endif
         </div>

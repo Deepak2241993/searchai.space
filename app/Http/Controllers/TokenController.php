@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Token;
 use App\Models\Ccrv_case;
+use App\Models\Service;
 use PDF;
 use DB;
 use Illuminate\Support\Facades\Mail;
@@ -83,32 +84,8 @@ class TokenController extends Controller
         return view('frontend.cart', compact('tokens', 'pricePerItem'));
     }
 
-    public function tokenList()
-    {
-        $userId = auth()->id();
-        if (!$userId) {
-            return redirect()->route('login')->with('error', 'Please log in to access tokens.');
-        }
-
-        $data = Token::with('aadhaarData')
-            ->where('user_id', $userId)
-           ->where('service_id', 'Aadhar KYC')
-            ->paginate(10);
-        return view('token.index', compact('data'));
-    }
-    public function CCRV()
-    {
-        $userId = auth()->id();
-        if (!$userId) {
-            return redirect()->route('login')->with('error', 'Please log in to access tokens.');
-        }
-        $data = Token::with('aadhaarData')
-            ->where('user_id', $userId)
-            ->where('service_type', 'CCRV')
-            ->paginate(10);
-
-        return view('token.ccrv', compact('data'));
-    }
+    
+  
 
     public function CCRVReport(Request $request)
     {
@@ -394,18 +371,7 @@ public function downloadPdf($id)
     }
     
 
-    public function CcrvAndBackgroundVerification()
-    {
-        $userId = auth()->id();
-        if (!$userId) {
-            return redirect()->route('login')->with('error', 'Please log in to access tokens.');
-        }
-        $data = Token::where('user_id', $userId)
-            ->where('service_id', 'KYC+CCRV')
-            ->paginate(10);
-
-        return view('kyc_ccrv.index', compact('data'));
-    }
+ 
 
 
     //  For OTP Generation on AAdhar 
@@ -663,21 +629,58 @@ public function CcrvReportGeneration(Request $request){
 }
 
 
+
+
 //  For DL Verification
 
 
-public function DLview(Request $request)
+public function MyServices(Request $request, $slug)
 {
     $userId = auth()->id();
     if (!$userId) {
         return redirect()->route('login')->with('error', 'Please log in to access tokens.');
     }
-    $data = Token::where('user_id', $userId)
-    ->where('service_id', 'DL')
-    ->paginate(10);
-
-    return view('dl.index', compact('data'));
+   $service = Service::where('service_slug', $slug)->firstOrFail();
+//    dd($service);
+    if($slug == 'aadhar-kyc')
+    {
+        $data = Token::where('user_id', $userId)
+        ->where('service_id', $service->id)
+        ->paginate(10);
+        return view('token.index', compact('data'));
+    }
+    else if($slug == 'ccrv')
+    {
+        $data = Token::where('user_id', $userId)
+        ->where('service_id', $service->id)
+        ->paginate(10);
+        return view('token.ccrv', compact('data'));
+    }
+    else if($slug == 'drivers-license-verification')
+    {
+        $data = Token::where('user_id', $userId)
+        ->where('service_id', $service->id)
+        ->paginate(10);
+        return view('dl.index', compact('data'));
+    }
+    else if($slug == 'kycccrv')
+    {
+        $data = Token::where('user_id', $userId)
+        ->where('service_id', $service->id)
+        ->paginate(10);
+        return view('kyc_ccrv.index', compact('data'));
+    }
+    else
+    {
+        return redirect()->route('dashboard')->with('error', 'Invalid service slug.');
+    }
+   
 }
+
+
+
+
+
 
 
 

@@ -67,30 +67,38 @@
                     </a>
                     
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('token.index') }}" class="nav-link {{ Request::segment(1) === 'token-views' ? 'active' : '' }}">
-                        <i class="nav-icon fa fa-check-square-o" aria-hidden="true"></i>
-                        <p>Background Verification</p>
-                    </a>
-                </li>
-                {{-- <li class="nav-item">
-                    <a href="{{ route('new-token.index') }}" class="nav-link {{ Request::segment(1) === 'ccrv' ? 'active' : '' }}">
-                        <i class="nav-icon fa fa-check-square-o" aria-hidden="true"></i>
-                        <p>CCRV</p>
-                    </a>
-                </li> --}}
-                <li class="nav-item">
-                    <a href="{{ route('ccrv-and-background-verification') }}" class="nav-link {{ Request::segment(1) === 'ccrv-and-background-verification' ? 'active' : '' }}">
-                        <i class="nav-icon fa fa-check-square-o" aria-hidden="true"></i>
-                        <p>CCRV + Background Verification</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('dl-verification-view') }}" class="nav-link {{ Request::segment(1) === 'dl-verification-view' ? 'active' : '' }}">
-                        <i class="nav-icon fa fa-check-square-o" aria-hidden="true"></i>
-                        <p>Driver's License Verification</p>
-                    </a>
-                </li>
+                @php
+                $user_id = auth()->id(); // Get the logged-in user ID
+
+                $service_type = [];
+                if ($user_id) {
+                    $service_type = App\Models\Token::where('user_id', $user_id)
+                        ->distinct()
+                        ->pluck('service_id'); // No need to call `get()`
+                }
+            @endphp
+
+                @foreach ($service_type as $service)
+                    @php
+                        $service_name = App\Models\Service::where('id', $service)->first();
+                    @endphp
+                    @if ($service_name)
+                        <li class="nav-item">
+                            <a href="{{ route('my-service', ['slug' => $service_name->service_slug]) }}" class="nav-link  {{ request()->segment(2) === $service_name->service_slug ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-check-square-o" aria-hidden="true"></i>
+                                <p>{{ $service_name->name }}</p>
+                            </a>
+                        </li>
+                        @else
+                        <li class="nav-item">
+                            <a href="{{ route('my-service',['slug'=>'']) }}" class="nav-link {{ Request::segment(1) === 'token-views' ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-check-square-o" aria-hidden="true"></i>
+                                <p>Service Not Found</p>
+                            </a>
+                    @endif
+                    
+                @endforeach
+
                 <li class="nav-item">
                     <a href="{{ route('orders') }}" class="nav-link {{ Request::segment(1) === 'my-orders' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-shopping-cart" aria-hidden="true"></i>

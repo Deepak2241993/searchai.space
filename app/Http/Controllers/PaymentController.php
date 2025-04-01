@@ -157,7 +157,7 @@ class PaymentController extends Controller
                     $expiresAt = Carbon::now()->addDays(30);
 
                     $tokens = [];
-                    $services = explode(',', $order->service_names);
+                    $services = explode(',', $order->service_id);
                     $tokensCount = explode(',', $order->tokens);
 
                     foreach ($services as $index => $service) {

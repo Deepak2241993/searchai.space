@@ -123,8 +123,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/token/{id}', [RegisterController::class, 'show'])->name('admin.token.show');
     // Route::get('/User/token/{id}', [TokenController::class, 'show'])->name('token.show');
 
-    Route::get('/token-views', [TokenController::class, 'tokenList'])->name('token.index');
-
     //  For CCRV Service
     Route::get('/ccrv', [TokenController::class, 'CCRV'])->name('new-token.index');
     Route::get('/all-ccrv-report', [TokenController::class, 'AllCCRVReport'])->name('all-ccrv-report');
@@ -132,8 +130,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/download-pdf/{id}', [TokenController::class, 'downloadPdf'])->name('download.pdf');
     Route::get('/download-report/{id}', [TokenController::class, 'ReportGenerate'])->name('reportgenerate');
 
+    // New Common URL
+    Route::get('/my-service/{slug}', [TokenController::class, 'MyServices'])->name('my-service');
+
+
     // For Background And CCRV 
-    Route::get('/ccrv-and-background-verification', [TokenController::class, 'CcrvAndBackgroundVerification'])->name('ccrv-and-background-verification');
     Route::post('/background-otpgeneration', [TokenController::class, 'BackgroundVerificationOtp'])->name('background-otpgeneration');
     Route::post('/background-kyc-otp', [TokenController::class, 'KycOtpSubmit'])->name('kyc-otp');
     Route::post('/ccrv-report-generation', [TokenController::class, 'CcrvReportGeneration'])->name('ccrv-report-generation');
