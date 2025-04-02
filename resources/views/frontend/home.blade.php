@@ -95,8 +95,7 @@
     font-family: Impact, sans-serif;
     font-size: 64px;
     font-weight: 300;
-    color: #000;
-    /* color: #fff; */
+    color: #fff;
     line-height: 1.2;
     margin-bottom: 20px;
 }
@@ -231,7 +230,7 @@
         font-family: Impact, sans-serif;
         font-size: 51px;
         font-weight: 300;
-        color: #fff;
+        color: #000;
         line-height: 1.2;
         margin-bottom: 20px;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
