@@ -968,7 +968,7 @@
   </div>
 </section>
 
-  <section class="py-5 deepak" style="background-color: #004b59;">
+  <section class="py-5 deepak1" style="background-color: #004b59;">
       <div class="container text-center text-white">
         <h2 class="fw-bold">Stay updated with our latest news!</h2>
         <p class="mb-4">Subscribe to our newsletter for exclusive updates, insights, and offers. Enter your email below and never miss an update from us!
@@ -989,7 +989,7 @@
 
     <!-- mobile view -->
 
-  <section class="py-5 deepak shashwatmobile" style="background-color: #004b59;">
+  <section class="py-5 deepak1 shashwatmobile" style="background-color: #004b59;">
   <div class="container text-center text-white">
     <h2 class="fw-bold">Stay updated with our latest news!</h2>
     <p class="mb-4">Subscribe to our newsletter for exclusive updates, insights, and offers. Enter your email below and never miss an update from us!</p>

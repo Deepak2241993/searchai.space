@@ -88,7 +88,7 @@
 
 /* For Tablet and Mobile (max-width: 991px) */
 @media (max-width: 991px) {
-    .deepak {
+    .deepak1 {
         display: none;
     }
     .shashwatmobile {
@@ -96,7 +96,7 @@
     }
 
     /* Apply margin-left and margin-right for Tablet and Mobile */
-    .deepak, .shashwatmobile {
+    .deepak1, .shashwatmobile {
         margin-left: 0px;
         margin-right: 0px;
     }
@@ -109,7 +109,7 @@
 
 /* For Small Mobile (max-width: 576px) */
 @media (max-width: 576px) {
-    .deepak, .shashwatmobile {
+    .deepak1, .shashwatmobile {
         margin-left: 0px;
         margin-right: 0px;
     }
