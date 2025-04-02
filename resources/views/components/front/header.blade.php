@@ -127,7 +127,7 @@
 
 
 <header class="navbar deepak navbar-expand-lg navbar-light" style="background-color:#ffff">
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding-left:6%; padding-right:6%;">
         <a class="navbar-brand text-white" href="{{ route('home')}}">
             <amp-img src="{{url('/front-assets')}}/images/footer_logo.png" width="200" height="40" layout="fixed" alt="Helpers near me"></amp-img>
         </a>
