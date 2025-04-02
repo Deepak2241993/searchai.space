@@ -230,7 +230,7 @@
         font-family: Impact, sans-serif;
         font-size: 51px;
         font-weight: 300;
-        color: #fff;
+        color: #000;
         line-height: 1.2;
         margin-bottom: 20px;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -238,7 +238,7 @@
 
     .banner-description {
         font-size: 19px;
-        color: #fff;
+        color: #000;
         margin-bottom: 30px;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         /* sm */
@@ -272,7 +272,7 @@
         .ServiceButton .btn-submit {
             margin: 5px;
         }
-    }
+
 
     /* Mobile */
     @media (max-width: 768px) {
