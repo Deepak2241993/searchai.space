@@ -118,6 +118,9 @@
     .form-control {
         font-size: 1.8rem;
     }
+    .ampstart-footer.flex.flex-column.items-center.px3 {
+        padding-bottom: 0;
+    }
 }
 
 </style>

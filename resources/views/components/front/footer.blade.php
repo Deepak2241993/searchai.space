@@ -36,7 +36,7 @@
 				</ul>
 			</div>
 			<div class="sm-col-12 md-col-3 md-col lg-col lg-col-2 text-center">
-				<a href="{{url('/')}}"><amp-img layout="fixed" width="165" height="45" src="{{url('/front-assets/footer_logo-removebg-preview.png')}}" alt="Helpers near me"></amp-img></a>
+				<a href="{{url('/')}}"><amp-img layout="fixed" width="165" height="45" src="{{url('/front-assets/images/footer_logo_lat-removebg-preview.png')}}" alt="Helpers near me"></amp-img></a>
 			</div>
 		</nav>	
 	</div>
