@@ -95,7 +95,8 @@
     font-family: Impact, sans-serif;
     font-size: 64px;
     font-weight: 300;
-    color: #fff;
+    color: #000;
+    /* color: #fff; */
     line-height: 1.2;
     margin-bottom: 20px;
 }
