@@ -238,7 +238,7 @@
 
     .banner-description {
         font-size: 19px;
-        color: #fff;
+        color: #000;
         margin-bottom: 30px;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         /* sm */
