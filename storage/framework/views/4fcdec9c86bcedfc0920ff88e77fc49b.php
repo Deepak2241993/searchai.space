@@ -1,10 +1,8 @@
-@extends('layouts.admin-master')
-
-@section('title')
+<?php $__env->startSection('title'); ?>
 Token List
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="app-content-header bg-light py-3 shadow-sm">
     <div class="container-fluid">
         <div class="row align-items-center">
@@ -29,32 +27,34 @@ Token List
             </div>
         </div>
         <!-- Show success message -->
-        @if (session('success'))
+        <?php if(session('success')): ?>
             <div class="alert alert-success">
-                {{ session('success') }}
+                <?php echo e(session('success')); ?>
+
             </div>
-        @endif
+        <?php endif; ?>
 
         <!-- Show error messages -->
-        @if ($errors->any())
+        <?php if($errors->any()): ?>
             <div class="alert alert-danger">
                 <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><?php echo e($error); ?></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
             </div>
-        @endif
+        <?php endif; ?>
 
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm">
-                    @if (session('message'))
+                    <?php if(session('message')): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="bi bi-check-circle-fill me-2"></i> {{ session('message') }}
+                        <i class="bi bi-check-circle-fill me-2"></i> <?php echo e(session('message')); ?>
+
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    @endif
+                    <?php endif; ?>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="datatable-buttons" class="table table-hover table-striped align-middle mb-0">
@@ -69,32 +69,32 @@ Token List
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($data as $key => $Token)
+                                    <?php $__empty_1 = true; $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $Token): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $Token->service_type }}</td>
-                                        <td>{{ $Token->token }}</td>
-                                        <td>{{ (date('d-m-Y',strtotime($Token->created_at))) }}</td>
-                                        <td>{{ $Token->status == 'active' ? 'Active' : 'Expired' }}</td>
-                                        @if ($Token->status == 'active')
+                                        <td><?php echo e($loop->iteration); ?></td>
+                                        <td><?php echo e($Token->service_type); ?></td>
+                                        <td><?php echo e($Token->token); ?></td>
+                                        <td><?php echo e((date('d-m-Y',strtotime($Token->created_at)))); ?></td>
+                                        <td><?php echo e($Token->status == 'active' ? 'Active' : 'Expired'); ?></td>
+                                        <?php if($Token->status == 'active'): ?>
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-info me-2 open-modal-btn"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#dlModel"
-                                                data-id="{{ $Token->id }}"
-                                                data-token="{{ $Token->token }}"
-                                                data-service="{{ $Token->service_type }}">
+                                                data-id="<?php echo e($Token->id); ?>"
+                                                data-token="<?php echo e($Token->token); ?>"
+                                                data-service="<?php echo e($Token->service_type); ?>">
                                                 DL Verify
                                             </button>
                                         </td>
                                                                       
-                                        @endif
+                                        <?php endif; ?>
                                     </tr>
-                                    @empty
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                     <tr>
                                         <td colspan="7" class="text-center text-muted">No data found.</td>
                                     </tr>
-                                    @endforelse
+                                    <?php endif; ?>
                                 </tbody>
 
                             </table>
@@ -102,7 +102,8 @@ Token List
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <nav>
-                            {{ $data->links('pagination::bootstrap-4') }}
+                            <?php echo e($data->links('pagination::bootstrap-4')); ?>
+
                         </nav>
                     </div>
                 </div>
@@ -121,8 +122,8 @@ Token List
             </div>
             <div class="modal-body">
                 <!-- Aadhaar OTP Generation Form -->
-                <form id="aadhaarOtpForm" action="{{ route('dl-verification') }}" method="POST">
-                    @csrf
+                <form id="aadhaarOtpForm" action="<?php echo e(route('dl-verification')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
                     <div class="mb-3">
                         <label for="driving_license_number" class="form-label">Driving License Number<span class="text-danger">*</span></label>
                         <input type="text" name="driving_license_number" id="driving_license_number" class="form-control" value="DL0420160390391"required>
@@ -150,9 +151,9 @@ Token List
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Handle modal opening
@@ -170,4 +171,5 @@ Token List
     });
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin-master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\searchai.space\resources\views/dl/index.blade.php ENDPATH**/ ?>

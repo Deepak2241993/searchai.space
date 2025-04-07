@@ -110,7 +110,7 @@ class TokenController extends Controller
     $curl = curl_init();
 
     curl_setopt_array($curl, [
-        CURLOPT_URL => rtrim(env('CCRV_API_URL'). "search"), // Ensure proper URL formatting
+        CURLOPT_URL => rtrim(env('Gridline_api_url'). "ccrv-api/rapid/search"), // Ensure proper URL formatting
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => json_encode($data),
@@ -194,7 +194,7 @@ class TokenController extends Controller
         // dd($token->token);
         $curl_report = curl_init();
         curl_setopt_array($curl_report, [
-            CURLOPT_URL => rtrim(env('CCRV_API_URL'), '/') . "/result",
+            CURLOPT_URL => rtrim(env('Gridline_api_url')) . "ccrv-api/rapid/result",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
@@ -683,35 +683,35 @@ public function MyServices(Request $request, $slug)
 
 
 
-
+//  For Deriving License Verification
 
 public function DLVerification(Request $request)
 {
-     // dd($request->all());
     try {
         $validated = $request->validate([
             'driving_license_number' => 'required|string',
             'date_of_birth' => 'required|date',
             'token' => 'required|string',
+            'source' => 'required',
             'service_type' => 'required|string',
         ]);
-        
+
         $token = Token::where('token', $validated['token'])->first();
         if (!$token) {
             return response()->json([
-                'success' => false, 
+                'success' => false,
                 'message' => 'Invalid token share code. Please try again.'
             ], 400);
         }
-        
+
         $data = [
             "driving_license_number" => $validated['driving_license_number'],
             "date_of_birth" => $validated['date_of_birth'],
-            "source" => 1,
+            "source" => $validated['source'],
             "consent" => 'Y',
         ];
-    //    dd($data);
-    $api_url = env('API_base_url') . "dl-api/fetch";
+
+        $api_url = env('Gridline_api_url') . "dl-api/fetch";
 
         $curl = curl_init();
         curl_setopt_array($curl, [
@@ -731,18 +731,48 @@ public function DLVerification(Request $request)
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         if (curl_errno($curl)) {
+            $error = curl_error($curl);
             curl_close($curl);
-            return response()->json(['success' => false, 'message' => 'cURL Error: ' . curl_error($curl)]);
+            return response()->json([
+                'success' => false,
+                'message' => 'cURL Error: ' . $error
+            ], 500);
         }
+
         curl_close($curl);
+        
+        $result = json_decode($response, true);
+        Log::info('DL Verification Response:', ['response' => $result]);
 
-        if ($httpCode === 200 && $response) {
-dd($response);
-            // return response()->json(json_decode($response, true));
-            dd(json(json_decode($response, true)));
+        $code = $result['data']['code'] ?? null;
+        $status = $result['status'] ?? null;
+
+        if ($status === 200 && $code==1000) {
+            $token->status = 'expired';
+            $token->save(); 
+            return response()->json([
+                'success' => true,
+                'data' => $result,
+                'message'   => $result['data']['message'] ?? 'DL Verification successful.',
+            ]);
+        }
+        if ($status === 200 && $code==1001) {
+            $token->status = 'expired';
+            $token->save(); 
+            return response()->json([
+                'success' => true,
+                'data' => $result,
+                'message'   => $result['data']['message'] ?? 'Driving license does not exist.',
+            ]);
         }
 
-        return response()->json(['success' => false, 'message' => 'API request failed.'], $httpCode);
+        if ($status === 400 && $code=='INVALID_DRIVING_LICENSE') {
+            return response()->json([
+                'success' => true,
+                'data' => $result,
+                'message'   => $result['data']['message'] ?? 'Invalid driving license number.',
+            ]);
+        }
 
     } catch (\Exception $e) {
         return response()->json([
@@ -751,4 +781,5 @@ dd($response);
         ], 500);
     }
 }
+
 }
