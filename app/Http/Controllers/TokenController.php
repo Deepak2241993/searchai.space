@@ -14,7 +14,7 @@ use Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use App\Models\AadhaarData;
-
+use App\Models\DlData;
 use Illuminate\Support\Facades\Http;
 
 
@@ -748,6 +748,56 @@ public function DLVerification(Request $request)
         $status = $result['status'] ?? null;
 
         if ($status === 200 && $code==1000) {
+
+            $dlData = new DlData();
+                // Assign basic fields
+                $dlData->name = $result['data']['driving_license_data']['name'] ?? null;
+                $dlData->dob = $result['data']['driving_license_data']['date_of_birth'] ?? null;
+                $dlData->address = $result['data']['driving_license_data']['address'] ?? null;
+                $dlData->dependent_name = $result['data']['driving_license_data']['dependent_name'] ?? null;
+                $dlData->document_type = $result['data']['driving_license_data']['document_type'] ?? null;
+                $dlData->document_id = $result['data']['driving_license_data']['document_id'] ?? null;
+                $dlData->pincode = $result['data']['driving_license_data']['pincode'] ?? null;
+
+                // Validity
+                $dlData->issue_date = $result['data']['driving_license_data']['validity']['non_transport']['issue_date'] ?? null;
+                $dlData->expiry_date = $result['data']['driving_license_data']['validity']['non_transport']['expiry_date'] ?? null;
+
+                // RTO Details
+                $dlData->state = $result['data']['driving_license_data']['rto_details']['state'] ?? null;
+                $dlData->authority = $result['data']['driving_license_data']['rto_details']['authority'] ?? null;
+
+                // Vehicle Class Details (array of entries)
+                $vehicleClassDetails = $result['data']['driving_license_data']['vehicle_class_details'] ?? [];
+
+                $categories = [];
+                $categoryAuthorities = [];
+
+                foreach ($vehicleClassDetails as $detail) {
+                    if (isset($detail['category'])) {
+                        $categories[] = $detail['category'];
+                    }
+                    if (isset($detail['authority'])) {
+                        $categoryAuthorities[] = $detail['authority'];
+                    }
+                }
+
+                // Implode only arrays
+                $dlData->category = !empty($categories) ? implode('|', $categories) : null;
+                $dlData->as_per_category_authority = !empty($categoryAuthorities) ? implode('|', $categoryAuthorities) : null;
+
+                // Token ID
+                $dlData->token_id = $token->id;
+
+                // Save to DB
+                $dlData->save();
+
+            // Send email to user
+            $authUserEmail = Auth::user()->email;
+            if ($authUserEmail) {
+                Mail::to($authUserEmail)->send(new \App\Mail\DLVerificationMail($dlData, $token, $validated['service_type']));
+            }
+            // Update token status
             $token->status = 'expired';
             $token->save(); 
             return response()->json([
