@@ -27,6 +27,7 @@ return new class extends Migration
         $table->string('category')->nullable();
         $table->string('as_per_category_authority')->nullable();
         $table->string('token_id')->nullable();
+        $table->mediumText('photos')->nullable();
         $table->timestamps();
     });
 }
