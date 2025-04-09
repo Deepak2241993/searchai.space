@@ -196,7 +196,7 @@
                 </tr>
                 <tr>
                     <th>DOB</th>
-                    <td><?php echo e($result->date_of_birth); ?></td>
+                    <td><?php echo e($result->dob); ?></td>
                 </tr>
                 <tr>
                     <th>Address</th>

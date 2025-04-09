@@ -800,28 +800,32 @@ public function DLVerification(Request $request)
             // Update token status
             $token->status = 'expired';
             $token->save(); 
-            return response()->json([
-                'success' => true,
-                'data' => $result,
-                'message'   => $result['data']['message'] ?? 'DL Verification successful.',
+            return redirect()->back()->with(['success',
+                'status' => true,
+                'message' => $result['data']['message'] ?? 'DL Verification successful.',
             ]);
+            // return response()->json([
+            //     'success' => true,
+            //     'data' => $result,
+            //     'message'   => $result['data']['message'] ?? 'DL Verification successful.',
+            // ]);
         }
         if ($status === 200 && $code==1001) {
             $token->status = 'expired';
-            $token->save(); 
-            return response()->json([
-                'success' => true,
-                'data' => $result,
-                'message'   => $result['data']['message'] ?? 'Driving license does not exist.',
-            ]);
+            $token->save();
+            return redirect()->back()->with(['success',
+                'status' => true,
+                'message' => $result['data']['message'] ?? 'Driving license does not exist.',
+            ]); 
+           
         }
 
         if ($status === 400 && $code=='INVALID_DRIVING_LICENSE') {
-            return response()->json([
-                'success' => true,
-                'data' => $result,
-                'message'   => $result['data']['message'] ?? 'Invalid driving license number.',
-            ]);
+            return redirect()->back()->with(['error',
+                'status' => true,
+                'message' => $result['data']['message'] ?? 'Invalid driving license number.',
+            ]); 
+            
         }
 
     } catch (\Exception $e) {
