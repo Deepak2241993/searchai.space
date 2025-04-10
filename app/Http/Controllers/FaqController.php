@@ -12,7 +12,7 @@ class FaqController extends Controller
      */
     public function index(Faq $faq)
     {
-        $data = $faq->paginate(5); 
+        $data = $faq->paginate(20); 
         return view('admin.faq.index', compact('data'));
     }
     

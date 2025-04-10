@@ -59,7 +59,7 @@
                                 <div class="com-md-12 self">
                                     <label for="summernote" class="form-label">Answer<span class="text-danger">*</span></label>
                                     <textarea class="form-control"
-                                        name="answer" id="summernote" required >{{ isset($faqData) ? $faqData->answer : '' }}</textarea><br>
+                                        name="answer"  required >{{ isset($faqData) ? $faqData->answer : '' }}</textarea><br>
                                    
         
                                 </div>

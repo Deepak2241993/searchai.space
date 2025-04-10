@@ -63,10 +63,29 @@
                             <?php echo csrf_field(); ?>
                             <div class="row">
                                 <!-- Title Field -->
-                                
+                                <div class="mb-3 col-lg-6">
+                                    <label for="title" class="form-label">Title</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="title" 
+                                        name="title" 
+                                        value="<?php echo e(isset($bannerData) ? $bannerData->title : ''); ?>" 
+                                        placeholder="Enter title" 
+                                        >
+                                </div>
 
                                 <!-- Description Field -->
-                                
+                                <div class="mb-3 col-lg-12">
+                                    <label for="summernote" class="form-label">Description</label>
+                                    <textarea 
+                                        class="form-control" 
+                                        id="summernote" 
+                                        name="description" 
+                                        rows="5" 
+                                        placeholder="Enter description" 
+                                        ><?php echo e(isset($bannerData) ? $bannerData->description : ''); ?></textarea>
+                                </div>
 
                                 <!-- Image Upload Field -->
                                 <div class="mb-3 col-lg-6">

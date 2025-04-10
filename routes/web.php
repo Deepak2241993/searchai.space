@@ -195,4 +195,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/tokens', [OrderRecordsController::class, 'ordersDetails'])->name('ordersDetails');
     });
 });
+
+route::view('front','layouts.front');
 Route:: view('deepak','pdf.ccrv_report');
