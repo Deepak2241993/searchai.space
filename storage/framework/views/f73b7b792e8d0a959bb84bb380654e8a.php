@@ -13,7 +13,7 @@
 						<img src="<?php echo e(url('/front-assets')); ?>/assets/img/shape/6.png" alt="Image Not Found">
 					</div>
 					<div class="f-item about pr-50 pr-xs-0 pr-md-0">
-						<img class="logo" src="<?php echo e(url('/front-assets')); ?>/assets/img/finallogo.png" alt="Logo">
+						<img class="logo" src="<?php echo e(url('/front-assets')); ?>/assets/img/searchaiwhite.png" alt="Logo">
 						<!-- <img class="logo" src="assets/img/finallogo.png" alt="Logo"> -->
 						<p>
 							At SearchAPI, we offer fast, safe, and affordable background checks for these 

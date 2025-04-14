@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('main-body'); ?>
     
     <!-- Start Banner Area 
@@ -321,6 +323,46 @@
           </div>
       </div>
   </div>
+
+    <!-- Start Services -->
+  
+
+    <div class="services-style-three-area bg-dark bg-cover default-padding bottom-less" style="background-image: url(<?php echo e(url('/front-assets')); ?>/assets/img/shape/banner-6.jpg);">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-8 offset-lg-2">
+                  <div class="site-heading text-center">
+                      <h5 class="sub-title">Our Services</h5>
+                      <h2 class="title">What We Offer</h2>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+      <div class="container">
+          <div class="row">
+              <!-- Single Item -->
+              <?php $__currentLoopData = $serviceData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <!-- Single Item -->
+              <div class="col-xl-3 col-lg-3 col-md-6 mb-30">
+                  <div class="services-style-three" style="background-image: url(<?php echo e(url('/front-assets')); ?>/assets/img/shape/banner-3.jpg); min-height: 445px;">
+                      <!-- <i class="flaticon-planning"></i> -->
+                      <!-- <img src="/assets/img/pic 4.jpg" alt="Aadhar" style="padding-bottom: 15px;"> -->
+                      <h4><a href="<?php echo e(route('services.show', $service->service_slug)); ?>"><?php echo e($service->name); ?></a></h4>
+                      <p>
+                        <?php echo $service->description; ?>
+
+                      </p>
+                      <a href="<?php echo e(route('services.show', $service->service_slug)); ?>" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a>
+                      <a href="<?php echo e(route('services.show', $service->service_slug)); ?>" class="btn btn success">Buy Now</a>
+                  </div>
+              </div>
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+              <!-- End Single Item -->            
+          </div>
+      </div>
+  </div>
+  <!-- End Services -->
   
 
 
@@ -621,7 +663,7 @@
               <div class="col-tact-stye-one col-lg-6 offset-lg-1">
                   <div class="contact-form-style-one">
                       <h4 class="sub-title">Have Questions?</h4>
-                      <h2 class="title">Send us a Massage</h2>
+                      <h2 class="title">Send us a Message</h2>
                       <form action="<?php echo e(url('/front-assets')); ?>/assets/mail/contact.php" method="POST" class="contact-form contact-form">
                           <div class="row">
                               <div class="col-lg-12">

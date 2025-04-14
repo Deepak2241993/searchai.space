@@ -44,82 +44,136 @@
                             </div>
                         @endif
                         <div class="card-body">
-                            @if (isset($serviceData))
-                                <form method="post" action="{{ route('admin.service.update', $serviceData->id) }}"
-                                    enctype="multipart/form-data">
-                                    @method('PUT')
-                                @else
-                                    <form method="post" action="{{ route('admin.service.store') }}"
-                                        enctype="multipart/form-data">
-                            @endif
+                            @if(isset($serviceData))
+                            <form method="POST" action="{{ route('admin.service.update', $serviceData->id) }}" enctype="multipart/form-data">
+                            @method('PUT')
+                        @else
+                            <form method="POST" action="{{ route('admin.service.store') }}" enctype="multipart/form-data">
+                        @endif
                             @csrf
+                        
                             <div class="row">
                                 <div class="mb-3 col-lg-6">
                                     <label for="name" class="form-label">Service Name</label>
                                     <input class="form-control" type="text" name="name"
-                                        value="{{ isset($serviceData) ? $serviceData->name : '' }}"
-                                        placeholder="Service Name" {{ isset($serviceData)?'readonly':''}} id="name" required>
+                                        value="{{ old('name', $serviceData->name ?? '') }}" placeholder="Service Name"
+                                        {{ isset($serviceData) ? 'readonly' : '' }} id="name" required>
                                 </div>
+                        
                                 <div class="mb-3 col-lg-6">
                                     <label for="service_slug" class="form-label">Service Slug</label>
-                                    <input class="form-control" readonly type="text" name="service_slug"
-                                        value="{{ isset($serviceData) ? $serviceData->service_slug : '' }}"
-                                        placeholder="Service Slug" {{ isset($serviceData)?'readonly':''}} id="service_slug" required>
+                                    <input class="form-control" type="text" name="service_slug"
+                                        value="{{ old('service_slug', $serviceData->service_slug ?? '') }}" placeholder="Service Slug"
+                                        readonly id="service_slug" required>
                                 </div>
-
+                        
                                 <div class="mb-3 col-lg-6">
                                     <label for="short_description" class="form-label">Short Description</label>
                                     <textarea class="form-control" name="short_description" id="short_description" rows="5"
-                                        placeholder="Shortly describe the service">{{ isset($serviceData) ? $serviceData->short_description : '' }}</textarea>
+                                        placeholder="Shortly describe the service">{{ old('short_description', $serviceData->short_description ?? '') }}</textarea>
                                 </div>
+                        
                                 <div class="mb-3 col-lg-12">
                                     <label for="long_description" class="form-label">Long Description</label>
                                     <textarea class="form-control" name="long_description" id="summernote" rows="5"
-                                        placeholder="Describe the service">{{ isset($serviceData) ? $serviceData->long_description : '' }}</textarea>
+                                        placeholder="Describe the service">{{ old('long_description', $serviceData->long_description ?? '') }}</textarea>
                                 </div>
+                        
                                 <div class="mb-3 col-lg-6">
                                     <label for="price" class="form-label">Price</label>
                                     <input class="form-control" type="text" name="price"
-                                        value="{{ isset($serviceData) ? $serviceData->price : '' }}" placeholder="Price"
-                                        id="price" required>
+                                        value="{{ old('price', $serviceData->price ?? '') }}" placeholder="Price" id="price" required>
                                 </div>
+                        
                                 <div class="mb-3 col-lg-6">
-                                    <label for="price" class="form-label">Tax %</label>
+                                    <label for="tax" class="form-label">Tax %</label>
                                     <input class="form-control" type="number" name="tax"
-                                        value="{{ isset($serviceData) ? $serviceData->tax : '' }}" placeholder="tax"
-                                        id="tax" required>
+                                        value="{{ old('tax', $serviceData->tax ?? '') }}" placeholder="Tax" id="tax" required>
                                 </div>
+                        
                                 <div class="mb-3 col-lg-6">
                                     <label for="status" class="form-label">Status</label>
-                                    <select class="form-control" name="status" id='status'>
-                                        <option
-                                            value="1"{{ isset($serviceData->status) && $serviceData->status == 1 ? 'selected' : '' }}>
-                                            Active</option>
-                                        <option
-                                            value="0"{{ isset($serviceData->status) && $serviceData->status == 0 ? 'selected' : '' }}>
-                                            Inactive</option>
+                                    <select class="form-control" name="status" id="status">
+                                        <option value="1" {{ (isset($serviceData->status) && $serviceData->status == 1) ? 'selected' : '' }}>Active</option>
+                                        <option value="0" {{ (isset($serviceData->status) && $serviceData->status == 0) ? 'selected' : '' }}>Inactive</option>
                                     </select>
                                 </div>
+                        
                                 <div class="mb-3 col-lg-6">
                                     <label for="images" class="form-label">Upload Images</label>
                                     <input class="form-control" type="file" name="images[]" id="images" multiple>
-                                    <!-- Preview uploaded images dynamically -->
                                     <small class="form-text text-muted">You can upload multiple images.</small>
-                                   @if(isset($serviceData))
-                                   @php
-                                        $image = explode('|', $serviceData->images);
-                                    @endphp
-                                    @foreach ($image as $value)
-                                        <image src="{{ $value }}" height="100" width="100">
-                                    @endforeach
+                                    @if(isset($serviceData) && !empty($serviceData->images))
+                                        <div class="mt-2">
+                                            @foreach(explode('|', $serviceData->images) as $value)
+                                                <img src="{{ $value }}" height="100" width="100" class="me-2 mb-2" />
+                                            @endforeach
+                                        </div>
                                     @endif
                                 </div>
-                                <div class="mb-3 col-lg-6 mt-4">
-
-                                    <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+                            </div>
+                        
+                            {{-- Key Features --}}
+                            <div class="card mt-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">Key Features</h5>
+                                    <button type="button" class="btn btn-success btn-sm" onclick="addKeyFeature()">Add More</button>
+                                </div>
+                                <div class="card-body" id="key-feature-container">
+                                    @php
+                                        $keyFeatures = isset($serviceData->key_feature) ? json_decode($serviceData->key_feature, true) : [['title' => '', 'description' => '']];
+                                    @endphp
+                                    @foreach($keyFeatures as $feature)
+                                        <div class="row mb-3 tax-entry">
+                                            <div class="col-lg-6">
+                                                <label class="form-label">Title</label>
+                                                <input class="form-control" type="text" name="tax_title[]" value="{{ $feature['title'] ?? '' }}" required>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label class="form-label">Description</label>
+                                                <input class="form-control" type="text" name="tax_description[]" value="{{ $feature['description'] ?? '' }}" required>
+                                            </div>
+                                            <div class="col-12 mt-2 text-end">
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="removeEntry(this)">Remove</button>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-                            </form>
+                        
+                            {{-- How It Works --}}
+                            <div class="card mt-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">How It Works</h5>
+                                    <button type="button" class="btn btn-success btn-sm" onclick="addHowItWorks()">Add More</button>
+                                </div>
+                                <div class="card-body" id="how-it-works-container">
+                                    @php
+                                        $howItWorks = isset($serviceData->how_to_work) ? json_decode($serviceData->how_to_work, true) : [['question' => '', 'answer' => '']];
+                                    @endphp
+                                    @foreach($howItWorks as $step)
+                                        <div class="row mb-3 tax-entry">
+                                            <div class="col-lg-6">
+                                                <label class="form-label">Title</label>
+                                                <input class="form-control" type="text" name="question[]" value="{{ $step['question'] ?? '' }}" required>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label class="form-label">Description</label>
+                                                <input class="form-control" type="text" name="answer[]" value="{{ $step['answer'] ?? '' }}" required>
+                                            </div>
+                                            <div class="col-12 mt-2 text-end">
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="removeEntry(this)">Remove</button>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        
+                            <div class="mt-4">
+                                <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+                            </div>
+                        </form>
+                        
 
                         </div>
 
@@ -130,7 +184,56 @@
     </div>
 @endsection
 @section('scripts')
-  
+    <script>
+        function addKeyFeature() {
+            const container = document.getElementById('key-feature-container');
+            const newEntry = document.createElement('div');
+            newEntry.className = 'row mb-3 tax-entry';
+
+            newEntry.innerHTML = `
+            <div class="col-lg-6">
+                <label class="form-label">Title</label>
+                <input class="form-control" type="text" name="tax_title[]" placeholder="Enter tax title" required>
+            </div>
+            <div class="col-lg-6">
+                <label class="form-label">Description</label>
+                <input class="form-control" type="text" name="tax_description[]" placeholder="Enter description" required>
+            </div>
+            <div class="col-12 mt-2 text-end">
+                <button type="button" class="btn btn-danger btn-sm" onclick="removeEntry(this)">Remove</button>
+            </div>
+        `;
+            container.appendChild(newEntry);
+        }
+
+        function addHowItWorks() {
+            const container = document.getElementById('how-it-works-container');
+            const newEntry = document.createElement('div');
+            newEntry.className = 'row mb-3 tax-entry';
+
+            newEntry.innerHTML = `
+            <div class="col-lg-6">
+                <label class="form-label">Title</label>
+                <input class="form-control" type="text" name="question[]" placeholder="Enter title" required>
+            </div>
+            <div class="col-lg-6">
+                <label class="form-label">Description</label>
+                <input class="form-control" type="text" name="answer[]" placeholder="Enter description" required>
+            </div>
+            <div class="col-12 mt-2 text-end">
+                <button type="button" class="btn btn-danger btn-sm" onclick="removeEntry(this)">Remove</button>
+            </div>
+        `;
+            container.appendChild(newEntry);
+        }
+
+        function removeEntry(button) {
+            const entry = button.closest('.tax-entry');
+            if (entry) entry.remove();
+        }
+    </script>
+
+
     <script>
         $("#name").on("change", function() {
             var element = $(this);
