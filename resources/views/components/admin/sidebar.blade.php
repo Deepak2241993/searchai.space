@@ -1,6 +1,6 @@
 <!--begin::Sidebar-->
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
-    <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="{{ route('home') }}" class="brand-link"> <!--begin::Brand Image--> <img src="{{ url('/front-assets/images/logo.png') }}" alt="search ai logo" class="brand-image opacity-75 shadow"> <span class="brand-text fw-light"></span> </a> </div>
+    <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="{{ route('home') }}" class="brand-link"> <!--begin::Brand Image--> <img src="{{ url('/front-assets/images/footer_logo.png') }}" alt="search ai logo" class="brand-image opacity-75 shadow"> <span class="brand-text fw-light"></span> </a> </div>
     <div class="sidebar-wrapper">
         <nav class="mt-2"> <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
@@ -51,6 +51,12 @@
                     <a href="{{ route('admin.ordersDetails') }}" class="nav-link {{ Request::segment(2) === 'tokens' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-money" aria-hidden="true"></i>
                         <p>Orders Details</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.newsletter.index') }}" class="nav-link {{ Request::segment(2) === 'newsletter-list' ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-money" aria-hidden="true"></i>
+                        <p>Our Newsletter </p>
                     </a>
                 </li>
                                

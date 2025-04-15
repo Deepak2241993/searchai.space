@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class AadhaarController extends Controller
+class AadhaarOCRController extends Controller
 {
     private $apiKey = 'gdFO0OUjcmksU6OLjG8b1aqfuF3r7kU7';  
 

@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\AadhaarOCRController;
 use App\Http\Controllers\AadhaarController;
+use App\Http\Controllers\NewsletterController;
 
 
 
@@ -79,7 +80,8 @@ Route::get('/clear-cart', function () {
 
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 
-
+// For Newsletter Store
+Route::post('/newsletter-store', [NewsletterController::class, 'store'])->name('newsletter.store');
 
 
 // aadhar_card 
@@ -193,6 +195,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/orders-details', [OrderRecordsController::class, 'ordersDetails'])->name('ordersDetails');
         Route::get('/orders/{id}', [OrderRecordsController::class, 'show'])->name('orders.show');
         Route::get('/tokens', [OrderRecordsController::class, 'ordersDetails'])->name('ordersDetails');
+
+        // For Newsletter
+        Route::get('/newsletter-list', [NewsletterController::class, 'index'])->name('newsletter.index');
+        // Route::get('/newsletter-create', [NewsletterController::class, 'create'])->name('newsletter.create');
+
+        Route::get('/newsletter-edit/{id}', [NewsletterController::class, 'edit'])->name('newsletter.edit');
+        Route::get('/newsletter-destroy/{id}', [NewsletterController::class, 'destroy'])->name('newsletter.destroy');
+
+       
     });
 });
 

@@ -483,7 +483,8 @@
                   <div class="project-deal">
                       <h2 class="title">Stay updated with our latest news!</h2>
                       <p>Subscribe to our newsletter for exclusive updates, insights, and offers. Enter your email below and never miss an update from us!</p>
-                      <form class="newsletter-form mt-30" action="#" method="post">
+                      <form class="newsletter-form mt-30" action="<?php echo e(route('newsletter.store')); ?>" method="post">
+                        <?php echo csrf_field(); ?>
                           <div class="input-group">
                               <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
                               <button type="submit" class="btn btn-md btn-gradient animation">Subscribe</button>
