@@ -472,7 +472,7 @@
                 <!-- Service Details -->
                 <div class="service-details-card">
                     <div class="service-image">
-                        <img src="{{$services->images}}?height=500&width=800" alt="Aadhar Verification Service">
+                        <img src="{{$services->images}}?height=500&width=800" alt="{!! $services->name !!}">
                         <div class="verification-badge">✓</div>
                     </div>
                     <div class="service-content">
@@ -480,39 +480,24 @@
                         <p class="service-description">
                             {!! $services->long_description !!}
                         </p>
-                        
+                     
                         <!-- Features Section -->
                         <div class="features-section">
                             <h3 class="features-title">Key Features</h3>
                             <div class="features-grid">
+                                @php
+                                $keyFeatures = isset($services->key_feature) ? json_decode($services->key_feature, true) : [['title' => '', 'description' => '']];
+                            @endphp
+                            @foreach($keyFeatures as $feature)
                                 <div class="feature-item">
                                     <div class="feature-icon">✓</div>
                                     <div class="feature-text">
-                                        <h4>Instant Verification</h4>
-                                        <p>Results in less than 60 seconds</p>
+                                        <h4>{{ $feature['title'] ?? '' }}</h4>
+                                        <p>{{ $feature['description'] ?? '' }}</p>
                                     </div>
                                 </div>
-                                <div class="feature-item">
-                                    <div class="feature-icon">✓</div>
-                                    <div class="feature-text">
-                                        <h4>Secure Process</h4>
-                                        <p>End-to-end encrypted verification</p>
-                                    </div>
-                                </div>
-                                <div class="feature-item">
-                                    <div class="feature-icon">✓</div>
-                                    <div class="feature-text">
-                                        <h4>99.9% Accuracy</h4>
-                                        <p>Reliable and precise results</p>
-                                    </div>
-                                </div>
-                                <div class="feature-item">
-                                    <div class="feature-icon">✓</div>
-                                    <div class="feature-text">
-                                        <h4>UIDAI Compliant</h4>
-                                        <p>Follows all regulatory guidelines</p>
-                                    </div>
-                                </div>
+                                @endforeach
+                                
                             </div>
                         </div>
                         
@@ -520,27 +505,19 @@
                         <div class="how-it-works">
                             <h3 class="how-it-works-title">How It Works</h3>
                             <div class="steps">
+                                @php
+                                $howItWorks = isset($services->how_to_work) ? json_decode($services->how_to_work, true) : [['question' => '', 'answer' => '']];
+                            @endphp
+                            @foreach($howItWorks as $key=>$step)
                                 <div class="step">
-                                    <div class="step-number">1</div>
+                                    <div class="step-number">{{$key+1}}</div>
                                     <div class="step-content">
-                                        <h4>Upload Aadhar Details</h4>
-                                        <p>Submit the Aadhar number or upload a scanned copy of the Aadhar card.</p>
+                                        <h4>{{ $step['question'] ?? '' }}</h4>
+                                        <p>{{ $step['answer'] ?? '' }}</p>
                                     </div>
                                 </div>
-                                <div class="step">
-                                    <div class="step-number">2</div>
-                                    <div class="step-content">
-                                        <h4>Automated Verification</h4>
-                                        <p>Our system securely verifies the details with the UIDAI database.</p>
-                                    </div>
-                                </div>
-                                <div class="step">
-                                    <div class="step-number">3</div>
-                                    <div class="step-content">
-                                        <h4>Receive Verification Report</h4>
-                                        <p>Get a comprehensive verification report with authentication status.</p>
-                                    </div>
-                                </div>
+                                @endforeach
+                               
                             </div>
                         </div>
                     </div>
@@ -549,7 +526,7 @@
                 <!-- Add to Cart Card -->
                 <div class="add-to-cart-card">
                     <div class="card-header">
-                        <h3 class="card-title">Aadhar Verification</h3>
+                        <h3 class="card-title">{!! $services->name !!}</h3>
                     </div>
                     
                     
@@ -589,7 +566,7 @@
     
         <!-- JavaScript for Plan Selection and Quantity -->
         <script>
-            // Fixed price for Aadhar verification
+            // Fixed price for service
             const unitPrice = {{ number_format($services->price, 2) }};
             let quantity = 1;
     

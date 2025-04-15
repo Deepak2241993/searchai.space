@@ -24,7 +24,7 @@
                                     {!! $banner->description !!}
                                   </p>
                                   <div class="button">
-                                      <a class="btn btn-theme btn-md animation" href="#">Apply Now</a>
+                                      <a class="btn btn-theme btn-md animation" href="https://searchai.space/register">Apply Now</a>
                                   </div>
                               </div>
                           </div>
@@ -51,7 +51,7 @@
                                       with our seamless and reliable verification process.
                                   </p>
                                   <div class="button">
-                                      <a class="btn btn-theme btn-md animation" href="#">Apply Now</a>
+                                      <a class="btn btn-theme btn-md animation" href="https://searchai.space/register">Apply Now</a>
                                   </div>
                               </div>
                           </div>
@@ -77,7 +77,7 @@
                                       ensure safety and trust in your workforce.
                                   </p>
                                   <div class="button">
-                                      <a class="btn btn-theme btn-md animation" href="#">Apply Now</a>
+                                      <a class="btn btn-theme btn-md animation" href="https://searchai.space/register">Apply Now</a>
                                   </div>
                               </div>
                           </div>
@@ -236,7 +236,7 @@
                       <p>
                           A unique identification number issued by the Indian government, linking biometric and demographic data for every resident of India.
                       </p>
-                      <a href="#" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a>
+              <!--        <a href="#" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a> -->
                   </div>
               </div>
               <!-- End Single Item -->
@@ -250,7 +250,7 @@
                       <p>
                           A Permanent Account Number used for income tax purposes, essential for financial transactions and opening bank accounts in India.
                       </p>
-                      <a href="#" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a>
+                  <!--     <a href="#" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a>    -->
                   </div>
               </div>
               <!-- End Single Item -->
@@ -264,7 +264,7 @@
                       <p>
                           An official document permitting an individual to drive a motor vehicle, issued by the regional transport office after a driving test.
                       </p>
-                      <a href="#" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a>
+                   <!--      <a href="#" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a>      -->
                   </div>
               </div>
               <!-- End Single Item -->
@@ -278,7 +278,7 @@
                       <p>
                           A legal certificate issued by the RTO proving ownership and authorization to operate a vehicle on Indian roads.
                       </p>
-                      <a href="#" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a>
+                <!--        <a href="#" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a> -->
                   </div>
               </div>
               <!-- End Single Item -->              
@@ -396,9 +396,9 @@
                       <!-- <img src="/assets/img/pic 4.jpg" alt="Aadhar" style="padding-bottom: 15px;"> -->
                       <h4><a href="{{ route('services.show', $service->service_slug) }}">{{$service->name}}</a></h4>
                       <p>
-                        {!! $service->description !!}
+                        {!! $service->short_description !!}
                       </p>
-                      <a href="{{ route('services.show', $service->service_slug) }}" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a>
+              <!--        <a href="{{ route('services.show', $service->service_slug) }}" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a>   -->
                       <a href="{{ route('services.show', $service->service_slug) }}" class="btn btn success">Buy Now</a>
                   </div>
               </div>
@@ -588,7 +588,7 @@
               <p class="text-dark mt-4">
                   At SearchAI, we make background verification simple, fast, and reliable. Whether you're a large enterprise, small business, start-up, or individual, our AI-driven screening solutions ensure trust and safety in every interaction. With advanced Artificial Intelligence (AI) and Machine Learning (ML), we deliver accurate, efficient, and fully compliant verification services. Choose SearchAI for seamless, secure, and hassle-free background checks - because building trust should be effortless.
               </p>
-              <a class="btn btn-md btn-dark mt-4" href="#">Read More</a>
+              <a class="btn btn-md btn-dark mt-4" href="https://searchai.space/about-us">Read More</a>
           </div>
       </div>
   </div>

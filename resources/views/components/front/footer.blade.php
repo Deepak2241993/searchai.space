@@ -170,7 +170,7 @@
 						<h4 class="widget-title">Quick Links</h4>
 						<ul>
 							<li>
-								<a href="#">About Us</a>
+								<a href="{{route('aboutus')}}">About Us</a>
 								<!-- <a href="about-us.html">Compnay Profile</a> -->
 							</li>
 							<li>

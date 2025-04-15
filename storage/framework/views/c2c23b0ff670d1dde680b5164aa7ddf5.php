@@ -481,39 +481,24 @@
                             <?php echo $services->long_description; ?>
 
                         </p>
-                        
+                     
                         <!-- Features Section -->
                         <div class="features-section">
                             <h3 class="features-title">Key Features</h3>
                             <div class="features-grid">
+                                <?php
+                                $keyFeatures = isset($services->key_feature) ? json_decode($services->key_feature, true) : [['title' => '', 'description' => '']];
+                            ?>
+                            <?php $__currentLoopData = $keyFeatures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $feature): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="feature-item">
                                     <div class="feature-icon">✓</div>
                                     <div class="feature-text">
-                                        <h4>Instant Verification</h4>
-                                        <p>Results in less than 60 seconds</p>
+                                        <h4><?php echo e($feature['title'] ?? ''); ?></h4>
+                                        <p><?php echo e($feature['description'] ?? ''); ?></p>
                                     </div>
                                 </div>
-                                <div class="feature-item">
-                                    <div class="feature-icon">✓</div>
-                                    <div class="feature-text">
-                                        <h4>Secure Process</h4>
-                                        <p>End-to-end encrypted verification</p>
-                                    </div>
-                                </div>
-                                <div class="feature-item">
-                                    <div class="feature-icon">✓</div>
-                                    <div class="feature-text">
-                                        <h4>99.9% Accuracy</h4>
-                                        <p>Reliable and precise results</p>
-                                    </div>
-                                </div>
-                                <div class="feature-item">
-                                    <div class="feature-icon">✓</div>
-                                    <div class="feature-text">
-                                        <h4>UIDAI Compliant</h4>
-                                        <p>Follows all regulatory guidelines</p>
-                                    </div>
-                                </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                
                             </div>
                         </div>
                         
@@ -521,13 +506,18 @@
                         <div class="how-it-works">
                             <h3 class="how-it-works-title">How It Works</h3>
                             <div class="steps">
+                                <?php
+                                $howItWorks = isset($services->how_to_work) ? json_decode($services->how_to_work, true) : [['question' => '', 'answer' => '']];
+                            ?>
+                            <?php $__currentLoopData = $howItWorks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $step): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="step">
                                     <div class="step-number">1</div>
                                     <div class="step-content">
-                                        <h4>Upload Aadhar Details</h4>
-                                        <p>Submit the Aadhar number or upload a scanned copy of the Aadhar card.</p>
+                                        <h4><?php echo e($step['question'] ?? ''); ?></h4>
+                                        <p><?php echo e($step['answer'] ?? ''); ?></p>
                                     </div>
                                 </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 <div class="step">
                                     <div class="step-number">2</div>
                                     <div class="step-content">
