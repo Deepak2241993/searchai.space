@@ -1,414 +1,648 @@
-<?php $__env->startSection('body'); ?>
-    <style>
-        #content {
-    /* background: linear-gradient(135deg, #FF7E5F, #ED760D); */
-    padding: 50px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#content h1 {
-    font-size: 3em;
-    margin-bottom: 20px;
-    color: #ffffff;
-    font-weight: bold;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-#content p {
-    font-size: 1.3em;
-    line-height: 1.8;
-    color: #ffffff;
-    margin-bottom: 40px;
-}
-
-.table-wrap {
-    margin: 30px auto;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    background: #fff;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    vertical-align: middle;
-}
-
-th {
-    background: #ED760D;
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-td button {
-    background-color: #FF4C4C;
-    border: none;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 5px;
-    font-size: 0.9em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-td button:hover {
-    background-color: #FF0000;
-}
-
-.product-info {
-    display: flex;
-    align-items: center;
-}
-
-.product-info img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-right: 20px;
-}
-
-.product-info h2 {
-    font-size: 1.2em;
-    color: #333;
-}
-
-.total-cost-bar {
-    background: #f9f9f9;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 30px auto;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.total-cost-bar h3 {
-    font-size: 1.8em;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #ED760D;
-}
-
-.total-cost-bar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.total-cost-bar ul li {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    font-size: 1.2em;
-    color: #333;
-}
-
-.total-cost-bar ul li span {
-    font-weight: bold;
-    color: #ED760D;
-}
-
-.btn-wrap {
-    margin-top: 30px;
-    text-align: right;
-}
-
-.btn-wrap button {
-    background: #0B7CA1;
-    color: #fff;
-    padding: 15px 30px;
-    border-radius: 10px;
-    font-size: 1.2em;
-    font-weight: bold;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-wrap button:hover {
-    background: #ED760D;
-    color: #fff;
-}
-
-.btn-primary {
-    display: inline-block;
-    background-color: #0B7CA1;
-    color: #fff;
-    text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #ED760D;
-    color: #fff;
-}
-.checkout-button{
-    padding: 10px 20px; background: #004555; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;
-}
-        </style>
-    <main id="content" style="padding: 20px; font-family: Arial, sans-serif;">
-        <h1 style="text-align: center; margin-bottom: 20px;">Your Cart</h1>
-        <p style="text-align: center; color: #555;">Review your selected items below and proceed to checkout.</p>
-
-        <div class="container" style="max-width: 800px; margin: 0 auto;">
-            <?php if(empty($cart) || count($cart) == 0): ?>
-                <div class="no-items" style="text-align: center; margin-top: 50px;">
-                    <p style="font-size: 18px; color: #888;">No items added to your cart.</p>
-                    <a href="<?php echo e(route('home')); ?>" class="btn-primary"
-                        style="padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">Add
-                        Items</a>
-                </div>
-            <?php else: ?>
-                <div class="table-wrap" style="margin-top: 30px; overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse; box-shadow: 0px 2px 5px rgba(0,0,0,0.1);">
-                        <thead style="background: #f8f9fa;">
-                            <tr>
-                                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Service Name
-                                </th>
-                                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Price Per
-                                    Token</th>
-                                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Tokens (Qty)
-                                </th>
-                                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Tax
-                                </th>
-                                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Amount
-                                </th>
-                                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+<?php $__env->startSection('page-title'); ?>
+    Cart
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('page-description'); ?>
+    Cart
+<?php $__env->stopSection(); ?> 
+<?php $__env->startSection('page-keywords'); ?>
+    Cart
+<?php $__env->stopSection(); ?>
 
 
-                            <?php
-                              $tax = 0;  
-                              $grandTotal = 0; 
-                            ?>
-                    <?php $__currentLoopData = $cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <?php if(is_array($item)): ?>
-                        <tr id="cart-item-<?php echo e($item['id']); ?>" data-price-per-item="<?php echo e($item['pricePerItem']); ?>">
-                            <td>
-                                <div class="product-info" style="font-weight: bold;">
-                                    <h2><?php echo e($item['serviceName'] == 'KYC+CCRV' ? 'Aadhar KYC + Criminal Background Verification' : $item['serviceName']); ?></h2>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-info">
-                                    <h2>&#8377;<?php echo e($item['pricePerItem']); ?></h2>
-                                </div>
-                            </td>
-                            <td>
-                                <input class="form-control" type="number" value="<?php echo e($item['tokens']); ?>" min="1" style="width: 80px;"
-                                    onchange="updateTotalPrice(this, <?php echo e($item['pricePerItem']); ?>, '<?php echo e($item['id']); ?>', <?php echo e($item['taxRate']); ?>)">
-                                    <input class="form-control" type="hidden" value="<?php echo e($item['service_id']); ?>">
-                            </td>
-                            <td>
-                                <div class="product-info tax-amount">
-                                    <h2>&#8377;<?php echo e($item['taxAmount']); ?></h2>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-info total-price">
-                                    <h2>&#8377;<?php echo e($item['taxAmount'] + ($item['pricePerItem'] * $item['tokens'])); ?></h2>
-                                </div>
-                            </td>
-                            <td>
-                                <button onclick="deleteItem('<?php echo e($item['id']); ?>')" class="btn btn-danger">Remove</button>
-                            </td>
-                        </tr>
-                        <?php
-                        $itemTotal = $item['pricePerItem'] * $item['tokens'];
-                        $itemTotalWithTax = $itemTotal + $item['taxAmount'];
-                        $tax += $item['taxAmount'];
-                        $grandTotal += $itemTotalWithTax;
-                    ?>
-                    <?php endif; ?>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="total-cost-bar" style="margin-top: 20px; text-align: right;">
-                    <h3>Total Cost</h3>
-                    <ul style="list-style: none; padding: 0; font-size: 16px; color: #555;">
-                        <li><strong>Subtotal:</strong> <span id="subtotal" style="font-size: 18px; color: #000;">&#8377;<?php echo e(number_format($grandTotal - $tax, 2)); ?></span></li>
-                        <li><strong>Tax:</strong> <span id="total-tax" style="font-size: 18px; color: #000;">&#8377;<?php echo e(number_format($tax, 2)); ?></span></li>
-                        <li><strong>Grand Total:</strong> <span id="grand-total" style="font-size: 18px; color: #000;">&#8377;<?php echo e(number_format($grandTotal, 2)); ?></span></li>
-                    </ul>
-                </div>
-                
-
-                <div class="btn-wrap" style="margin-top: 20px; text-align: center;">
-                    <form action="<?php echo e(route('checkout')); ?>" method="get" style="display: inline-block;">
-                        <?php echo csrf_field(); ?>
-                        <input type="hidden" id="cart-data" name="cart" value="<?php echo e(json_encode($cart)); ?>">
-                        <button type="submit" class="checkout-button">Proceed
-                            to Checkout</button>
-                    </form>
-                    <a href="<?php echo e(url('/')); ?>" class="btn btn-primary checkout-button">Buy More</a>
-                </div>
-            <?php endif; ?>
-        </div>
-    </main>
-
-    <script>
-     function updateTotalPrice(input, pricePerItem, itemId, taxrate) {
-    const quantity = parseInt(input.value) || 1;
-    const itemTotal = pricePerItem * quantity;
-    const tax = (itemTotal * taxrate) / 100;
-    const totalPrice = itemTotal + tax;
-
-    const itemRow = document.querySelector(`#cart-item-${itemId}`);
-    if (!itemRow) return;
-
-    // Update tax amount
-    const taxElement = itemRow.querySelector('.tax-amount h2');
-    if (taxElement) {
-        taxElement.innerText = `₹${tax.toFixed(2)}`;
+<?php $__env->startSection('main-body'); ?>
+<style>
+    /* Reset and Base Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    // Update total price
-    const totalPriceElement = itemRow.querySelector('.total-price h2');
-    if (totalPriceElement) {
-        totalPriceElement.innerText = `₹${totalPrice.toFixed(2)}`;
+    body {
+        background-color: #f5f5f7;
+        color: #333;
+        line-height: 1.6;
     }
 
-    // Recalculate cart data and totals
-    updateCartData();
-    updateSubtotalAndTotal();
-}
-
-
-
-function updateCartData() {
-    const cart = [];
-
-    document.querySelectorAll('tr[id^="cart-item-"]').forEach(row => {
-        const itemId = row.id.replace('cart-item-', '');
-        const quantityInput = row.querySelector('input[type="number"]');
-        const serviceIdInput = row.querySelector('input[type="hidden"]'); // Get hidden service_id input
-        const pricePerItem = parseFloat(row.dataset.pricePerItem) || 0;
-        const quantity = parseInt(quantityInput.value) || 1;
-        const serviceNameElement = row.querySelector('.product-info h2');
-
-        // Ensure service name is correctly retrieved
-        const serviceName = serviceNameElement ? serviceNameElement.innerText.trim() : '';
-
-        // Ensure tax and total price are extracted correctly
-        const taxAmountElement = row.querySelector('.tax-amount h2');
-        const totalPriceElement = row.querySelector('.total-price h2');
-
-        const taxAmount = taxAmountElement ? parseFloat(taxAmountElement.innerText.replace('₹', '').trim()) || 0 : 0;
-        const totalPrice = totalPriceElement ? parseFloat(totalPriceElement.innerText.replace('₹', '').trim()) || 0 : 0;
-
-        // Ensure service_id value is retrieved
-        const service_id = serviceIdInput ? serviceIdInput.value : '';
-
-        cart.push({
-            id: itemId,
-            serviceName: serviceName,
-            service_id: service_id,
-            tokens: quantity,
-            pricePerItem: pricePerItem,
-            taxAmount: taxAmount,
-            totalPrice: totalPrice
-        });
-    });
-
-    // Update hidden input for cart data (for backend submission)
-    const cartDataInput = document.getElementById('cart-data');
-    if (cartDataInput) {
-        cartDataInput.value = JSON.stringify(cart);
+    /* Page Title */
+    .page-title-section {
+        background: linear-gradient(to right, #4a4a4a, #7a7a7a);
+        color: white;
+        padding: 30px 0;
     }
-}
 
+    .page-title-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
 
+    .page-title {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
 
+    .breadcrumbs {
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
 
-function updateSubtotalAndTotal() {
-    let subtotal = 0;
-    let totalTax = 0;
-    let grandTotal = 0;
+    .breadcrumbs a {
+        color: white;
+        text-decoration: none;
+    }
 
-    // Iterate through each cart item row
-    document.querySelectorAll('tr[id^="cart-item-"]').forEach(row => {
-        const quantityInput = row.querySelector('input[type="number"]');
-        const pricePerItem = parseFloat(row.dataset.pricePerItem) || 0;
-        const quantity = parseInt(quantityInput.value) || 1;
-        const taxAmount = parseFloat(row.querySelector('.tax-amount h2').innerText.replace('₹', '')) || 0;
+    .breadcrumbs a:hover {
+        text-decoration: underline;
+    }
 
-        subtotal += pricePerItem * quantity;
-        totalTax += taxAmount;
-    });
+    .breadcrumbs .separator {
+        margin: 0 10px;
+    }
 
-    grandTotal = subtotal + totalTax;
+    /* Main Content */
+    .main-content {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
 
-    // Update DOM elements
-    const subtotalElement = document.getElementById('subtotal');
-    const totalTaxElement = document.getElementById('total-tax');
-    const grandTotalElement = document.getElementById('grand-total');
+    .cart-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
 
-    if (subtotalElement) subtotalElement.innerText = `₹${subtotal.toFixed(2)}`;
-    if (totalTaxElement) totalTaxElement.innerText = `₹${totalTax.toFixed(2)}`;
-    if (grandTotalElement) grandTotalElement.innerText = `₹${grandTotal.toFixed(2)}`;
-}
+    /* Cart Items */
+    .cart-items-card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
 
+    .card-header {
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+    }
 
+    .card-title {
+        font-size: 1.4rem;
+        color: #333;
+        display: flex;
+        align-items: center;
+    }
 
-        function deleteItem(itemId) {
-        if (confirm('Are you sure you want to remove this item?')) {
-            fetch(`<?php echo e(route('cart.remove', '')); ?>/${itemId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to remove item.');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    const itemRow = document.querySelector(`#cart-item-${itemId}`);
-                    if (itemRow) {
-                        itemRow.remove();
-                    }
-                    updateSubtotalAndTotal();
-                    updateCartData();
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+    .card-content {
+        padding: 0;
+    }
+
+    .cart-item {
+        display: flex;
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+        position: relative;
+    }
+
+    .cart-item:last-child {
+        border-bottom: none;
+    }
+
+    .item-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-right: 20px;
+        flex-shrink: 0;
+    }
+
+    .item-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .item-details {
+        flex-grow: 1;
+    }
+
+    .item-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .item-description {
+        font-size: 0.9rem;
+        color: #777;
+        margin-bottom: 15px;
+        max-width: 600px;
+    }
+
+    .item-actions {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .quantity-btn {
+        width: 36px;
+        height: 36px;
+        background-color: #f5f5f5;
+        border: none;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .quantity-btn:hover {
+        background-color: #e5e5e5;
+    }
+
+    .quantity-input {
+        width: 50px;
+        height: 36px;
+        border: none;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        text-align: center;
+        font-size: 0.95rem;
+    }
+
+    .remove-btn {
+        background: none;
+        border: none;
+        color: #f5a15d;
+        font-size: 0.9rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .remove-btn:hover {
+        text-decoration: underline;
+    }
+
+    .remove-icon {
+        margin-right: 5px;
+    }
+
+    .item-price {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #333;
+        margin-left: auto;
+        align-self: center;
+    }
+
+    .empty-cart {
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .empty-cart-icon {
+        font-size: 3rem;
+        color: #ddd;
+        margin-bottom: 20px;
+    }
+
+    .empty-cart-message {
+        font-size: 1.2rem;
+        color: #777;
+        margin-bottom: 30px;
+    }
+
+    /* Cart Summary */
+    .cart-summary-card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .summary-content {
+        padding: 20px;
+    }
+
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    .summary-row:last-of-type {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+
+    .summary-label {
+        color: #666;
+    }
+
+    .summary-value {
+        font-weight: 500;
+    }
+
+    .grand-total {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .coupon-section {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+    }
+
+    .coupon-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .coupon-form {
+        display: flex;
+    }
+
+    .coupon-input {
+        flex-grow: 1;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-right: none;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        font-size: 0.95rem;
+    }
+
+    .coupon-input:focus {
+        outline: none;
+        border-color: #5AACCE;
+    }
+
+    .coupon-btn {
+        padding: 0 15px;
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .coupon-btn:hover {
+        background-color: #e5e5e5;
+    }
+
+    /* Buttons */
+    .btn {
+        display: inline-block;
+        padding: 12px 25px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+        text-decoration: none;
+    }
+
+    .btn-primary {
+        background-color: #f5a15d;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #e08e45;
+    }
+
+    .btn-outline {
+        background-color: transparent;
+        border: 1px solid #ddd;
+        color: #666;
+    }
+
+    .btn-outline:hover {
+        border-color: #5AACCE;
+        color: #5AACCE;
+    }
+
+    .btn-block {
+        display: block;
+        width: 100%;
+    }
+
+    .cart-actions {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    /* Responsive Styles */
+    @media (min-width: 992px) {
+        .cart-container {
+            grid-template-columns: 2fr 1fr;
+        }
+        
+        .cart-summary-card {
+            position: sticky;
+            top: 20px;
+            align-self: start;
         }
     }
-    </script>
 
-    </main>
+    @media (max-width: 767px) {
+        .page-title {
+            font-size: 1.6rem;
+        }
+        
+        .cart-item {
+            flex-direction: column;
+        }
+        
+        .item-image {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+        
+        .item-actions {
+            margin-top: 15px;
+            width: 100%;
+            justify-content: space-between;
+        }
+        
+        .item-price {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            margin-left: 0;
+        }
+        
+        .cart-actions {
+            flex-direction: column;
+        }
+        
+        .cart-actions .btn {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .card-title {
+            font-size: 1.2rem;
+        }
+        
+        .item-name {
+            font-size: 1.1rem;
+            padding-right: 70px;
+        }
+        
+        .item-description {
+            font-size: 0.85rem;
+        }
+    }
+</style>
+<!-- Page Title -->
+<section class="page-title-section">
+    <div class="page-title-container">
+        <h1 class="page-title">Shopping Cart</h1>
+        <div class="breadcrumbs">
+            <a href="#">Home</a>
+            <span class="separator">›</span>
+            <a href="#">Services</a>
+            <span class="separator">›</span>
+            <span>Cart</span>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<main class="main-content">
+    <div class="cart-container">
+        <!-- Cart Items -->
+        <div class="cart-items-card">
+            <div class="card-header">
+                <h2 class="card-title">Your Cart (<?php echo e(count($cart)); ?> items)</h2>
+            </div>
+            <div class="card-content">
+                <?php $__currentLoopData = $cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if(is_array($item)): ?>
+                        <?php
+                            $service_data = App\Models\Service::find($item['service_id']);
+                            $itemId = $item['id'];
+                        ?>
+                        <div class="cart-item" id="cart-item-<?php echo e($itemId); ?>">
+                            <div class="item-image">
+                                <img src="<?php echo e($service_data->images); ?>?height=100&width=100" alt="<?php echo e($service_data->name); ?>">
+                            </div>
+                            <div class="item-details">
+                                <h3 class="item-name"><?php echo e($service_data->name); ?></h3>
+                                <p class="item-description"><?php echo e($service_data->short_description); ?></p>
+                                <div class="item-actions">
+                                    <div class="quantity-controls">
+                                        <button class="quantity-btn" onclick="updateQuantity('<?php echo e($itemId); ?>', -1)">-</button>
+                                        <input type="number" class="quantity-input" value="<?php echo e($item['tokens']); ?>" min="1" id="quantity-<?php echo e($itemId); ?>" onchange="updateItemTotal('<?php echo e($itemId); ?>')">
+                                        <button class="quantity-btn" onclick="updateQuantity('<?php echo e($itemId); ?>', 1)">+</button>
+                                    </div>
+                                    <button class="remove-btn" onclick="removeItem('<?php echo e($itemId); ?>')">
+                                        <span class="remove-icon">🗑️</span> Remove
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-price" id="price-<?php echo e($itemId); ?>">₹<?php echo e($item['tokens'] * $item['pricePerItem']); ?></div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        
+                <!-- Empty Cart State -->
+                <div class="empty-cart" style="display: none;" id="empty-cart">
+                    <div class="empty-cart-icon">🛒</div>
+                    <h3 class="empty-cart-message">Your cart is empty</h3>
+                    <a href="#" class="btn btn-primary">Browse Services</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- Cart Summary -->
+        <div class="cart-summary-card">
+            <div class="card-header">
+                <h2 class="card-title">Order Summary</h2>
+            </div>
+            <div class="summary-content">
+                <div class="summary-row">
+                    <span class="summary-label">Subtotal</span>
+                    <span class="summary-value" id="subtotal">₹2,597</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">GST (18%)</span>
+                    <span class="summary-value" id="tax">₹467.46</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Grand Total</span>
+                    <span class="summary-value grand-total" id="total">₹3,064.46</span>
+                </div>
+                
+                <div class="coupon-section">
+                    <h3 class="coupon-title">Have a coupon?</h3>
+                    <div class="coupon-form">
+                        <input type="text" class="coupon-input" placeholder="Enter coupon code">
+                        <button class="coupon-btn">Apply</button>
+                    </div>
+                </div>
+                
+                
+
+                <form id="checkout-form" action="<?php echo e(route('checkout')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <input type="hidden" id="cart-data" name="cart" value="<?php echo e(json_encode($cart)); ?>">
+                    <button type="submit" class="btn btn-primary btn-block"style="margin-top: 20px;">Proceed to Checkout →</button>
+                </form>
+                
+                <p style="margin-top: 15px; font-size: 0.9rem; color: #777; text-align: center;">
+                    Need help? Contact us at <a href="mailto:care@searchai.com" style="color: #5AACCE;">care@searchai.com</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cart-actions">
+        <a href="#" class="btn btn-outline">← Continue Shopping </a>
+        <form id="checkout-form" action="<?php echo e(route('checkout')); ?>" method="POST">
+            <?php echo csrf_field(); ?>
+            <input type="hidden" id="cart-data" name="cart" value="<?php echo e(json_encode($cart)); ?>">
+            <button type="submit" class="btn btn-primary">Proceed to Checkout →</button>
+        </form>
+        
+    </div>
+</main>
+
+
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('script'); ?>
+<!-- JavaScript for Cart Functionality -->
+<script>
+    // 1. Dynamically fetch item prices from Blade
+    const itemPrices = {
+        <?php $__currentLoopData = $cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php if(is_array($item)): ?>
+                "<?php echo e($item['id']); ?>": <?php echo e($item['pricePerItem']); ?>,
+            <?php endif; ?>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    };
+
+    // 2. Update quantity with +/- buttons
+    function updateQuantity(itemId, change) {
+        const input = document.getElementById(`quantity-${itemId}`);
+        let quantity = parseInt(input.value) || 1;
+        quantity = Math.max(1, quantity + change);
+        input.value = quantity;
+        updateItemTotal(itemId);
+    }
+
+    // 3. Recalculate item total when quantity changes
+    function updateItemTotal(itemId) {
+        const input = document.getElementById(`quantity-${itemId}`);
+        const quantity = parseInt(input.value) || 1;
+        const unitPrice = itemPrices[itemId] || 0;
+        const price = unitPrice * quantity;
+        const priceElement = document.getElementById(`price-${itemId}`);
+        priceElement.textContent = '₹' + price.toLocaleString('en-IN');
+        updateCartTotals();
+    }
+
+    // 4. Remove item from cart with animation and backend update
+    function removeItem(itemId) {
+        const cartItem = document.getElementById(`cart-item-${itemId}`);
+        cartItem.style.transition = 'all 0.3s ease';
+
+        setTimeout(() => {
+            cartItem.style.opacity = '0';
+            cartItem.style.height = '0';
+            cartItem.style.margin = '0';
+            cartItem.style.padding = '0';
+        }, 10);
+
+        $.ajax({
+            url: `<?php echo e(route('cart.remove', '')); ?>/${itemId}`,
+            method: 'POST',
+            data: {
+                _token: '<?php echo e(csrf_token()); ?>'
+            },
+            success: function () {
+                setTimeout(() => {
+                    cartItem.remove();
+                    updateCartCount();
+                    updateCartTotals();
+
+                    const remaining = document.querySelectorAll('.cart-item').length;
+                    if (remaining === 0) {
+                        document.getElementById('empty-cart').style.display = 'block';
+                    }
+                }, 300);
+            },
+            error: function () {
+                alert('Failed to remove item from cart.');
+            }
+        });
+    }
+
+    // 5. Update total items count in header
+    function updateCartCount() {
+        const count = document.querySelectorAll('.cart-item').length;
+        const cartTitle = document.querySelector('.card-title');
+        cartTitle.textContent = `Your Cart (${count} item${count !== 1 ? 's' : ''})`;
+    }
+
+    // 6. Update subtotal, GST and grand total
+    function updateCartTotals() {
+        let subtotal = 0;
+        document.querySelectorAll('.item-price').forEach(el => {
+            const raw = el.textContent.replace(/[^\d]/g, '');
+            subtotal += parseInt(raw) || 0;
+        });
+
+        const tax = subtotal * 0.18;
+        const grandTotal = subtotal + tax;
+
+        document.getElementById('subtotal').textContent = '₹' + subtotal.toLocaleString('en-IN');
+        document.getElementById('tax').textContent = '₹' + tax.toFixed(2).toLocaleString('en-IN');
+        document.getElementById('total').textContent = '₹' + grandTotal.toFixed(2).toLocaleString('en-IN');
+    }
+
+    // 7. Init: Update totals on load
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCartTotals();
+        updateCartCount();
+    });
+
+
+</script>
+
+<?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\searchai.space\resources\views/frontend/cart.blade.php ENDPATH**/ ?>

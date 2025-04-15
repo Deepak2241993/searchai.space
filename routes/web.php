@@ -39,6 +39,8 @@ use App\Http\Controllers\NewsletterController;
 // });
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [HomeController::class, 'AboutUs'])->name('aboutus');
+Route::view('/thank-you','frontend.thankyou')->name('thankyou');
+Route::post('/contact-us-mail',[HomeController::class,'ContactMail'])->name('contactmail');
 
 // register
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -146,7 +148,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/dl-verification', [TokenController::class, 'DLVerification'])->name('dl-verification');
 
     // Checkout Routes
-    Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::post('/payment/create-order', [PaymentController::class, 'createOrder'])->name('payment.createOrder');
 });
 

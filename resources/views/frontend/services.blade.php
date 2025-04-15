@@ -524,91 +524,134 @@
                 </div>
                 
                 <!-- Add to Cart Card -->
-                <div class="add-to-cart-card">
+                <div class="add-to-cart-card" id="service-{{ $services->id }}">
                     <div class="card-header">
                         <h3 class="card-title">{!! $services->name !!}</h3>
                     </div>
-                    
-                    
-                    
+                
                     <div class="quantity-selector">
                         <label class="quantity-label">Quantity</label>
                         <div class="quantity-controls">
-                            <button class="quantity-btn">-</button>
-                            <input type="number" class="quantity-input" value="1" min="1">
-                            <button class="quantity-btn">+</button>
+                            <button class="quantity-btn minus" data-id="{{ $services->id }}">-</button>
+                            <input type="number" 
+                                   class="quantity-input" 
+                                   id="quantity-{{ $services->id }}" 
+                                   value="1" 
+                                   min="1" 
+                                   data-id="{{ $services->id }}">
+                            <button class="quantity-btn plus" data-id="{{ $services->id }}">+</button>
                         </div>
                     </div>
-                    
-                    <div class="total-section">
+                
+                    <div class="total-section" data-id="{{ $services->id }}">
                         <div class="total-row">
                             <span class="total-label">Plan Price</span>
-                            <span class="total-value">₹{{ number_format($services->price, 2) }}</span>
+                            <span class="total-value" id="unit-price-{{ $services->id }}">₹{{ number_format($services->price, 2) }}</span>
                         </div>
                         <div class="total-row">
                             <span class="total-label">Quantity</span>
-                            <span class="total-value">1</span>
+                            <span class="total-value" id="quantity-text-{{ $services->id }}">1</span>
                         </div>
                         <div class="total-row">
                             <span class="total-label">Total</span>
-                            <span class="total-price">₹{{ number_format($services->price, 2) }}</span>
+                            <span class="total-price" id="total-price-{{ $services->id }}">₹{{ number_format($services->price, 2) }}</span>
                         </div>
                     </div>
-                    
-                    <a href="#" class="add-to-cart-btn">Add to Cart</a>
-                    
+                
+                    <a href="javascript:void(0);" 
+                       class="add-to-cart-btn" 
+                       data-id="{{ $services->id }}" 
+                       data-price="{{ $services->price }}">
+                       Add to Cart
+                    </a>
+                
                     <div class="secure-note">
                         <i>🔒</i> Secure checkout
                     </div>
                 </div>
+                
             </div>
         </main>
     
         <!-- JavaScript for Plan Selection and Quantity -->
         <script>
-            // Fixed price for service
-            const unitPrice = {{ number_format($services->price, 2) }};
-            let quantity = 1;
-    
-            // Quantity controls
-            const minusBtn = document.querySelector('.quantity-btn:first-child');
-            const plusBtn = document.querySelector('.quantity-btn:last-child');
-            const quantityInput = document.querySelector('.quantity-input');
-    
-            minusBtn.addEventListener('click', function() {
-                if (quantity > 1) {
-                    quantity--;
-                    quantityInput.value = quantity;
-                    updateTotalPrice();
+            document.addEventListener('DOMContentLoaded', function () {
+                // Attach click handlers to plus and minus buttons
+                document.querySelectorAll('.quantity-btn').forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        const serviceId = this.dataset.id;
+                        const input = document.getElementById(`quantity-${serviceId}`);
+                        let quantity = parseInt(input.value) || 1;
+            
+                        if (this.classList.contains('minus')) {
+                            quantity = Math.max(1, quantity - 1);
+                        } else if (this.classList.contains('plus')) {
+                            quantity += 1;
+                        }
+            
+                        input.value = quantity;
+                        updateTotals(serviceId, quantity);
+                    });
+                });
+            
+                // Attach input change listener
+                document.querySelectorAll('.quantity-input').forEach(function(input) {
+                    input.addEventListener('change', function() {
+                        const serviceId = this.dataset.id;
+                        let quantity = Math.max(1, parseInt(this.value) || 1);
+                        this.value = quantity;
+                        updateTotals(serviceId, quantity);
+                    });
+                });
+            
+                function updateTotals(serviceId, quantity) {
+                    const price = parseFloat(document.querySelector(`.add-to-cart-btn[data-id="${serviceId}"]`).dataset.price);
+            
+                    const total = price * quantity;
+            
+                    document.getElementById(`quantity-text-${serviceId}`).textContent = quantity;
+                    document.getElementById(`total-price-${serviceId}`).textContent = '₹' + total.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+                    document.getElementById(`unit-price-${serviceId}`).textContent = '₹' + price.toLocaleString('en-IN', { minimumFractionDigits: 2 });
                 }
             });
-    
-            plusBtn.addEventListener('click', function() {
-                quantity++;
-                quantityInput.value = quantity;
-                updateTotalPrice();
-            });
-    
-            quantityInput.addEventListener('change', function() {
-                quantity = Math.max(1, parseInt(this.value) || 1);
-                this.value = quantity;
-                updateTotalPrice();
-            });
-    
-            function updateTotalPrice() {
-                const priceElement = document.querySelector('.total-row:first-child .total-value');
-                const quantityElement = document.querySelector('.total-row:nth-child(2) .total-value');
-                const totalElement = document.querySelector('.total-price');
-    
-                const total = unitPrice * quantity;
-    
-                priceElement.textContent = '₹' + unitPrice.toLocaleString('en-IN');
-                quantityElement.textContent = quantity;
-                totalElement.textContent = '₹' + total.toLocaleString('en-IN');
-            }
-        </script>
+            </script>
+            
 
 
     </main>
     
 @endsection
+@push('script')
+<script>
+    $(document).ready(function () {
+        $('.add-to-cart-btn').on('click', function (e) {
+            e.preventDefault();
+    
+            let button = $(this);
+            let serviceId = button.data('id');
+            let price = button.data('price');
+    
+            // Find the quantity input in the same .add-to-cart-card
+            let quantity = button.closest('.add-to-cart-card').find('.quantity-input').val();
+    
+            $.ajax({
+                url: '{{ route("cart.add") }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    service_id: serviceId,
+                    tokens: quantity,
+                    pricePerItem: price
+                },
+                success: function (response) {
+                    // Redirect to cart page
+                    window.location.href = '{{ route("cart.index") }}';
+                },
+                error: function (xhr) {
+                    alert('Something went wrong. Please try again!');
+                }
+            });
+        });
+    });
+    </script>
+@endpush

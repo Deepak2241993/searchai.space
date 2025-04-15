@@ -109,5 +109,6 @@
 <?php $component = $__componentOriginal1d30095d9a31623de772bc1c5e5aff6f; ?>
 <?php unset($__componentOriginal1d30095d9a31623de772bc1c5e5aff6f); ?>
 <?php endif; ?>
+    <?php echo $__env->yieldPushContent('script'); ?>
 </body>
 </html><?php /**PATH C:\xampp\htdocs\searchai.space\resources\views/layouts/master.blade.php ENDPATH**/ ?>

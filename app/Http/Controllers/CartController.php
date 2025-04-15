@@ -18,7 +18,7 @@ class CartController extends Controller
         $validated = $request->validate([
             'tokens' => 'required|integer|min:1',
             'pricePerItem' => 'required|numeric',
-            'serviceName' => 'required|string',
+            'service_id' => 'required|string',
         ]);
 
         // Retrieve the current cart from the session
@@ -30,15 +30,13 @@ class CartController extends Controller
         // Check if the item already exists in the cart
         $itemExists = false;
         foreach ($cart as &$item) {
-            if ($item['serviceName'] === $validated['serviceName']) {
-                $service = Service::where('name', $item['serviceName'])->first();
+            if ($item['service_id'] === $validated['service_id']) {
+                $service = Service::where('id', $item['service_id'])->first();
                 $taxRate = $service->tax ?? 0;
-                $item['service_id'] = $service->id;
-                // Update tokens and subtotal
+
                 $item['tokens'] += $validated['tokens'];
                 $item['subtotal'] = $item['tokens'] * $validated['pricePerItem'];
 
-                // Calculate tax and total price
                 $item['tax_pay'] = $item['subtotal'] * ($taxRate / 100);
                 $item['total_price'] = $item['subtotal'] + $item['tax_pay'];
 
@@ -49,32 +47,30 @@ class CartController extends Controller
 
         // If the item does not exist, add it as a new entry
         if (!$itemExists) {
-            $service = Service::where('name', $validated['serviceName'])->first();
+            $service = Service::where('id', $validated['service_id'])->first();
             $taxRate = $service->tax ?? 0;
             $subtotal = $validated['tokens'] * $validated['pricePerItem'];
             $taxPay = $subtotal * ($taxRate / 100);
 
             $cart[] = [
                 'id' => $itemId,
-                'serviceName' => $validated['serviceName'],
+                'service_id' => $validated['service_id'],
                 'tokens' => $validated['tokens'],
                 'pricePerItem' => $validated['pricePerItem'],
                 'subtotal' => $subtotal,
                 'taxRate' => $taxRate,
                 'taxAmount' => $taxPay,
-                'service_id' => $service->id,
                 'total_price' => $subtotal + $taxPay,
             ];
         }
 
-// dd($cart);
-
         // Store the updated cart in the session
         session()->put('cart', $cart);
 
-        // Redirect back to the cart page with a success message
-        return redirect()->route('cart.index')->with('success', 'Item added to cart.');
+        // Return a success response for AJAX
+        return response()->json(['success' => true, 'message' => 'Item added to cart.']);
     }
+
 
 
 
@@ -94,7 +90,7 @@ class CartController extends Controller
                 $subtotal += $item['pricePerItem'] * $item['tokens'];
         
                 // Ensure tax key exists in the item array
-                $services = Service::where('name', $item['serviceName'])->first();
+                $services = Service::find($item['id']);
                 $taxRate = $services['tax'] ?? 0; 
                 $tax += ($item['pricePerItem'] * $item['tokens']) * ($taxRate / 100);
                 
@@ -102,8 +98,7 @@ class CartController extends Controller
                 $rate_of_tax[] = $taxRate;
             }
         }
-        
-
+        // Calculate total
         $total = $subtotal + $tax;
         return view('frontend.cart', compact('cart', 'subtotal', 'total', 'tax'));
 

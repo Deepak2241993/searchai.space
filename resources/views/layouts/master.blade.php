@@ -53,5 +53,6 @@
     ============================================= -->
     
     <x-front.front_footer_js/>
+    @stack('script')
 </body>
 </html>

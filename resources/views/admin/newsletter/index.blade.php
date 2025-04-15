@@ -41,11 +41,13 @@ Newsletter List
                                     <thead class="bg-primary text-white">
                                         <tr>
                                             <th>#</th>
-                                            <th>Name</th>
+                                            {{-- <th>Name</th> --}}
                                             <th>Email</th>
                                             <th>Latitude</th>
                                             <th>Longitude</th>
                                             <th>City</th>
+                                            <th>State</th>
+                                            <th>Country</th>
                                             <th>Status</th>
                                             {{-- <th class="text-center">Action</th> --}}
                                         </tr>
@@ -54,12 +56,14 @@ Newsletter List
                                         @forelse ($newsletters as $key => $value)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $value->name }}</td>
+                                                {{-- <td>{{ $value->name }}</td> --}}
                                                 <td>{{ $value->email }}</td>
                                                 <td>{{ $value->latitude }}</td>
                                                 <td>{{ $value->longitude }}</td>
                                                 <td>{{ $value->city }}</td>
-                                                <td>{{ $value->status == 1 ? 'Active' : 'Inactive' }}</td>
+                                                <td>{{ $value->state }}</td>
+                                                <td>{{ $value->country }}</td>
+                                                <td>{{ $value->status == 'active' ? 'Active' : 'Inactive' }}</td>
                                                 {{-- <td class="text-center">
                                                     <a href="{{ route('admin.newsletter.edit', $value->id) }}" class="btn btn-sm btn-info me-2">Edit</a>
                                                     <button class="btn btn-sm btn-danger" onclick="deleteNewsletter({{ $value->id }})">Delete</button>

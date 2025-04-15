@@ -67,7 +67,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="{{url('/')}}">
                     <img src="{{url('/front-assets')}}/assets/img/finallogo.png" class="logo" alt="Logo">
                 </a>
             </div>
@@ -174,7 +174,7 @@
 
             <div class="attr-right">
                 <!-- Start Atribute Navigation -->
-                <div class="attr-nav flex">
+                {{-- <div class="attr-nav flex">
                     <ul>
                         <li class="search"><a href="#"><i class="fas fa-search"></i></a></li>
                         <li class="side-menu">
@@ -185,7 +185,7 @@
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
                 <!-- End Atribute Navigation -->
 
 

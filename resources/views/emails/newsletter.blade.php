@@ -37,7 +37,7 @@
           <!-- Call to Action -->
           <tr>
             <td align="center" style="padding: 30px 0;">
-              <a href="https://yourwebsite.com" style="background-color: #007bff; color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 4px; display: inline-block;">Visit Our Website</a>
+              <a href="{{url('/')}}" style="background-color: #007bff; color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 4px; display: inline-block;">Visit Our Website</a>
             </td>
           </tr>
 

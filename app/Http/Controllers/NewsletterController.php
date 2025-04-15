@@ -21,7 +21,7 @@ class NewsletterController extends Controller
             'email' => 'required|email',
         ]);
         $data = $request->all();
-        $data['status'] = 1;
+        $data['status'] = 'active';
         $data['send_status'] = 'pending';
         $ip = $request->ip();
 $response = @json_decode(file_get_contents("http://ip-api.com/json/{$ip}"));
@@ -34,11 +34,11 @@ $response = @json_decode(file_get_contents("http://ip-api.com/json/{$ip}"));
         $data['latitude'] = $response->lat ?? 0;
         $data['longitude'] = $response->lon ?? 0;
         $data['timezone'] = $response->timezone ?? 'UTC';
-
-       $result = \App\Models\Newsletter::create($request->all());
+// dd($data);
+       $result = \App\Models\Newsletter::create($data);
        if($result){
            Mail::to($request->email)->send(new NewsletterMail($data));
-           return redirect()->back()->with('success', 'Subscription successful!');
+           return redirect(route('thankyou'))->with('success', 'Subscription successful!');
         }
 
     }

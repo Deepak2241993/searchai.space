@@ -472,7 +472,7 @@
                 <!-- Service Details -->
                 <div class="service-details-card">
                     <div class="service-image">
-                        <img src="<?php echo e($services->images); ?>?height=500&width=800" alt="Aadhar Verification Service">
+                        <img src="<?php echo e($services->images); ?>?height=500&width=800" alt="<?php echo $services->name; ?>">
                         <div class="verification-badge">✓</div>
                     </div>
                     <div class="service-content">
@@ -509,121 +509,151 @@
                                 <?php
                                 $howItWorks = isset($services->how_to_work) ? json_decode($services->how_to_work, true) : [['question' => '', 'answer' => '']];
                             ?>
-                            <?php $__currentLoopData = $howItWorks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $step): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php $__currentLoopData = $howItWorks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$step): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="step">
-                                    <div class="step-number">1</div>
+                                    <div class="step-number"><?php echo e($key+1); ?></div>
                                     <div class="step-content">
                                         <h4><?php echo e($step['question'] ?? ''); ?></h4>
                                         <p><?php echo e($step['answer'] ?? ''); ?></p>
                                     </div>
                                 </div>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <div class="step">
-                                    <div class="step-number">2</div>
-                                    <div class="step-content">
-                                        <h4>Automated Verification</h4>
-                                        <p>Our system securely verifies the details with the UIDAI database.</p>
-                                    </div>
-                                </div>
-                                <div class="step">
-                                    <div class="step-number">3</div>
-                                    <div class="step-content">
-                                        <h4>Receive Verification Report</h4>
-                                        <p>Get a comprehensive verification report with authentication status.</p>
-                                    </div>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Add to Cart Card -->
-                <div class="add-to-cart-card">
+                <div class="add-to-cart-card" id="service-<?php echo e($services->id); ?>">
                     <div class="card-header">
-                        <h3 class="card-title">Aadhar Verification</h3>
+                        <h3 class="card-title"><?php echo $services->name; ?></h3>
                     </div>
-                    
-                    
-                    
+                
                     <div class="quantity-selector">
                         <label class="quantity-label">Quantity</label>
                         <div class="quantity-controls">
-                            <button class="quantity-btn">-</button>
-                            <input type="number" class="quantity-input" value="1" min="1">
-                            <button class="quantity-btn">+</button>
+                            <button class="quantity-btn minus" data-id="<?php echo e($services->id); ?>">-</button>
+                            <input type="number" 
+                                   class="quantity-input" 
+                                   id="quantity-<?php echo e($services->id); ?>" 
+                                   value="1" 
+                                   min="1" 
+                                   data-id="<?php echo e($services->id); ?>">
+                            <button class="quantity-btn plus" data-id="<?php echo e($services->id); ?>">+</button>
                         </div>
                     </div>
-                    
-                    <div class="total-section">
+                
+                    <div class="total-section" data-id="<?php echo e($services->id); ?>">
                         <div class="total-row">
                             <span class="total-label">Plan Price</span>
-                            <span class="total-value">₹<?php echo e(number_format($services->price, 2)); ?></span>
+                            <span class="total-value" id="unit-price-<?php echo e($services->id); ?>">₹<?php echo e(number_format($services->price, 2)); ?></span>
                         </div>
                         <div class="total-row">
                             <span class="total-label">Quantity</span>
-                            <span class="total-value">1</span>
+                            <span class="total-value" id="quantity-text-<?php echo e($services->id); ?>">1</span>
                         </div>
                         <div class="total-row">
                             <span class="total-label">Total</span>
-                            <span class="total-price">₹<?php echo e(number_format($services->price, 2)); ?></span>
+                            <span class="total-price" id="total-price-<?php echo e($services->id); ?>">₹<?php echo e(number_format($services->price, 2)); ?></span>
                         </div>
                     </div>
-                    
-                    <a href="#" class="add-to-cart-btn">Add to Cart</a>
-                    
+                
+                    <a href="javascript:void(0);" 
+                       class="add-to-cart-btn" 
+                       data-id="<?php echo e($services->id); ?>" 
+                       data-price="<?php echo e($services->price); ?>">
+                       Add to Cart
+                    </a>
+                
                     <div class="secure-note">
                         <i>🔒</i> Secure checkout
                     </div>
                 </div>
+                
             </div>
         </main>
     
         <!-- JavaScript for Plan Selection and Quantity -->
         <script>
-            // Fixed price for Aadhar verification
-            const unitPrice = <?php echo e(number_format($services->price, 2)); ?>;
-            let quantity = 1;
-    
-            // Quantity controls
-            const minusBtn = document.querySelector('.quantity-btn:first-child');
-            const plusBtn = document.querySelector('.quantity-btn:last-child');
-            const quantityInput = document.querySelector('.quantity-input');
-    
-            minusBtn.addEventListener('click', function() {
-                if (quantity > 1) {
-                    quantity--;
-                    quantityInput.value = quantity;
-                    updateTotalPrice();
+            document.addEventListener('DOMContentLoaded', function () {
+                // Attach click handlers to plus and minus buttons
+                document.querySelectorAll('.quantity-btn').forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        const serviceId = this.dataset.id;
+                        const input = document.getElementById(`quantity-${serviceId}`);
+                        let quantity = parseInt(input.value) || 1;
+            
+                        if (this.classList.contains('minus')) {
+                            quantity = Math.max(1, quantity - 1);
+                        } else if (this.classList.contains('plus')) {
+                            quantity += 1;
+                        }
+            
+                        input.value = quantity;
+                        updateTotals(serviceId, quantity);
+                    });
+                });
+            
+                // Attach input change listener
+                document.querySelectorAll('.quantity-input').forEach(function(input) {
+                    input.addEventListener('change', function() {
+                        const serviceId = this.dataset.id;
+                        let quantity = Math.max(1, parseInt(this.value) || 1);
+                        this.value = quantity;
+                        updateTotals(serviceId, quantity);
+                    });
+                });
+            
+                function updateTotals(serviceId, quantity) {
+                    const price = parseFloat(document.querySelector(`.add-to-cart-btn[data-id="${serviceId}"]`).dataset.price);
+            
+                    const total = price * quantity;
+            
+                    document.getElementById(`quantity-text-${serviceId}`).textContent = quantity;
+                    document.getElementById(`total-price-${serviceId}`).textContent = '₹' + total.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+                    document.getElementById(`unit-price-${serviceId}`).textContent = '₹' + price.toLocaleString('en-IN', { minimumFractionDigits: 2 });
                 }
             });
-    
-            plusBtn.addEventListener('click', function() {
-                quantity++;
-                quantityInput.value = quantity;
-                updateTotalPrice();
-            });
-    
-            quantityInput.addEventListener('change', function() {
-                quantity = Math.max(1, parseInt(this.value) || 1);
-                this.value = quantity;
-                updateTotalPrice();
-            });
-    
-            function updateTotalPrice() {
-                const priceElement = document.querySelector('.total-row:first-child .total-value');
-                const quantityElement = document.querySelector('.total-row:nth-child(2) .total-value');
-                const totalElement = document.querySelector('.total-price');
-    
-                const total = unitPrice * quantity;
-    
-                priceElement.textContent = '₹' + unitPrice.toLocaleString('en-IN');
-                quantityElement.textContent = quantity;
-                totalElement.textContent = '₹' + total.toLocaleString('en-IN');
-            }
-        </script>
+            </script>
+            
 
 
     </main>
     
 <?php $__env->stopSection(); ?>
+<?php $__env->startPush('script'); ?>
+<script>
+    $(document).ready(function () {
+        $('.add-to-cart-btn').on('click', function (e) {
+            e.preventDefault();
+    
+            let button = $(this);
+            let serviceId = button.data('id');
+            let price = button.data('price');
+    
+            // Find the quantity input in the same .add-to-cart-card
+            let quantity = button.closest('.add-to-cart-card').find('.quantity-input').val();
+    
+            $.ajax({
+                url: '<?php echo e(route("cart.add")); ?>',
+                method: 'POST',
+                data: {
+                    _token: '<?php echo e(csrf_token()); ?>',
+                    service_id: serviceId,
+                    tokens: quantity,
+                    pricePerItem: price
+                },
+                success: function (response) {
+                    // Redirect to cart page
+                    window.location.href = '<?php echo e(route("cart.index")); ?>';
+                },
+                error: function (xhr) {
+                    alert('Something went wrong. Please try again!');
+                }
+            });
+        });
+    });
+    </script>
+<?php $__env->stopPush(); ?>
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\searchai.space\resources\views/frontend/services.blade.php ENDPATH**/ ?>
