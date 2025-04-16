@@ -80,7 +80,7 @@
     <div class="email-container">
         <!-- Header Section -->
         <div class="email-header">
-            <img src="{{url('/front-assets/images/footer_logo.png')}}" alt="SearchAI">
+            <img src="{{url('/front-assets/assets/img/finallogo.png')}}" alt="SearchAI">
             <h2>Welcome to SearchAI</h2>
         </div>
         <!-- Body Section -->

@@ -35,7 +35,9 @@
 <body>
 
     <!-- Preloader Start -->
+    @if(route('checkout') != url()->current())
     <div class="se-pre-con"></div>
+    @endif
     <!-- Preloader Ends -->
 
 

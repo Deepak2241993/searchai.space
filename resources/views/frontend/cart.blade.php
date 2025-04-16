@@ -497,46 +497,43 @@
             <div class="summary-content">
                 <div class="summary-row">
                     <span class="summary-label">Subtotal</span>
-                    <span class="summary-value" id="subtotal">₹2,597</span>
+                    <span class="summary-value" id="subtotal">₹{{ number_format($subtotal, 2) }}</span>
                 </div>
                 <div class="summary-row">
                     <span class="summary-label">GST (18%)</span>
-                    <span class="summary-value" id="tax">₹467.46</span>
+                    <span class="summary-value" id="tax">₹{{ number_format($tax, 2) }}</span>
                 </div>
                 <div class="summary-row">
                     <span class="summary-label">Grand Total</span>
-                    <span class="summary-value grand-total" id="total">₹3,064.46</span>
+                    <span class="summary-value grand-total" id="total">₹{{ number_format($total, 2) }}</span>
                 </div>
-                
-                <div class="coupon-section">
-                    <h3 class="coupon-title">Have a coupon?</h3>
-                    <div class="coupon-form">
-                        <input type="text" class="coupon-input" placeholder="Enter coupon code">
-                        <button class="coupon-btn">Apply</button>
-                    </div>
-                </div>
-                
-                
-
-                <form id="checkout-form" action="{{ route('checkout') }}" method="POST">
+        
+                <form id="place-order-form" action="{{ route('checkout') }}" method="POST">
                     @csrf
-                    <input type="hidden" id="cart-data" name="cart" value="{{ json_encode($cart) }}">
-                    <button type="submit" class="btn btn-primary btn-block"style="margin-top: 20px;">Proceed to Checkout →</button>
+                    <input type="hidden" name="cart" value="{{ json_encode($cart) }}">
+                    <input type="hidden" name="subtotal" value="{{ $subtotal }}">
+                    <input type="hidden" name="tax" value="{{$subtotal * 0.18}}">
+                    <input type="hidden" name="total" value="{{ $total + $subtotal * 0.18 }}">
+                    <button type="submit" class="btn btn-success btn-block" style="margin-top: 20px;">Place Order</button>
                 </form>
-                
+        
                 <p style="margin-top: 15px; font-size: 0.9rem; color: #777; text-align: center;">
                     Need help? Contact us at <a href="mailto:care@searchai.com" style="color: #5AACCE;">care@searchai.com</a>
                 </p>
             </div>
         </div>
+        
     </div>
     
     <div class="cart-actions">
-        <a href="#" class="btn btn-outline">← Continue Shopping </a>
-        <form id="checkout-form" action="{{ route('checkout') }}" method="POST">
+        <a href="{{url('/')}}" class="btn btn-outline">← Continue Shopping </a>
+        <form id="place-order-form" action="{{ route('checkout') }}" method="POST">
             @csrf
-            <input type="hidden" id="cart-data" name="cart" value="{{ json_encode($cart) }}">
-            <button type="submit" class="btn btn-primary">Proceed to Checkout →</button>
+            <input type="hidden" name="cart" value="{{ json_encode($cart) }}">
+            <input type="hidden" name="subtotal" value="{{ $subtotal }}">
+            <input type="hidden" name="tax" value="{{$subtotal * 0.18}}">
+            <input type="hidden" name="total" value="{{ $total + $subtotal * 0.18 }}">
+            <button type="submit" class="btn btn-success btn-block" style="margin-top: 20px;">Place Order</button>
         </form>
         
     </div>

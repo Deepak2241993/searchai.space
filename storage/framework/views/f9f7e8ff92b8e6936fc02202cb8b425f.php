@@ -86,11 +86,7 @@
                                         value="<?php echo e(old('price', $serviceData->price ?? '')); ?>" placeholder="Price" id="price" required>
                                 </div>
                         
-                                <div class="mb-3 col-lg-6">
-                                    <label for="tax" class="form-label">Tax %</label>
-                                    <input class="form-control" type="number" name="tax"
-                                        value="<?php echo e(old('tax', $serviceData->tax ?? '')); ?>" placeholder="Tax" id="tax" required>
-                                </div>
+                                
                         
                                 <div class="mb-3 col-lg-6">
                                     <label for="status" class="form-label">Status</label>

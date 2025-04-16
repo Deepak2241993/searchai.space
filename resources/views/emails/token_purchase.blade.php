@@ -51,7 +51,7 @@
 <body>
     <div class="email-container">
         <div class="logo">
-            <img src="{{url('/front-assets/images/footer_logo.png')}}" alt="SearchAI Logo">
+            <img src="{{url('/front-assets/assets/img/finallogo.png')}}" alt="SearchAI Logo">
         </div>
         <div class="content">
             <p>Dear <strong>{{ $user->name }}</strong>,</p>

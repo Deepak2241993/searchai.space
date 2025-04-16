@@ -46,17 +46,7 @@
     <nav class="navbar mobile-sidenav navbar-default validnavs dark">
 
         <!-- Start Top Search -->
-        <div class="top-search">
-            <div class="container">
-                <form action="#">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Search">
-                        <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-                    </div>
-                </form>
-            </div>
-        </div>
+        
         <!-- End Top Search -->
 
         <div class="container d-flex justify-content-between align-items-center">            
@@ -82,93 +72,32 @@
                 </button>
                 
                 <ul class="nav navbar-nav navbar-center" data-in="fadeInDown" data-out="fadeOutUp">
-                    <!-- <li class="dropdown">
-                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Home</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="index.html">Creative Agency</a></li>
-                            <li><a href="business.html">Conulting Business</a></li>
-                            <li><a href="index-3.html">Digital Marketing</a></li>
-                            <li><a href="index-2.html">Digital Agency</a></li>
-                        </ul>
-                    </li> -->
-                    <!-- <li class="dropdown megamenu-fw">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Megamenu</a>
-                        <ul class="dropdown-menu megamenu-content" role="menu">
-                            <li>
-                                <div class="row">
-                                    <div class="col-menu col-lg-3">
-                                        <h6 class="title">Services</h6>
-                                        <div class="content">
-                                            <ul class="menu-col">
-                                                <li><a href="services.html">Services Style One</a></li>
-                                                <li><a href="services-2.html">Services Style Two</a></li>
-                                                <li><a href="services-3.html">Services Style Three</a></li>
-                                                <li><a href="services-details.html">Services Single</a></li>
-                                            </ul>
-                                        </div>
-                                    </div> 
-                                    <div class="col-menu col-lg-3">
-                                        <h6 class="title">Projects</h6>
-                                        <div class="content">
-                                            <ul class="menu-col">
-                                                <li><a href="project-2-colum.html">Project Two Colum</a></li>
-                                                <li><a href="project.html">Project Three Colum</a></li>
-                                                <li><a href="project-carousel.html">Project Carousel</a></li>
-                                                <li><a href="project-details.html">Project Details</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-menu col-lg-3">
-                                        <h6 class="title">Team</h6>
-                                        <div class="content">
-                                            <ul class="menu-col">
-                                                <li><a href="team.html">Team Style One</a></li>
-                                                <li><a href="team-3.html">Team Style Two</a></li>
-                                                <li><a href="team-2.html">Team Style Three</a></li>
-                                                <li><a href="team-details.html">Team Details</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>    
-                                    <div class="col-menu col-lg-3">
-                                        <h6 class="title">Other Pages</h6>
-                                        <div class="content">
-                                            <ul class="menu-col">
-                                                <li><a href="about-us.html">About Us</a></li>
-                                                <li><a href="pricing.html">Pricing Table</a></li>
-                                                <li><a href="contact-us.html">Contact us</a></li>
-                                                <li><a href="404.html">Error page</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li> -->
-                    <!-- <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Services</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="services-details.html">Marketing Strategy</a></li>
-                            <li><a href="services-details.html">Enterprise Consulting</a></li>
-                            <li><a href="services-details.html">Growth Tracking</a></li>
-                            <li><a href="services-details.html">Social Media Marketing</a></li>
-                            <li><a href="services-details.html">Keyword Research</a></li>
-                        </ul>
-                    </li> -->
-                    <!-- <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Blog</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="blog-standard.html">Blog Standard</a></li>
-                            <li><a href="blog-with-sidebar.html">Blog With Sidebar</a></li>
-                            <li><a href="blog-2-colum.html">Blog Grid Two Colum</a></li>
-                            <li><a href="blog-3-colum.html">Blog Grid Three Colum</a></li>
-                            <li><a href="blog-single.html">Blog Single</a></li>
-                            <li><a href="blog-single-with-sidebar.html">Blog Single With Sidebar</a></li>
-                        </ul>
-                    </li> -->
+                    
                     <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
                     <li><a href="<?php echo e(route('aboutus')); ?>">About Us</a></li>
+                    <?php if(auth()->guard()->check()): ?>
+                    <li class="nav-item">
+                        <a href="<?php echo e(route('dashboard')); ?>"><?php echo e(ucfirst(Auth::user()->name)); ?></a>
+                    </li>
+                
+                    
+                    <?php else: ?>
                     <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
                     <li><a href="<?php echo e(route('register')); ?>">Register</a></li>
+                    <?php endif; ?>
+                    <?php if(Session::has('cart') && is_array(Session::get('cart')) && count(Session::get('cart')) > 0): ?>
+                    <li>
+                        <a href="<?php echo e(route('cart.index')); ?>">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge bg-primary" style="
+                                border-radius: 50%;
+                                position: absolute;
+                                background-color: rgb(237 118 13) !important;
+                            "><?php echo e(count(Session::get('cart'))); ?></span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+                
                 </ul>
             </div><!-- /.navbar-collapse -->
 

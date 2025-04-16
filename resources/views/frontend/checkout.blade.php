@@ -584,7 +584,7 @@
 
 <!-- Main Content -->
 <main class="main-content">
-    <form id="orderForm">
+    <form id="orderForm" method="POST">
         <div class="checkout-container">
             <!-- Billing Information -->
             <div class="checkout-forms">
@@ -604,7 +604,7 @@
                             <div class="form-group">
                                 <label for="name">Name<span class="text-danger">*</span></label>
                                 <input type="text" id="name" name="name" class="form-control"
-                                    placeholder="Full Name" required>
+                                    placeholder="Full Name" required value="{{ auth()->check() ? auth()->user()->name : (isset($customerAddress) ? $customerAddress->name : '') }}">
                             </div>
 
                             <!-- Phone Field -->
@@ -617,7 +617,7 @@
                                     class="form-control"
                                     placeholder="Phone Number"
                                     pattern="[0-9]+"
-                                    required>
+                                    required value="{{ isset($customerAddress) ? $customerAddress->phone : old('phone') }}">
                             </div>
 
                             <!-- Email Field -->
@@ -628,7 +628,7 @@
                                     id="email"
                                     name="email"
                                     class="form-control"
-                                    value="user@example.com"
+                                    value="{{ auth()->check() ? auth()->user()->email : (isset($customerAddress) ? $customerAddress->email : old('email')) }}"
                                     placeholder="Email Address"
                                     readonly>
                             </div>
@@ -637,7 +637,7 @@
                             <div class="form-group">
                                 <label for="address">Address<span class="text-danger">*</span></label>
                                 <textarea id="address" name="address" class="form-control"
-                                    placeholder="e.g. House, Road, Street Name" required></textarea>
+                                    placeholder="e.g. House, Road, Street Name" required>{{ isset($customerAddress) ? $customerAddress->address : '' }}</textarea>
                             </div>                           
                             <hr>
                             <h4>Company Details</h4>
@@ -656,81 +656,12 @@
                     </div>
                 </div>
                 
-                <!-- Payment Method -->
-                <div class="form-card" style="margin-top: 30px;">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <span class="card-title-icon">2</span>
-                            Payment Method
-                        </h2>
-                    </div>
-                    <div class="card-content">
-                        <div class="payment-methods">
-                            <div class="payment-method selected">
-                                <div class="payment-method-icon">💳</div>
-                                <div class="payment-method-name">Credit Card</div>
-                            </div>
-                            <div class="payment-method">
-                                <div class="payment-method-icon">🏦</div>
-                                <div class="payment-method-name">Net Banking</div>
-                            </div>
-                            <div class="payment-method">
-                                <div class="payment-method-icon">📱</div>
-                                <div class="payment-method-name">UPI</div>
-                            </div>
-                            <div class="payment-method">
-                                <div class="payment-method-icon">💸</div>
-                                <div class="payment-method-name">Wallet</div>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-details" style="margin-top: 20px;">
-                            <div class="form-group">
-                                <label for="cardNumber">Card Number</label>
-                                <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456" required>
-                            </div>
-                            
-                            <div class="form-row">
-                                <div class="form-col">
-                                    <div class="form-group">
-                                        <label for="expiryDate">Expiry Date</label>
-                                        <input type="text" id="expiryDate" class="form-control" placeholder="MM/YY" required>
-                                    </div>
-                                </div>
-                                <div class="form-col">
-                                    <div class="form-group">
-                                        <label for="cvv">CVV</label>
-                                        <input type="text" id="cvv" class="form-control" placeholder="123" required>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="cardName">Name on Card</label>
-                                <input type="text" id="cardName" class="form-control" required>
-                            </div>
-                        </div>
-                        
-                        <div class="secure-checkout">
-                            <div class="secure-icon">🔒</div>
-                            <div class="secure-text">
-                                <strong>Secure Checkout:</strong> Your payment information is encrypted and secure. We do not store your credit card details.
-                            </div>
-                        </div>
-                        
-                        <input id="credit-card" hidden type="radio" name="payment_method" value="stripe" class="form-check-input" checked>
-                        <input type="hidden" id="order-amount" name="amount" value="1178.82">
-                        <input type="hidden" id="buy-tokens" name="buy-tokens" value="1">
-                    </div>
-                </div>
+                
                 
                 <!-- Actions -->
                 <div class="actions">
-                    <a href="#" class="btn btn-outline">← Return to Cart</a>
-                    <button type="submit" id="submitButton" class="btn btn-primary">
-                        <i class="las la-check-circle"></i> <span id="buttonText">Place Order</span>
-                        <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                    </button>
+                    <a href="{{url('cart')}}" class="btn btn-outline">← Return to Cart</a>
+                   
                 </div>
             </div>
             
@@ -744,40 +675,66 @@
                     <h3 class="title-text mb-4 text-center">Your Order</h3>
                     <div class="cart-items-list mb-4">
                         <ul class="list-unstyled">
+                            @php
+                            $totalTokens = 0;
+                        @endphp
+                            @foreach ($carts as $key => $item)
+                            @if (is_array($item))
+                            @php
+                                $service_data = App\Models\Service::find($item['service_id']);
+                                $itemId = $item['id'];
+                                $totalTokens += $item['tokens'];
+                            @endphp
+                            
+                    
                             <li class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-3">
                                 <div>
-                                    <h5 class="font-weight-bold">Aadhar Card Verification</h5>
-                                    <input type="hidden" name="service_id[]" value="1">
-                                    <input type="hidden" name="tokens[]" value="1">
-                                    <span class="text-muted">₹999.00 x 1 tokens</span>
+                                    <h5 class="font-weight-bold">{{ $service_data->name }}</h5>
+                                    <input type="hidden" name="service_id[]" value="{{ $item['service_id'] }}">
+                                    <input type="hidden" name="tokens[]" value="{{ $item['tokens'] }}">
+                                    
+
+                                    <span class="text-muted">₹{{ number_format($item['pricePerItem'], 2) }} x {{ $item['tokens'] }} tokens</span>
                                 </div>
                                 <div>
-                                    <small>Tax: ₹179.82</small><br>
-                                    <strong>Total: ₹1,178.82</strong>
+                                    {{-- <small>Tax: &#8377;{{ number_format($taxAmount, 2) }}</small><br> --}}
+                                    <strong>Total: ₹{{ $item['tokens'] * $item['pricePerItem'] }}</strong>
                                 </div>
                             </li>
+                            @endif
+                        @endforeach
                         </ul>
                     </div>
                 
                     <!-- Total Amount Section -->
                     <div class="d-flex justify-content-between mb-2">
                         <h5 class="font-weight-bold">Subtotal</h5>
-                        <span class="text-right">₹999.00</span>
+                        <span class="text-right">₹{{ isset($subtotal) ? $subtotal : '' }}</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <h5 class="font-weight-bold">Tax</h5>
-                        <span class="text-right">₹179.82</span>
+                        <h5 class="font-weight-bold">GST (18%)</h5>
+                        <span class="text-right">₹{{ isset($tax) ? $tax : '' }}</span>
                     </div>
                     <div class="d-flex justify-content-between mb-4">
                         <h5 class="font-weight-bold">Grand Total</h5>
-                        <span class="text-right">₹1,178.82</span>
+                        <span class="text-right">₹{{ isset($total) ? $total : '' }}</span>
                     </div>
-                
+                    <div class="payment-information mb-4">
+                        <div class="form-check mb-3">
+                            <input id="credit-card" hidden type="radio" name="payment_method" value="stripe" class="form-check-input" checked>
+                            <input type="hidden" id="order-amount" name="amount" value="{{$total }}">
+                            <input type="hidden" id="buy-tokens" name="buy-tokens" value="{{ $totalTokens }}">
+                        </div>
+                    </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-lg btn-primary w-100 btn-rounded shadow-lg transition-all">
+                        <button type="submit" id="submitButton">
+                            <span id="buttonText">Place Order</span>
+                            <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        </button>
+                        {{-- <button type="submit" class="btn btn-lg btn-primary w-100 btn-rounded shadow-lg transition-all">
                             <i class="las la-check-circle"></i> <span>Place Order</span>
                             <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
             </div>
@@ -792,52 +749,142 @@
 @endsection
 
 
-@section('script')
+@push('script')
+    
+
+
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-    // Payment method selection
-    const paymentMethods = document.querySelectorAll('.payment-method');
-    
-    paymentMethods.forEach(method => {
-        method.addEventListener('click', function() {
-            // Remove selected class from all methods
-            paymentMethods.forEach(m => m.classList.remove('selected'));
-            
-            // Add selected class to clicked method
-            this.classList.add('selected');
-            
-            // Here you would typically show/hide different payment form fields
-            // based on the selected payment method
-            const paymentMethodName = this.querySelector('.payment-method-name').textContent;
-            const paymentDetails = document.querySelector('.payment-details');
-            
-            // Simple example - in a real application you'd have different forms for each method
-            if (paymentMethodName === 'Credit Card') {
-                paymentDetails.style.display = 'block';
-            } else {
-                paymentDetails.style.display = 'none';
-            }
-        });
-    });
-    
-    // Form submission handling
-    document.getElementById('orderForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Show spinner and change button text
+    document.getElementById('orderForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
         const submitButton = document.getElementById('submitButton');
         const buttonText = document.getElementById('buttonText');
         const spinner = document.getElementById('spinner');
-        
-        buttonText.textContent = 'Processing...';
-        spinner.classList.remove('d-none');
+
+        // Disable button and show spinner
         submitButton.disabled = true;
+        spinner.classList.remove('d-none');
+        buttonText.textContent = 'Processing...';
+
+        const amount = document.getElementById('order-amount').value;
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const address = document.getElementById('address').value;
+        const company_name = document.getElementById('company_name').value;
+        const gst_number = document.getElementById('gst_number').value;
+        // Get all service names
+        const service_id = Array.from(document.querySelectorAll('input[name="service_id[]"]')).map(input => input.value);
+
+        // Get all token counts
+        const tokens = Array.from(document.querySelectorAll('input[name="tokens[]"]')).map(input => input.value);
+        const buyTokens = tokens.reduce((acc, curr) => acc + curr, 0); 
         
-        // Simulate form submission (in a real app, this would be an actual form submission)
-        setTimeout(() => {
-            alert('Order placed successfully!');
-            window.location.href = 'order-confirmation.html';
-        }, 2000);
+        if (!amount || !name || !email || !phone || !address || tokens.length === 0 || service_id.length === 0) {
+            alert('Please fill all the required fields.');
+            submitButton.disabled = false;
+            spinner.classList.add('d-none');
+            buttonText.textContent = 'Place Order';
+            return;
+        }
+
+
+        console.log('User Details:', {
+            amount,
+            name,
+            email,
+            phone,
+            address,
+            company_name,
+            gst_number
+        });
+
+        try {
+            const response = await fetch("{{ route('payment.createOrder') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({
+                    amount,
+                    name,
+                    email,
+                    phone,
+                    address,
+                    buyTokens,
+                    service_id,
+                    tokens,
+                    company_name,
+                    gst_number
+                })
+            });
+
+            const data = await response.json();
+            console.log('Order Creation Response:', data);
+
+            if (data.orderId) {
+                const options = {
+                    key: "{{ config('services.razorpay.key') }}",
+                    amount: data.amount * 100,
+                    currency: "INR",
+                    name,
+                    description: "Order Payment",
+                    order_id: data.orderId,
+                    prefill: {
+                        name,
+                        email,
+                        contact: phone
+                    },
+                    handler: async function(response) {
+                        console.log('Razorpay Payment Response:', response);
+
+                        const paymentResponse = await fetch("{{ route('payment.callback') }}", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                            },
+                            body: JSON.stringify({
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_signature: response.razorpay_signature
+                            })
+                        });
+
+                        const paymentData = await paymentResponse.json();
+                        console.log('Payment Callback Response:', paymentData);
+
+                        if (paymentData.success) {
+                            const params = new URLSearchParams(paymentData).toString();
+                            window.location.href = "{{ route('payment.success') }}?" + params;
+                        } else {
+                            const params = new URLSearchParams(paymentData).toString();
+                            window.location.href = "{{ route('payment.failure') }}?" + params;
+                        }
+                    },
+                    modal: {
+                        ondismiss: function() {
+                            console.log('Payment popup closed by the user.');
+                            alert('Payment was not completed. Please try again.');
+                        }
+                    },
+                    theme: {
+                        color: "#3399cc"
+                    }
+                };
+
+                const rzp = new Razorpay(options);
+                rzp.open();
+            } else {
+                alert('Failed to create order. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error creating order:', error);
+            alert('An error occurred. Please try again.');
+        }
     });
+   
 </script>
-@endsection
+@endpush

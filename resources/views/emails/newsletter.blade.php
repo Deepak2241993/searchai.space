@@ -13,7 +13,7 @@
           <!-- Company Logo -->
           <tr>
             <td align="center" style="padding-bottom: 30px;">
-              <img src="{{ url('/front-assets/images/footer_logo.png') }}s" alt="Company Logo" width="150" style="display: block;">
+              <img src="{{url('/front-assets/assets/img/finallogo.png')}}" alt="Company Logo" width="150" style="display: block;">
             </td>
           </tr>
           

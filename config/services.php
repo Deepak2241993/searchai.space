@@ -31,9 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'stripe' => [
+'razorpay' => [
     'key' => env('RAZORPAY_KEY_ID'),
-    ],
+    'secret' => env('RAZORPAY_KEY_SECRET'),
+],
     'gridlines' => [
         'api_url' => env('GRIDLINES_API_URL', 'https://api.gridlines.io/aadhaar-api/ocr'),
         'api_key' => env('GRIDLINES_API_KEY'),

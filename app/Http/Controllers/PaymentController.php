@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Mail;
 class PaymentController extends Controller
 {
     public function createOrder(Request $request)
-    {
+    {  
 
         $validated = $request->validate([
             'amount' => 'required|numeric|min:1',
@@ -177,19 +177,6 @@ class PaymentController extends Controller
                         }
                     }
 
-                    // for ($i = 0; $i < $numberOfTokens; $i++) {
-                    //     $newToken = new Token();
-                    //     $newToken->user_id = $user->id;
-                    //     $newToken->service_type = $services[$i] ?? null;
-                    //     $newToken->token = Str::random(32);
-                    //     $newToken->expires_at = $expiresAt;
-                    //     $newToken->status = 'active';
-                    //     $newToken->order_id = $order->id;
-                    //     $newToken->save();
-                    
-                    //     // Push the saved token to the array
-                    //     $tokens[] = $newToken;
-                    // }
                     
 
                     // Send the email with the PDF attachment and log success/failure
@@ -205,10 +192,10 @@ class PaymentController extends Controller
                     $order->status = 'paid';
                     $order->save();
 
-                    return response()->json(['success' => true, 'message' => 'Payment successful']);
+                    return response()->json(['success' => true, 'message' => 'Payment successful','payment_id'=> $razorpayPaymentId]);
                 } else {
                     Log::error('Payment failed', ['razorpay_payment_id' => $razorpayPaymentId]);
-                    return response()->json(['error' => 'Payment failed'], 400);
+                    return response()->json(['error' => 'Payment failed','payment'=> $razorpayOrderId], 400);
                 }
             } catch (\Exception $e) {
                 Log::error('Error verifying payment', [
@@ -217,7 +204,7 @@ class PaymentController extends Controller
                     'razorpay_order_id' => $razorpayOrderId,
                 ]);
 
-                return response()->json(['error' => 'Payment verification failed'], 500);
+                return response()->json(['error' => $e->getMessage(),'payment'=> $razorpayPaymentId], 500);
             }
         } else {
             Log::error('Signature verification failed', [
@@ -251,10 +238,24 @@ class PaymentController extends Controller
             return false; // Signature is invalid
         }
     }
-    public function success()
+    public function success(Request $request)
     {
-        session()->pull('cart');
-        return view('payment.success');
+        $payment_result = Payment::where('razorpay_payment_id', $request->payment_id)->first();
+           
+        // These are example fields; adjust based on actual payment response structure
+    $paymentId = $payment_result->razorpay_payment_id; // Razorpay Payment ID
+    $status = $payment_result->status; // captured
+    $amount = $payment_result->amount; // in paisa
+    $createdAt = $payment_result->created_at; // timestamp
+    $order_id = $payment_result->order_id; // Order Id
+    session()->pull('cart');
+    return view('payment.success', compact(
+        'paymentId',
+        'status',
+        'amount',
+        'createdAt',
+        'order_id',
+    ));
     }
     public function failure()
     {

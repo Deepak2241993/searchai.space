@@ -63,7 +63,7 @@
 <body>
     <div class="email-container">
         <div class="header">
-            <img src="{{url('/front-assets/images/footer_logo.png')}}" alt="SearchAI Logo">
+            <img src="{{url('/front-assets/assets/img/finallogo.png')}}" alt="SearchAI Logo">
             <h1>Criminal Background Screening Report</h1>
         </div>
         <div class="content">
