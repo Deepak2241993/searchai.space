@@ -13,7 +13,7 @@
               <!-- Single Item -->
               <?php $__currentLoopData = $bannerData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $banner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <div class="swiper-slide banner-style-four">
-                  <div class="banner-thumb bg-cover shadow dark" style="background: url(<?php echo e(url('/front-assets')); ?>/assets/img/img67.jpg);"></div>
+                  <div class="banner-thumb bg-cover shadow dark" style="background: url(<?php echo e(url('/').'/'.$banner->image); ?>"></div>
                   <div class="container">
                       <div class="row align-center">
                           <div class="col-xl-6 col-lg-7 col-md-10">

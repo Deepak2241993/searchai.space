@@ -57,15 +57,16 @@
                                     <label for="name" class="form-label">Service Name</label>
                                     <input class="form-control" type="text" name="name"
                                         value="{{ old('name', $serviceData->name ?? '') }}" placeholder="Service Name"
-                                        {{ isset($serviceData) ? 'readonly' : '' }} id="name" required>
+                                         id="name" >
                                 </div>
-                        
+                                @unless(isset($serviceData))
                                 <div class="mb-3 col-lg-6">
                                     <label for="service_slug" class="form-label">Service Slug</label>
                                     <input class="form-control" type="text" name="service_slug"
                                         value="{{ old('service_slug', $serviceData->service_slug ?? '') }}" placeholder="Service Slug"
-                                        readonly id="service_slug" required>
+                                         id="service_slug" required>
                                 </div>
+                            @endunless
                         
                                 <div class="mb-3 col-lg-6">
                                     <label for="short_description" class="form-label">Short Description</label>

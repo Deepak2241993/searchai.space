@@ -144,9 +144,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/ccrv-report-generation', [TokenController::class, 'CcrvReportGeneration'])->name('ccrv-report-generation');
 
     // Driver's License Verification
-    // Route::get('/dl-verification-view', [TokenController::class, 'DLview'])->name('dl-verification-view');
     Route::post('/dl-verification', [TokenController::class, 'DLVerification'])->name('dl-verification');
     Route::get('/dl-report/{id}', [TokenController::class, 'DLReportGenerate'])->name('dlreportgenerate');
+
+      // PAN Verification
+      Route::post('/pan-verification', [TokenController::class, 'PanVerification'])->name('pan-verification');
+      Route::get('/pan-report/{id}', [TokenController::class, 'PanReportGenerate'])->name('panreportgenerate');
 
     // Checkout Routes
     Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');

@@ -667,13 +667,13 @@ public function MyServices(Request $request, $slug)
         ->paginate(10);
         return view('token.index', compact('data'));
     }
-    else if($slug == 'ccrv')
-    {
-        $data = Token::where('user_id', $userId)
-        ->where('service_id', $service->id)
-        ->paginate(10);
-        return view('token.ccrv', compact('data'));
-    }
+    // else if($slug == 'ccrv')
+    // {
+    //     $data = Token::where('user_id', $userId)
+    //     ->where('service_id', $service->id)
+    //     ->paginate(10);
+    //     return view('token.ccrv', compact('data'));
+    // }
     else if($slug == 'driving-licence-verification')
     {
         $data = Token::where('user_id', $userId)
@@ -687,6 +687,13 @@ public function MyServices(Request $request, $slug)
         ->where('service_id', $service->id)
         ->paginate(10);
         return view('kyc_ccrv.index', compact('data'));
+    }
+    else if($slug == 'pan-card-verification')
+    {
+        $data = Token::where('user_id', $userId)
+        ->where('service_id', $service->id)
+        ->paginate(10);
+        return view('pan.index', compact('data'));
     }
     else
     {

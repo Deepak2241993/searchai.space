@@ -126,7 +126,6 @@ class ServiceController extends Controller
     // Validate incoming data
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
-        'service_slug' => 'required|unique:services,service_slug,' . $service->id,
         'short_description' => 'nullable|string|max:255',
         'long_description' => 'nullable|string',
         'price' => 'required|numeric',
