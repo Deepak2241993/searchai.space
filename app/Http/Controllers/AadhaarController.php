@@ -226,7 +226,8 @@ class AadhaarController extends Controller
             return redirect()->route('aadhaar.form')->withErrors('No data available.');
         }
 
-        return redirect()->route('token.index')->with('success', 'Token purchase was successful!')
+        return redirect()->route('my-service', ['slug' => 'aadhar-kyc'])
+        ->with('success', 'Token purchase was successful!')
         ->with('data', $data);
         
     }

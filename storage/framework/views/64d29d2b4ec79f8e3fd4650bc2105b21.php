@@ -710,7 +710,7 @@
                         <span class="text-right">₹<?php echo e(isset($subtotal) ? $subtotal : ''); ?></span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <h5 class="font-weight-bold">Tax</h5>
+                        <h5 class="font-weight-bold">GST (18%)</h5>
                         <span class="text-right">₹<?php echo e(isset($tax) ? $tax : ''); ?></span>
                     </div>
                     <div class="d-flex justify-content-between mb-4">
@@ -726,7 +726,7 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" id="submitButton">
-                            <span id="buttonText">Place Order</span>
+                            <span id="buttonText">Pay</span>
                             <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                         </button>
                         

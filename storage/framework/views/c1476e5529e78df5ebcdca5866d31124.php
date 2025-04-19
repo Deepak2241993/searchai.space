@@ -1,22 +1,60 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aadhaar Details {{ $kyc_date['reference_id'] }}</title>
+    <title>Aadhaar Details <?php echo e($aadhaarData['reference_id']); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <style>
-        /* Deepak Code */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border-top: 8px solid black;
+            border-bottom: 1px solid black;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .company-details {
+            text-align: right;
+        }
+
+        .company-details p {
+            margin: 0;
+            font-size: 14px;
+        }
+
         .identity-check {
             display: flex;
             align-items: center;
-            font-family: Arial, sans-serif;
             font-weight: bold;
             font-size: 16px;
             color: #000;
@@ -29,96 +67,6 @@
             height: 1px;
             background-color: #000;
             margin: 0 10px;
-        }
-
-        /* @page {
-            size: A4;
-            margin: 20mm;
-           
-        }
-
-        .a4 {
-            width: 210mm;
-            height: 297mm;
-            background: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20mm;
-            overflow: hidden;
-            box-sizing: border-box;
-        } */
-
-        .info-table th {
-            background-color: #f2f2f2;
-            width: 25%;
-        }
-
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            border-top: 8px solid black;
-            background-color: #fff;
-            border-bottom: 1px solid black;
-            margin-bottom: 30px;
-        }
-
-        .logo img {
-            height: 50px;
-        }
-
-        .logo {
-            border-right: 1px solid rgb(110, 109, 109);
-        }
-
-
-
-
-        .company-details {
-            text-align: right;
-        }
-
-        .company-details p {
-            margin: 0;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-
-        .company-details p.bold {
-            font-weight: bold;
-        }
-
-        /* Deepak Code end */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-        }
-
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-
-
-        .client-info,
-        .report-info {
-            margin-bottom: 50px;
-        }
-
-        .client-info h2,
-        .report-info h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
         }
 
         .info-table {
@@ -134,15 +82,18 @@
             text-align: left;
         }
 
+        .info-table th {
+            background-color: #f2f2f2;
+            width: 25%;
+        }
 
         footer {
-            background-color: #f9f9f9;
             font-size: 12px;
-            color: #000;
             text-align: center;
-            margin-top: 30px;
-            padding-top: 10px;
             border-top: 1px solid #eaeaea;
+            padding: 10px 20px;
+            background-color: #f9f9f9;
+            margin-top: 30px;
         }
 
         .footer-disclaimer {
@@ -153,100 +104,101 @@
 </head>
 
 <body>
-    <div class="a4">
+    <div class="container">
 
+        <!-- Header -->
         <div class="header">
-
-            <table>
-                <tr>
-                    <td style="margin-right: 10px; width: 300px; text-align: left;"> 
-                        <div class="col-md-6 logo">
-                            <img src="{{ public_path('front-assets/assets/img/finallogo.png') }}" alt="SearchAI Logo">
-                        </div>
-                    </td>
-                    <td style="margin-right: 10px; width: 300px; text-align: left;">
-                        <div class="col-md-4 company-details">
-                             <p>A 24/5, Mohan Cooperative Industrial Area, <br>Badarpur, Secound Floor, <br><strong>New Delhi 110044</strong></p> 
-                        </div>
-                    </td>
-                </tr>
-            </table>
+            <div class="logo">
+                <img src="<?php echo e(public_path('front-assets/images/footer_logo.png')); ?>" alt="SearchAI Logo">
+            </div>
+            <div class="company-details">
+                <p>Navigant Digital Pvt. Ltd.</p>
+                <p>A 24/5, Mohan Cooperative Industrial Area, <br>Badarpur, Secound Floor, <br><strong>New Delhi 110044</strong></p>
+                
+            </div>
         </div>
 
-
+        <!-- Client Info -->
         <section class="client-info">
             <div class="identity-check">BACKGROUND SCREENING REPORT</div>
 
             <table class="info-table">
                 <tr>
                     <th>Client Name</th>
-                    <td>{{ $kyc_date->name }}</td>
+                    <td><?php echo e($client_data->name); ?></td>
                 </tr>
                 <tr>
                     <th>Order ID</th>
-                    <td>{{ $kyc_date->id_token }}</td>
+                    <td><?php echo e($order_id); ?></td>
                 </tr>
-                
+                <tr>
+                    <th>Mobile Number</th>
+                    <td>--</td>
+                </tr>
                 <tr>
                     <th>Report Date</th>
-                    <td>{{ date('d-m-Y', strtotime($kyc_date->updated_at)) }}</td>
+                    <td><?php echo e(date('d-m-Y', strtotime($createdData->updated_at))); ?></td>
                 </tr>
             </table>
         </section>
 
+        <!-- Aadhaar Report -->
         <section class="report-info">
             <div class="identity-check">IDENTITY CHECK : AADHAAR CARD</div>
+
             <table class="info-table">
                 <tr>
                     <th>Aadhaar Number</th>
-                    <td>{{ $kyc_date['aadhaar_number'] }}</td>
+                    <td><?php echo e($createdData['aadhaar_number']); ?></td>
                 </tr>
                 <tr>
                     <th>Name</th>
-                    <td>{{ $kyc_date['name'] }}</td>
+                    <td><?php echo e($aadhaarData['name']); ?></td>
                 </tr>
                 <tr>
                     <th>Date of Birth</th>
-                    <td>{{ $kyc_date['date_of_birth'] }}</td>
+                    <td><?php echo e($aadhaarData['date_of_birth']); ?></td>
                 </tr>
                 <tr>
                     <th>Gender</th>
-                    <td>{{ $kyc_date['gender'] }}</td>
+                    <td><?php echo e($aadhaarData['gender']); ?></td>
                 </tr>
                 <tr>
                     <th>Father's Name</th>
-                    <td>{{ $kyc_date['care_of'] ?? '' }}</td>
+                    <td><?php echo e($aadhaarData['care_of'] ?? ''); ?></td>
                 </tr>
                 <tr>
                     <th>State</th>
-                    <td>{{ $kyc_date['state'] ?? '' }}</td>
+                    <td><?php echo e($aadhaarData['state'] ?? ''); ?></td>
                 </tr>
                 <tr>
                     <th>Address</th>
                     <td>
-                        {{ $kyc_date['house'] ?? '' }},
-                        {{ $kyc_date['street'] ?? '' }},
-                        {{ $kyc_date['district'] ?? '' }},
-                        {{ $kyc_date['sub_district'] ?? '' }},
-                        {{ $kyc_date['locality'] ?? '' }},
-                        {{ $kyc_date['post_office_name'] ?? '' }},
-                        {{ $kyc_date['state'] ?? '' }}
-                        {{ $kyc_date['country'] ?? '' }},
-                        {{ $kyc_date['vtc_name'] ?? '' }}</td>
+                        <?php echo e($aadhaarData['house'] ?? ''); ?>,
+                        <?php echo e($aadhaarData['street'] ?? ''); ?>,
+                        <?php echo e($aadhaarData['district'] ?? ''); ?>,
+                        <?php echo e($aadhaarData['sub_district'] ?? ''); ?>,
+                        <?php echo e($aadhaarData['locality'] ?? ''); ?>,
+                        <?php echo e($aadhaarData['post_office_name'] ?? ''); ?>,
+                        <?php echo e($aadhaarData['state'] ?? ''); ?>,
+                        <?php echo e($aadhaarData['country'] ?? ''); ?>,
+                        <?php echo e($aadhaarData['vtc_name'] ?? ''); ?>
+
+                    </td>
                 </tr>
                 <tr>
                     <th>Pin Code</th>
-                    <td>{{ $kyc_date['pincode'] ?? '' }}</td>
+                    <td><?php echo e($aadhaarData['pincode'] ?? ''); ?></td>
                 </tr>
             </table>
         </section>
+
         <div style="page-break-before: always;"></div>
+
+        <!-- Footer -->
         <footer>
             <div class="footer-disclaimer">
                 <h4 style="text-align: center;"><strong><u>LEGAL DISCLAIMER</u></strong></h4>
-
-
-                </h4>
                 <p class="text-wrap mt-4 p-4">All rights reserved. The report and its contents are the property of
                     SearchAI (operated by Navigant Digital
                     Pvt. Ltd.) and may not be reproduced in any manner without the express written permission of
@@ -301,8 +253,10 @@
             <p style="font-size: 16px;">SearchAI Confidential</p>
             <br class="mb-4">
         </footer>
+
     </div>
 
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\searchai.space\resources\views/pdf/aadhaar-pdf.blade.php ENDPATH**/ ?>

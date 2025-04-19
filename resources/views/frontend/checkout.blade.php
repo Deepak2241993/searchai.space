@@ -728,7 +728,7 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" id="submitButton">
-                            <span id="buttonText">Place Order</span>
+                            <span id="buttonText">Pay</span>
                             <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                         </button>
                         {{-- <button type="submit" class="btn btn-lg btn-primary w-100 btn-rounded shadow-lg transition-all">

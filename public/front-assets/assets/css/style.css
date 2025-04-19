@@ -97,7 +97,7 @@ Sidebar heading:  22px 'Manrope', sans-serif
 	--dark: #0E1E2A;
 	--dark-secondary: #041637;
 	--white: #ffffff;
-	--color-primary: #ED760D;
+	--color-primary: #117AB6;
 	--color-secondary: #5B3DC9;
 	--color-heading: #04000b;
 	--color-paragraph: #666666;
@@ -7576,7 +7576,7 @@ footer .f-item.link li {
 
 footer .f-item.link li a {
 	display: inline-block;
-	color: #d2d2d4;
+	color: #ffffff;
 	font-weight: 500;
 }
 
@@ -7611,7 +7611,7 @@ footer .f-item.link li a:hover {
 }
 
 .f-item.contact li {
-	color: #dedede;
+	color: #ffffff;
 }
 
 .f-item.contact li p {
@@ -7620,7 +7620,7 @@ footer .f-item.link li a:hover {
 }
 
 .f-item.contact li a {
-	color: #dedede;
+	color: #ffffff;
 	font-weight: 500;
 }
 

@@ -35,7 +35,9 @@
 <body>
 
     <!-- Preloader Start -->
+    <?php if(route('checkout') != url()->current()): ?>
     <div class="se-pre-con"></div>
+    <?php endif; ?>
     <!-- Preloader Ends -->
 
 

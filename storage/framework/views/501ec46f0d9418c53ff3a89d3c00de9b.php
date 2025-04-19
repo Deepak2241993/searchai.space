@@ -1,8 +1,7 @@
-@extends('layouts.admin-master')
-@section('title')
+<?php $__env->startSection('title'); ?>
 User Orders
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 <style>
     @media (min-height: 768px) {
     .modal-body {
@@ -38,12 +37,13 @@ User Orders
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm">
-                    @if (session('message'))
+                    <?php if(session('message')): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="bi bi-check-circle-fill me-2"></i> {{ session('message') }}
+                        <i class="bi bi-check-circle-fill me-2"></i> <?php echo e(session('message')); ?>
+
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    @endif
+                    <?php endif; ?>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="datatable-buttons" class="table table-hover table-striped align-middle mb-0">
@@ -51,7 +51,6 @@ User Orders
                                     <tr>
                                         <th>#</th>
                                         <th>Order</th>
-                                        <th>Service Type</th>
                                         <th>Total Token</th>
                                         <th>Date</th>
                                         <th>Status</th>
@@ -60,34 +59,34 @@ User Orders
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($data as $key => $token)
+                                    <?php $__empty_1 = true; $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $token): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>OT{{ $token->id }}</td>
-                                        <td>{{ $token->service_names }}</td>
-                                        <td>{{ $token->tokens_sum }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($token->created_at)->format('d-m-Y H:i A') }}</td>
-                                        <td> {{ $token->status == 'paid' ? 'Paid' : 'pending' }}</td>
+                                        <td><?php echo e($loop->iteration); ?></td>
+                                        <td>OT<?php echo e($token->id); ?></td>
+                                        <td><?php echo e($token->tokens_sum); ?></td>
+                                        <td><?php echo e(\Carbon\Carbon::parse($token->created_at)->format('d-m-Y H:i A')); ?></td>
+                                        <td> <?php echo e($token->status == 'paid' ? 'Paid' : 'pending'); ?></td>
                                         <td>
                                             <!-- View Icon -->
-                                            <a href="#" class="btn btn-primary btn-sm" onclick="viewToken({{ $token->id }})">
+                                            <a href="#" class="btn btn-primary btn-sm" onclick="viewToken(<?php echo e($token->id); ?>)">
                                                 <i class="fa fa-eye"></i> View
                                             </a>
                                         </td>
 
                                     </tr>
-                                    @empty
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                     <tr>
                                         <td colspan="7" class="text-center text-muted">No data found.</td>
                                     </tr>
-                                    @endforelse
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <nav>
-                            {{ $data->links('pagination::bootstrap-4') }}
+                            <?php echo e($data->links('pagination::bootstrap-4')); ?>
+
                         </nav>
                     </div>
                 </div>
@@ -129,8 +128,8 @@ User Orders
 
 
 
-@endsection
-@section('scripts')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var alerts = document.querySelectorAll('.alert');
@@ -145,10 +144,10 @@ User Orders
 <script>
     function deleteFaq(faqId) {
         if (confirm('Are you sure you want to delete this FAQ?')) {
-            fetch(`{{ url('admin/faq') }}/${faqId}`, {
+            fetch(`<?php echo e(url('admin/faq')); ?>/${faqId}`, {
                     method: 'DELETE',
                     headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
                         'Content-Type': 'application/json',
                     },
                 })
@@ -169,7 +168,7 @@ User Orders
     }
 
     function viewToken(orderId) {
-    fetch(`{{ url('admin/token') }}/${orderId}`)
+    fetch(`<?php echo e(url('admin/token')); ?>/${orderId}`)
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -208,4 +207,5 @@ User Orders
 
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin-master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\searchai.space\resources\views/admin/ordersdetails/orders.blade.php ENDPATH**/ ?>

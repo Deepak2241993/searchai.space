@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aadhaar Details {{ $kyc_date['reference_id'] }}</title>
+    <title>Aadhaar Details <?php echo e($kyc_date['reference_id']); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -161,7 +161,7 @@
                 <tr>
                     <td style="margin-right: 10px; width: 300px; text-align: left;"> 
                         <div class="col-md-6 logo">
-                            <img src="{{ public_path('front-assets/assets/img/finallogo.png') }}" alt="SearchAI Logo">
+                            <img src="<?php echo e(public_path('front-assets/assets/img/finallogo.png')); ?>" alt="SearchAI Logo">
                         </div>
                     </td>
                     <td style="margin-right: 10px; width: 300px; text-align: left;">
@@ -180,16 +180,16 @@
             <table class="info-table">
                 <tr>
                     <th>Client Name</th>
-                    <td>{{ $kyc_date->name }}</td>
+                    <td><?php echo e($kyc_date->name); ?></td>
                 </tr>
                 <tr>
                     <th>Order ID</th>
-                    <td>{{ $kyc_date->id_token }}</td>
+                    <td><?php echo e($kyc_date->id_token); ?></td>
                 </tr>
                 
                 <tr>
                     <th>Report Date</th>
-                    <td>{{ date('d-m-Y', strtotime($kyc_date->updated_at)) }}</td>
+                    <td><?php echo e(date('d-m-Y', strtotime($kyc_date->updated_at))); ?></td>
                 </tr>
             </table>
         </section>
@@ -199,44 +199,45 @@
             <table class="info-table">
                 <tr>
                     <th>Aadhaar Number</th>
-                    <td>{{ $kyc_date['aadhaar_number'] }}</td>
+                    <td><?php echo e($kyc_date['aadhaar_number']); ?></td>
                 </tr>
                 <tr>
                     <th>Name</th>
-                    <td>{{ $kyc_date['name'] }}</td>
+                    <td><?php echo e($kyc_date['name']); ?></td>
                 </tr>
                 <tr>
                     <th>Date of Birth</th>
-                    <td>{{ $kyc_date['date_of_birth'] }}</td>
+                    <td><?php echo e($kyc_date['date_of_birth']); ?></td>
                 </tr>
                 <tr>
                     <th>Gender</th>
-                    <td>{{ $kyc_date['gender'] }}</td>
+                    <td><?php echo e($kyc_date['gender']); ?></td>
                 </tr>
                 <tr>
                     <th>Father's Name</th>
-                    <td>{{ $kyc_date['care_of'] ?? '' }}</td>
+                    <td><?php echo e($kyc_date['care_of'] ?? ''); ?></td>
                 </tr>
                 <tr>
                     <th>State</th>
-                    <td>{{ $kyc_date['state'] ?? '' }}</td>
+                    <td><?php echo e($kyc_date['state'] ?? ''); ?></td>
                 </tr>
                 <tr>
                     <th>Address</th>
                     <td>
-                        {{ $kyc_date['house'] ?? '' }},
-                        {{ $kyc_date['street'] ?? '' }},
-                        {{ $kyc_date['district'] ?? '' }},
-                        {{ $kyc_date['sub_district'] ?? '' }},
-                        {{ $kyc_date['locality'] ?? '' }},
-                        {{ $kyc_date['post_office_name'] ?? '' }},
-                        {{ $kyc_date['state'] ?? '' }}
-                        {{ $kyc_date['country'] ?? '' }},
-                        {{ $kyc_date['vtc_name'] ?? '' }}</td>
+                        <?php echo e($kyc_date['house'] ?? ''); ?>,
+                        <?php echo e($kyc_date['street'] ?? ''); ?>,
+                        <?php echo e($kyc_date['district'] ?? ''); ?>,
+                        <?php echo e($kyc_date['sub_district'] ?? ''); ?>,
+                        <?php echo e($kyc_date['locality'] ?? ''); ?>,
+                        <?php echo e($kyc_date['post_office_name'] ?? ''); ?>,
+                        <?php echo e($kyc_date['state'] ?? ''); ?>
+
+                        <?php echo e($kyc_date['country'] ?? ''); ?>,
+                        <?php echo e($kyc_date['vtc_name'] ?? ''); ?></td>
                 </tr>
                 <tr>
                     <th>Pin Code</th>
-                    <td>{{ $kyc_date['pincode'] ?? '' }}</td>
+                    <td><?php echo e($kyc_date['pincode'] ?? ''); ?></td>
                 </tr>
             </table>
         </section>
@@ -306,3 +307,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\searchai.space\resources\views/pdf/template.blade.php ENDPATH**/ ?>

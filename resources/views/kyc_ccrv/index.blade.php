@@ -61,7 +61,6 @@ Token List
                                 <thead class="bg-primary text-white">
                                     <tr>
                                         <th>#</th>
-                                        <th>Service Type</th>
                                         <th>Token</th>
                                         <th>Purchase Date</th>
                                         <th>Status</th>
@@ -72,7 +71,6 @@ Token List
                                     @forelse ($data as $key => $Token)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $Token->service_type }}</td>
                                         <td>{{ $Token->token }}</td>
                                         <td>{{ (date('d-m-Y',strtotime($Token->created_at))) }}</td>
                                         <td>{{ $Token->status == 'active' ? 'Active' : 'Expired' }}</td>

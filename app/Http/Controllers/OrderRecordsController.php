@@ -140,6 +140,17 @@ public function AssignTokensView(Request $request, $user_id) {
         }
     }
 
-    
+    public function orders()
+    {
+        // Fetch the orders with related tokens
+        $data = Order::with('tokens')
+            ->where('user_id', auth()->id())
+            ->paginate(5);
+        foreach ($data as $order) {
+            $tokens = explode(',', $order->tokens);
+            $order->tokens_sum = array_sum(array_map('intval', $tokens)); // Sum the tokens
+        }
+        return view('admin.ordersdetails.orders', compact('data'));
+    }
     
 }

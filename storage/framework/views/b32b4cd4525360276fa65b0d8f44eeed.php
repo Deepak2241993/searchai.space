@@ -61,7 +61,6 @@ Token List
                                 <thead class="bg-primary text-white">
                                     <tr>
                                         <th>#</th>
-                                        <th>Service Type</th>
                                         <th>Token</th>
                                         <th>Purchase Date</th>
                                         <th>Status</th>
@@ -72,7 +71,6 @@ Token List
                                     <?php $__empty_1 = true; $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $Token): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <tr>
                                         <td><?php echo e($loop->iteration); ?></td>
-                                        <td><?php echo e($Token->service_type); ?></td>
                                         <td><?php echo e($Token->token); ?></td>
                                         <td><?php echo e((date('d-m-Y',strtotime($Token->created_at)))); ?></td>
                                         <td><?php echo e($Token->status == 'active' ? 'Active' : 'Expired'); ?></td>

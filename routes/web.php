@@ -123,7 +123,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/remove/{itemId}', [CartController::class, 'remove'])->name('cart.remove');
 
 
-    Route::get('/my-orders', [RegisterController::class, 'orders'])->name('orders');
+    Route::get('/my-orders', [OrderRecordsController::class, 'orders'])->name('orders');
     Route::get('admin/token/{id}', [RegisterController::class, 'show'])->name('admin.token.show');
     // Route::get('/User/token/{id}', [TokenController::class, 'show'])->name('token.show');
 
