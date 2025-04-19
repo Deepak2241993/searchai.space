@@ -94,7 +94,7 @@ Token List
                                                 data-bs-target="#reportgenerate"
                                                 data-id="{{ $Token->id }}"
                                                 data-token="{{ $Token->token }}"
-                                                data-service="{{ $Token->service_type }}">
+                                                data-service="{{ $Token->service_id}}">
                                                 Generate Report
                                             </button>
                                            
@@ -341,7 +341,7 @@ $(document).ready(function () {
         let button = $(this); // Store the button reference
         let tokenId = button.data("id");
         let tokenValue = button.data("token");
-        let serviceType = button.data("service");
+        let serviceId = button.data("service");
 
         // Disable button and show spinner
         button.prop("disabled", true).html(`
@@ -355,7 +355,7 @@ $(document).ready(function () {
                 _token: "{{ csrf_token() }}", 
                 token_id: tokenId,
                 token: tokenValue,
-                service_type: serviceType
+                service_id: serviceId
             },
             dataType: "json", // Ensures JSON response is parsed correctly
             success: function (response) {

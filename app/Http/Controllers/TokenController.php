@@ -94,7 +94,7 @@ class TokenController extends Controller
         'address' => 'required|string|max:255',
         'token' => 'required|string',
         'date_of_birth' => 'required|string',
-        'service_type' => 'required|string',
+        'service_id' => 'required|string',
     ]);
 
     $data = [
@@ -595,7 +595,8 @@ public function downloadPdf($id)
 
 public function CcrvReportGeneration(Request $request){
     $data = $request->all();
-   $adhardata =  AadhaarData::where('id_token',$request->token_id)->first();
+    // dd($data);
+    $adhardata =  AadhaarData::where('id_token',$request->token_id)->first();
     // ✅ Call CCRVReport after successful Aadhaar verification
     $ccrvRequest = new Request([
         'name' => $adhardata['name'] ?? null,
@@ -608,7 +609,7 @@ public function CcrvReportGeneration(Request $request){
             $adhardata['pincode'] ?? ''
         ])),
         'date_of_birth' => $adhardata['date_of_birth'] ?? null,
-        'service_type' => $data['service_type'],
+        'service_id' => $data['service_id'],
         'token' => $data['token']
     ]);
 // dd($ccrvRequest);

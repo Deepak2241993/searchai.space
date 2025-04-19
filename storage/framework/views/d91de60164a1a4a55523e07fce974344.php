@@ -94,7 +94,7 @@ Token List
                                                 data-bs-target="#reportgenerate"
                                                 data-id="<?php echo e($Token->id); ?>"
                                                 data-token="<?php echo e($Token->token); ?>"
-                                                data-service="<?php echo e($Token->service_type); ?>">
+                                                data-service="<?php echo e($Token->service_id); ?>">
                                                 Generate Report
                                             </button>
                                            
@@ -342,7 +342,7 @@ $(document).ready(function () {
         let button = $(this); // Store the button reference
         let tokenId = button.data("id");
         let tokenValue = button.data("token");
-        let serviceType = button.data("service");
+        let serviceId = button.data("service");
 
         // Disable button and show spinner
         button.prop("disabled", true).html(`
@@ -356,7 +356,7 @@ $(document).ready(function () {
                 _token: "<?php echo e(csrf_token()); ?>", 
                 token_id: tokenId,
                 token: tokenValue,
-                service_type: serviceType
+                service_id: serviceId
             },
             dataType: "json", // Ensures JSON response is parsed correctly
             success: function (response) {

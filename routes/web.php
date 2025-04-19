@@ -98,7 +98,7 @@ Route::get('/aadhaar-form-verify', function () {
     return view('aadhaar_verify');
 });
 
-
+//  For Aadhaar Service
 Route::get('/aadhaar/form', [AadhaarController::class, 'showForm'])->name('aadhaar.form');
 Route::post('/aadhaar/generate', [AadhaarController::class, 'generateOtp'])->name('aadhaar.generate');
 Route::get('/aadhaar/verify', [AadhaarController::class, 'showVerifyForm'])->name('aadhaar.verify');

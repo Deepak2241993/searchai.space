@@ -1,4 +1,4 @@
-@php
+<?php
 // $token ="mtVNZSBUKNqoXyJa6mWbIo1RCiscc39O";
 //    $token_data = \App\Models\Token::where('token',$token)->first();
 //    $token->aadhaarData = \App\Models\CustomerAddress::where('user_id',Auth::user()->id)->first();
@@ -11,7 +11,7 @@
 //         "date_of_birth" => '23/04/1992',  
 //     ];
 //     $caseCount = ['case_count' => 19];
-@endphp
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -173,7 +173,7 @@
                 <tr>
                     <td style="margin-right: 10px; width: 300px; text-align: left;"> 
                         <div class="col-md-6 logo">
-                            <img src="{{ public_path('front-assets/assets/img/finallogo.png') }}" alt="SearchAI Logo">
+                            <img src="<?php echo e(public_path('front-assets/assets/img/finallogo.png')); ?>" alt="SearchAI Logo">
                         </div>
                     </td>
                     <td style="margin-right: 10px; width: 300px; text-align: left;">
@@ -192,19 +192,16 @@
             <table class="info-table">
                 <tr>
                     <th>Client Name</th>
-                    <td>{{ $name }}</td>
+                    <td><?php echo e($name); ?></td>
                 </tr>
                 <tr>
                     <th>Order ID</th>
-                    <td>OT-{{ $token->order_id  }}</td>
+                    <td>OT-<?php echo e($token->order_id); ?></td>
                 </tr>
-                {{-- <tr>
-                    <th>Mobile Number</th>
-                    <td>{{$token->aadhaarData->phone}}</td>
-                </tr> --}}
+                
                 <tr>
                     <th>Report Date</th>
-                    <td>{{ date('d-m-Y', strtotime($token->updated_at)) }}</td>
+                    <td><?php echo e(date('d-m-Y', strtotime($token->updated_at))); ?></td>
                 </tr>
             </table>
         </section>
@@ -214,47 +211,53 @@
             <table class="info-table">
                 <tr>
                     <th>Aadhaar Number</th>
-                    <td>{{ $criminal_data['aadhaar_number'] }}</td>
+                    <td><?php echo e($criminal_data['aadhaar_number']); ?></td>
                 </tr>
                 <tr>
                     <th>Name</th>
-                    <td>{{ $criminal_data['name'] }}</td>
+                    <td><?php echo e($criminal_data['name']); ?></td>
                 </tr>
                 <tr>
                     <th>Date Of Birth</th>
-                    <td>{{ $criminal_data['date_of_birth'] }}</td>
+                    <td><?php echo e($criminal_data['date_of_birth']); ?></td>
                 </tr>
                 <tr>
                     <th>Gender</th>
-                    <td>{{ $criminal_data['gender'] }}</td>
+                    <td><?php echo e($criminal_data['gender']); ?></td>
                 </tr>
                 <tr>
                     <th>Father’s Name / Care of</th>
-                    <td>{{ $criminal_data['care_of'] }}</td>
+                    <td><?php echo e($criminal_data['care_of']); ?></td>
                 </tr>
                 <tr>
                     <th>State</th>
-                    <td>{{ $criminal_data['state'] }}</td>
+                    <td><?php echo e($criminal_data['state']); ?></td>
                 </tr>
                 <tr>
                     <th>Address</th>
                     <td>
-                        {{ $criminal_data['house'] ?? '' }} 
-                        {{ ", ".$criminal_data['street'] ?? '' }}
-                        {{ ", ".$criminal_data['vtc_name'] ?? '' }}
-                        {{ ", ".$criminal_data['district'] ?? '' }}
-                        {{ ", ".$criminal_data['state'] ?? '' }}
-                        {{ ", ".$criminal_data['pincode'] ?? '' }}
-                        {{ ", ".$criminal_data['country'] ?? '' }}
+                        <?php echo e($criminal_data['house'] ?? ''); ?> 
+                        <?php echo e(", ".$criminal_data['street'] ?? ''); ?>
+
+                        <?php echo e(", ".$criminal_data['vtc_name'] ?? ''); ?>
+
+                        <?php echo e(", ".$criminal_data['district'] ?? ''); ?>
+
+                        <?php echo e(", ".$criminal_data['state'] ?? ''); ?>
+
+                        <?php echo e(", ".$criminal_data['pincode'] ?? ''); ?>
+
+                        <?php echo e(", ".$criminal_data['country'] ?? ''); ?>
+
                     </td>
                 </tr>
                 <tr>
                     <th>Pin Code</th>
-                    <td>{{ $criminal_data['pincode'] }}</td>
+                    <td><?php echo e($criminal_data['pincode']); ?></td>
                 </tr>
                 <tr>
                     <th>Report Date</th>
-                    <td>{{ date('d-m-Y', strtotime($token->updated_at)) }}</td>
+                    <td><?php echo e(date('d-m-Y', strtotime($token->updated_at))); ?></td>
                 </tr>
             </table>
         </section>
@@ -265,100 +268,96 @@
                 <tr>
                     <th>Name of the applicant
                     </th>
-                    <td>{{ $criminal_data['name'] }}</td>
+                    <td><?php echo e($criminal_data['name']); ?></td>
                 </tr>
                 <tr>
                     <th>Father's Name/Care of</th>
-                    <td>{{ $criminal_data['care_of'] }}</td>
+                    <td><?php echo e($criminal_data['care_of']); ?></td>
                 </tr>
                 <tr>
                     <th>Address</th>
                     <td>
-                        {{ $criminal_data['house'] ?? '' }} 
-                        {{ ", ".$criminal_data['street'] ?? '' }}
-                        {{ ", ".$criminal_data['vtc_name'] ?? '' }}
-                        {{ ", ".$criminal_data['district'] ?? '' }}
-                        {{ ", ".$criminal_data['state'] ?? '' }}
-                        {{ ", ".$criminal_data['pincode'] ?? '' }}
-                        {{ ", ".$criminal_data['country'] ?? '' }}
+                        <?php echo e($criminal_data['house'] ?? ''); ?> 
+                        <?php echo e(", ".$criminal_data['street'] ?? ''); ?>
+
+                        <?php echo e(", ".$criminal_data['vtc_name'] ?? ''); ?>
+
+                        <?php echo e(", ".$criminal_data['district'] ?? ''); ?>
+
+                        <?php echo e(", ".$criminal_data['state'] ?? ''); ?>
+
+                        <?php echo e(", ".$criminal_data['pincode'] ?? ''); ?>
+
+                        <?php echo e(", ".$criminal_data['country'] ?? ''); ?>
+
                     </td>
                     
                 </tr>
                 <tr>
                     <th>DOB</th>
-                    <td>{{ $criminal_data['date_of_birth'] }}</td>
+                    <td><?php echo e($criminal_data['date_of_birth']); ?></td>
                 </tr>
-                {{-- <tr>
-                    <th>Check Status</th>
-                    <td>
-                        @if(is_array($caseCount) && isset($caseCount['case_count']))
-                            Case: {{ $caseCount['case_count'] }}
-                        @else
-                            Cleared
-                        @endif
-                    </td>
-                    
-                </tr> --}}
+                
                 
             </table>
         </section>
 
-        @if(count($ccrv_report)>0)
-        @foreach ($ccrv_report as $case)
+        <?php if(count($ccrv_report)>0): ?>
+        <?php $__currentLoopData = $ccrv_report; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $case): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <section class="report-info">
             <div class="identity-check">CASE DETAILS</div>
             <table class="info-table">
                 <tr>
                     <th>Source</th>
-                    <td>{{ $case['source']  ?? '--'}}</td>
+                    <td><?php echo e($case['source']  ?? '--'); ?></td>
                 </tr>
                 <tr>
                     <th>State Name</th>
-                    <td>{{ $case['state_name'] ?? '--' }}</td>
+                    <td><?php echo e($case['state_name'] ?? '--'); ?></td>
                 </tr>
                 <tr>
                     <th>District Name</th>
-                    <td>{{ $case['district_name'] ?? '--' }}</td>
+                    <td><?php echo e($case['district_name'] ?? '--'); ?></td>
                 </tr>
                 <tr>
                     <th>Court Name</th>
-                    <td>{{ $case['court_name'] ?? '--' }}</td>
+                    <td><?php echo e($case['court_name'] ?? '--'); ?></td>
                 </tr>
                 <tr>
                     <th>Case Category</th>
-                    <td>{{ $case['case_category'] ?? '--' }}</td>
+                    <td><?php echo e($case['case_category'] ?? '--'); ?></td>
                 </tr>
                 <tr>
                     <th>Under Acts</th>
-                    <td>{{ $case['under_acts'] ?? '--' }}</td>
+                    <td><?php echo e($case['under_acts'] ?? '--'); ?></td>
                 </tr>
                 <tr>
                     <th>Under Sections</th>
-                    <td>{{ $case['under_sections'] ?? '--' }}</td>
+                    <td><?php echo e($case['under_sections'] ?? '--'); ?></td>
                 </tr>
                 <tr>
                     <th>Case Status</th>
-                    <td>{{ $case['case_status'] ?? '--' }}</td>
+                    <td><?php echo e($case['case_status'] ?? '--'); ?></td>
                 </tr>
                 <tr>
                     <th>Filing Date</th>
-                    <td>{{ $case['filing_date'] ?? '--' }}</td>
+                    <td><?php echo e($case['filing_date'] ?? '--'); ?></td>
                 </tr>
                 <tr>
                     <th>Decision Date</th>
-                    <td>{{ $case['decision_date'] ?? '--' }}</td>
+                    <td><?php echo e($case['decision_date'] ?? '--'); ?></td>
                 </tr>
                 
             </table>
         </section>
-        @endforeach
-        @else
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php else: ?>
         <table class="info-table">
             <tr>
                 <td colspan="10">No cases available (case_count is zero)</td>
             </tr>
         </table>
-        @endif
+        <?php endif; ?>
         <div style="page-break-before: always;"></div>
         <footer>
             <div class="footer-disclaimer">
@@ -422,3 +421,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\searchai.space\resources\views/pdf/ccrv_kyc_report.blade.php ENDPATH**/ ?>
