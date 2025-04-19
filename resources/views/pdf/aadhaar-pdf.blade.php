@@ -109,7 +109,7 @@
         <!-- Header -->
         <div class="header">
             <div class="logo">
-                <img src="{{ public_path('front-assets/images/footer_logo.png') }}" alt="SearchAI Logo">
+                <img src="{{ public_path('front-assets/assets/img/finallogo.png') }}" alt="SearchAI Logo">
             </div>
             <div class="company-details">
                 <p>Navigant Digital Pvt. Ltd.</p>

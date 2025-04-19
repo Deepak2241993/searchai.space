@@ -85,7 +85,12 @@ Token List
                                                 DL Verify
                                             </button>
                                         </td>
-                                                                      
+                                        <?php else: ?>
+                                        <td class="text-center">
+                                            <a href="<?php echo e(route('dlreportgenerate', $Token->id)); ?>" class="btn btn-sm btn-secondary">
+                                                Download Report
+                                            </a>
+                                        </td>                        
                                         <?php endif; ?>
                                     </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
@@ -124,11 +129,11 @@ Token List
                     <?php echo csrf_field(); ?>
                     <div class="mb-3">
                         <label for="driving_license_number" class="form-label">Driving License Number<span class="text-danger">*</span></label>
-                        <input type="text" name="driving_license_number" id="driving_license_number" class="form-control" value="DL0420160390391"required>
+                        <input type="text" name="driving_license_number" id="driving_license_number" class="form-control" value=""required>
                     </div>
                     <div class="mb-3">
                         <label for="date_of_birth" class="form-label">DOB<span class="text-danger">*</span></label>
-                        <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" value="1987-11-01" required>
+                        <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" value="" placeholder="yyyy-mm-dd" required>
                         <input type="hidden" name="source" id="source" class="form-control" value="2">
                     </div>
                     <!-- Hidden fields for Token and Service Type -->

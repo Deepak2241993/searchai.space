@@ -1,4 +1,4 @@
-@php
+<?php
 // $token ="mtVNZSBUKNqoXyJa6mWbIo1RCiscc39O";
 //    $token_data = \App\Models\Token::where('token',$token)->first();
 //    $token->aadhaarData = \App\Models\CustomerAddress::where('user_id',Auth::user()->id)->first();
@@ -11,7 +11,7 @@
 //         "date_of_birth" => '23/04/1992',  
 //     ];
 //     $caseCount = ['case_count' => 19];
-@endphp
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -173,7 +173,7 @@
                 <tr>
                     <td style="margin-right: 10px; width: 300px; text-align: left;"> 
                         <div class="col-md-6 logo">
-                            <img src="{{ public_path('front-assets/assets/img/finallogo.png') }}" alt="SearchAI Logo">
+                            <img src="<?php echo e(public_path('front-assets/images/footer_logo.png')); ?>" alt="SearchAI Logo">
                         </div>
                     </td>
                     <td style="margin-right: 10px; width: 300px; text-align: left;">
@@ -192,36 +192,36 @@
             <table class="info-table">
                 <tr>
                     <th>Client Name</th>
-                    <td>{{$result->name}}</td>
+                    <td><?php echo e($result->name); ?></td>
                 </tr>
                 <tr>
                     <th>DOB</th>
-                    <td>{{$result->dob}}</td>
+                    <td><?php echo e($result->dob); ?></td>
                 </tr>
                 <tr>
                     <th>Address</th>
-                    <td>{{$result->address}}</td>
+                    <td><?php echo e($result->address); ?></td>
                 </tr>
                 <tr>
                     <th>Dependent Name </th>
-                    <td>{{$result->dependent_name}}</td>
+                    <td><?php echo e($result->dependent_name); ?></td>
                 </tr>
                 <tr>
                     <th>Document Type</th>
-                    <td>{{$result->document_type}}</td>
+                    <td><?php echo e($result->document_type); ?></td>
                 </tr>
                 <tr>
                     <th>Document Id </th>
-                    <td>{{$result->document_id}}</td>
+                    <td><?php echo e($result->document_id); ?></td>
                 </tr>
                 <tr>
                     <th>Pincode  </th>
-                    <td>{{$result->pincode}}</td>
+                    <td><?php echo e($result->pincode); ?></td>
                 </tr>
       
                 <tr>
                     <th>Report Date</th>
-                    <td>{{ date('d-m-Y', strtotime($token->updated_at)) }}</td>
+                    <td><?php echo e(date('d-m-Y', strtotime($token->updated_at))); ?></td>
                 </tr>
             </table>
         </section>
@@ -231,11 +231,11 @@
             <table class="info-table">
                 <tr>
                     <th>Issue Date </th>
-                    <td>{{$result->issue_date}}</td>
+                    <td><?php echo e($result->issue_date); ?></td>
                 </tr>
                 <tr>
                     <th>Expiry Date</th>
-                    <td>{{$result->expiry_date}}</td>
+                    <td><?php echo e($result->expiry_date); ?></td>
                 </tr>
                 
             </table>
@@ -246,11 +246,11 @@
             <table class="info-table">
                 <tr>
                     <th>State </th>
-                    <td>{{$result->state}} </td>
+                    <td><?php echo e($result->state); ?> </td>
                 </tr>
                 <tr>
                     <th>Authority </th>
-                    <td>{{$result->authority}} </td>
+                    <td><?php echo e($result->authority); ?> </td>
                 </tr>
                 
             </table>
@@ -261,11 +261,11 @@
             <table class="info-table">
                 <tr>
                     <th>Category </th>
-                    <td>{{$result->category}}</td>
+                    <td><?php echo e($result->category); ?></td>
                 </tr>
                 <tr>
                     <th>Authority </th>
-                    <td>{{$result->as_per_category_authority}}</td>
+                    <td><?php echo e($result->as_per_category_authority); ?></td>
                 </tr>
                 
             </table>
@@ -333,3 +333,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\searchai.space\resources\views/pdf/dl_report.blade.php ENDPATH**/ ?>

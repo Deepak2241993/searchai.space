@@ -174,7 +174,7 @@
                 <tr>
                     <td style="margin-right: 10px; width: 300px; text-align: left;"> 
                         <div class="col-md-6 logo">
-                            <img src="{{ public_path('front-assets/images/footer_logo.png') }}" alt="SearchAI Logo">
+                            <img src="{{ public_path('front-assets/assets/img/finallogo.png') }}" alt="SearchAI Logo">
                         </div>
                     </td>
                     <td style="margin-right: 10px; width: 300px; text-align: left;">

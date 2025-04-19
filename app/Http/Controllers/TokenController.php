@@ -367,9 +367,26 @@ public function downloadPdf($id)
         ]);
     
         // Download the PDF with a filename
-        return $pdf->download('details_' . $token->id . '.pdf');
+        return $pdf->download('ccrv_' . $token->id . '.pdf');
     }
     
+    //  DL Report Generation
+    public function DLReportGenerate(Request $request, $id)
+    {
+
+        // Fetch the token by ID
+        $token = Token::findOrFail($id);
+        // Get the associated CCRV report
+        $dldata = DlData::where('token_id', $token->id)->first();
+        // Pass both token and dldata to the PDF view
+        $pdf = PDF::loadView('pdf.dl_report', [
+            'token' => $token,
+            'result' => $dldata,
+        ]);
+    
+        // Download the PDF with a filename
+        return $pdf->download('DL_' . $token->id . '.pdf');
+    }
 
  
 
@@ -657,7 +674,7 @@ public function MyServices(Request $request, $slug)
         ->paginate(10);
         return view('token.ccrv', compact('data'));
     }
-    else if($slug == 'drivers-license-verification')
+    else if($slug == 'driving-licence-verification')
     {
         $data = Token::where('user_id', $userId)
         ->where('service_id', $service->id)
